@@ -13,4 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', 'testController@index');
+//管理側
+
+
+
+
+//お客さん側
