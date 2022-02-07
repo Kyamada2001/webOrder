@@ -1,0 +1,35 @@
+version: '3'
+services:
+  php:
+    container_name: webOrder
+    build: ./docker/php
+    volumes:
+      - ./server:/var/www
+    depends_on:
+      - db
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./server:/var/www
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+  db:
+    image: mysql:8.0
+    platform: linux/x86_64
+    restart: always
+    container_name: webOrder-db
+    environment:
+      MYSQL_ROOT_PASSWORD: pwd
+      MYSQL_DATABASE: webOrder
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+      - ./docker/db/my.conf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
