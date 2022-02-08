@@ -8,11 +8,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>店舗一覧</h1>
-    <h2>店舗一覧</h2>
-    <div class="border">
-        <button class="btn-blue">テストボタン</button>
-        <input type="text" value="あほ">
+    <div class="container">
+        <div>
+            <h1>店舗一覧</h1>
+        </div>
+        <h1 class="text-3xl text-green-500">Hello Tailwind</h1>
+</body>
+        <div>
+            <table class="min-w-full leading-normal">
+                <tr>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">店舗コード</td>
+                    <td>店舗名</td>
+                    <td>営業時間</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>
