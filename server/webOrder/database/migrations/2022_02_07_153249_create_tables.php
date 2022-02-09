@@ -13,28 +13,31 @@ class CreateTables extends Migration
      */
     public function up()
     {
-
+        Schema::dropIfExists('shops');
+        Schema::dropIfExists('products');
         Schema::create('shops', function (Blueprint $table) {
             
             $table->id();
             $table->string('name');
-            $table->datetime('business_hour');
+            $table->time('business_start_time');
+            $table->time('business_end_time');
+            $table->tinyInteger('weekly_holiday')->nullable();
             $table->timestamps();
         });
 
         Schema::create('products', function (Blueprint $table) {
             
             $table->id();
-            $table->unsingedBigInteger('shop_id');
+            $table->unsignedBigInteger('shop_id');
             $table->string('name');
             $table->unsignedInteger('price');
             $table->timestamps();
 
             $table->foreign('shop_id')
-                ->refrences('id')
+                ->references('id')
                 ->on('shops')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
 
         Schema::create('customers', function (Blueprint $table) {
@@ -49,14 +52,14 @@ class CreateTables extends Migration
             
             $table->id();
             $table->unsignedBigInteger('customer_id');
-            $table->unsingedInteger('total_amount_including_tax');
+            $table->unsignedInteger('total_amount_including_tax');
             $table->timestamps();
 
             $table->foreign('customer_id')
-                ->refrences('id')
+                ->references('id')
                 ->on('customers')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
 
         Schema::create('order_details', function (Blueprint $table) {
@@ -69,16 +72,14 @@ class CreateTables extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')
-                ->refrences('id')
+                ->references('id')
                 ->on('orders')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreign('product_id')
-                ->refrences('id')
-                ->on('products')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->references('id')
+                ->on('products');
         });
 
         
