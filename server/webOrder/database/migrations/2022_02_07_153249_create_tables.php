@@ -51,14 +51,21 @@ class CreateTables extends Migration
         Schema::create('orders', function (Blueprint $table) {
             
             $table->id();
+            $table->unsignedBigInteger('shop_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedInteger('total_amount_including_tax');
             $table->timestamps();
 
+            $table->foreign('shop_id')
+                ->references('id')
+                ->on('customers')
+                ->cascadeOnDelete() //消さないほうがいい？
+                ->cascadeOnUpdate();
+
             $table->foreign('customer_id')
                 ->references('id')
                 ->on('customers')
-                ->cascadeOnDelete()
+                ->cascadeOnDelete() //消さないほうがいい？
                 ->cascadeOnUpdate();
         });
 
