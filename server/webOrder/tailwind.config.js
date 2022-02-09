@@ -1,8 +1,9 @@
 module.exports = {
-  purge: [ //これ書いてなかったkら反映されなかたっぽい
-    './resources/**/**/*.blade.php',
-],
-  content: [],
+  content: [
+    "./resources/**/**/*.blade.php",
+    "./resources/**/*.js",
+    //"./resources/**/**/*.vue",
+  ],
   theme: {
     extend: {},
   },
