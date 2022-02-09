@@ -15,7 +15,8 @@ class Shop extends Model
         'business_end_time',
         'weekly_holiday'
     ];
-
+    
+    const STATUS_NO_HOLIDAY = 0;
     const STATUS_MONDAY = 1;
     const STATUS_TUSEDAY = 2;
     const STATUS_WEDNESDAY = 3;
