@@ -16,11 +16,17 @@ class Shop extends Model
         'weekly_holiday'
     ];
     
+    /*public function toArray(){
+        $shops = Shop::toArray();
+        $shops['business_start_time'] = $shops['business_start_time']->format('H:i');
+        $shops['business_end_time'] = $shops['business_end_time']->format('H:i');
+        return $shops;
+    }*/
     const STATUS_NO_HOLIDAY = 0;
     const STATUS_MONDAY = 1;
-    const STATUS_TUSEDAY = 2;
+    const STATUS_TUESDAY = 2;
     const STATUS_WEDNESDAY = 3;
-    const STATUS_TUESDAY = 4;
+    const STATUS_THURSDAY = 4;
     const STATUS_FRIDAY = 5;
     const STATUS_SATURDAY = 6;
     const STATUS_SUNDAY = 7;

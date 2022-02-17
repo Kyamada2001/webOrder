@@ -21,7 +21,7 @@ class CreateTables extends Migration
             $table->string('name');
             $table->time('business_start_time');
             $table->time('business_end_time');
-            $table->tinyInteger('weekly_holiday')->nullable();
+            $table->char('weekly_holiday', 20)->nullable();
             $table->timestamps();
         });
 
