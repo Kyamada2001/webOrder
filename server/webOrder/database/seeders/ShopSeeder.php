@@ -36,16 +36,31 @@ class ShopSeeder extends Seeder
     protected function getData()
     {
         $shopArray = array();
-        for($i = 1; $i<6; $i++){
-            $array = array(
-                ['id' => $i,
-                'name' => "shop{$i}",
-                'business_start_time' => "0{$i}:00",
-                'business_end_time' => "1{$i}:00",
-                'weekly_holiday' => $i,]
-            );
-            $shopArray = array_merge($shopArray,$array);
-        }
+            for($i = 1;$i<6; $i++){
+                $array = array(
+                    [
+                    'id' => $i,
+                    'name' => "shop{$i}",
+                    'business_start_time' => "0{$i}:00",
+                    'business_end_time' => "1{$i}:00",
+                    'weekly_holiday' => "{$i}",
+                    ]
+                );
+                $shopArray = array_merge($shopArray,$array);
+            }
+            for($i=6;$i<9; $i++){
+                $j = $i-1;
+                $array = array(
+                    [
+                    'id' => $i,
+                    'name' => "shop{$i}",
+                    'business_start_time' => "0{$i}:00",
+                    'business_end_time' => "1{$i}:00",
+                    'weekly_holiday' => "{$j},{$i}",
+                    ]
+                );
+                $shopArray = array_merge($shopArray,$array);
+            }
         return $shopArray;
     }
 }
