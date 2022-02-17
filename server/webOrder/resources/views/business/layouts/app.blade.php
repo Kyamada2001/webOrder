@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('/css/business/app.css') }}" rel="stylesheet">
+    <title>web管理</title>
+</head>
+<body>
+    <div class="flex flex-row">
+        <div class="relative dark:bg-gray-800 h-full w-1/4">
+            <div class="flex flex-col sm:flex-row sm:justify-around">
+                <div class="w-72 h-screen">
+                    <nav class="mt-10 px-6 ">
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                店舗一覧
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                店舗登録
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                商品一覧
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                商品登録
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                アカウント一覧
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <span class="mx-4 text-lg font-normal">
+                                管理アカウント一覧
+                            </span>
+                            <span class="flex-grow text-right">
+                            </span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <main class="w-full">
+            <div class="container mx-auto px-8 bg-stone-100">
+                <div class="flex justify-center flex-col">
+                    <div>
+                        <h1>@yield('title')</h1>
+                    </div> 
+                    <div>
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    @yield('script')
+</body>
+</html>
