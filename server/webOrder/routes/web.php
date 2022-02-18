@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 //管理側
 Route::get('/business/shops', 'Business\ShopController@index')->name('shop.index');
+Route::get('business/shops/create', 'Business\ShopController@create')->name('shop.create');
+
 
 
 

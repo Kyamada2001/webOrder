@@ -2,11 +2,11 @@
 @section('title','店舗一覧')
 @section('content')
     <div class="flex justify-center">
-        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded" href="#">
+        <a class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded" href="{{ route('shop.create') }}">
             新規登録
         </a>
     </div>
-    <div class="p-6 bg-white overflow-x-auto">
+    <div class="p-6 bg-whitez">
         <div>
             <p>全{{ count($shops) }}件</p>
         </div>

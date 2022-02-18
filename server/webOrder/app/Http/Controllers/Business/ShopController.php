@@ -17,8 +17,12 @@ class ShopController extends Controller
             $shop->business_start_time = substr($shop->business_start_time, 0,5);
             $shop->business_end_time = substr($shop->business_end_time, 0,5);
         }
-        return view('business/shops/index',[
+        return view('business.shops.index',[
             'shops' => $shops,
         ]);
+    }
+
+    public function create(){
+        return view('business.shops.create');
     }
 }

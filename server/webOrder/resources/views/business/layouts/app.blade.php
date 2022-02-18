@@ -8,19 +8,34 @@
     <title>web管理</title>
 </head>
 <body>
+    <div class="h-20 w-full">
+        <header class="flex flex-row w-full">
+            <div class="text-orange-500">
+                <h3 class="px-12 py-6">webOrder総合管理</h3>
+            </div>
+            <div class="flex flex-row absolute inset-y-0 right-0 px-4 py-6">
+                <div class="px-2">
+                    山田さん
+                </div>
+                <div>
+                    ログアウト
+                </div>
+            </div>
+        </header>
+    </div>
     <div class="flex flex-row">
         <div class="relative dark:bg-gray-800 h-full w-1/4">
             <div class="flex flex-col sm:flex-row sm:justify-around">
                 <div class="w-72 h-screen">
                     <nav class="mt-10 px-6 ">
-                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('shop.index') }}">
                             <span class="mx-4 text-lg font-normal">
                                 店舗一覧
                             </span>
                             <span class="flex-grow text-right">
                             </span>
                         </a>
-                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('shop.create') }}">
                             <span class="mx-4 text-lg font-normal">
                                 店舗登録
                             </span>
