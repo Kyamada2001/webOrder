@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('/css/business/app.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="{{ asset('css/business/app.css') }}" rel="stylesheet">
     <title>web管理</title>
 </head>
 <body>
@@ -75,18 +76,21 @@
             </div>
         </div>
         <main class="w-full">
-            <div class="container mx-auto px-8 bg-stone-100">
+            <div id ="app" class="container mx-auto px-8 bg-stone-100 h-full">
                 <div class="flex justify-center flex-col">
+                <example-component></example-component>
                     <div>
                         <h1>@yield('title')</h1>
                     </div> 
                     <div>
                         @yield('content')
                     </div>
+                   
                 </div>
             </div>
         </main>
     </div>
-    @yield('script')
+@yield('script')
+<script src="{{ asset('js/business/app.js') }}"></script>
 </body>
 </html>
