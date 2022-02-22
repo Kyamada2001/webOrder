@@ -78,7 +78,6 @@
         <main class="w-full">
             <div id ="app" class="container mx-auto px-8 bg-stone-100 h-full">
                 <div class="flex justify-center flex-col">
-                <example-component></example-component>
                     <div>
                         <h1>@yield('title')</h1>
                     </div> 
