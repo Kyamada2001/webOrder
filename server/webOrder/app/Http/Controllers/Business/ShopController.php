@@ -8,6 +8,14 @@ use App\Models\Shop;
 
 class ShopController extends Controller
 {
+    private $shop;
+
+    public function __construct(Shop $shop)
+    {
+        $this->shop = $shop;        
+    }
+
+
     public function index(){
 
         $shops = Shop::get();
@@ -23,6 +31,9 @@ class ShopController extends Controller
     }
 
     public function create(){
-        return view('business.shops.create');
+        $shop = $this->shop;
+        return view('business.shops.create', [
+            'shop' => $shop,
+        ]);
     }
 }
