@@ -79,7 +79,7 @@
             <div id ="app" class="container mx-auto px-8 bg-stone-100 h-full">
                 <div class="flex justify-center flex-col">
                     <div>
-                        <h1>@yield('title')</h1>
+                        <h1  class="text-xl">@yield('title')</h1>
                     </div> 
                     <div>
                         @yield('content')
