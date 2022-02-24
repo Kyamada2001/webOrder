@@ -1,46 +1,81 @@
 @extends('business.layouts.app')
 @section('title', '店舗登録')
 @section('content')
+@if($errors->any())
+<div class="bg-red-200 px-2 py-2 my-4 rounded-md">
+    <p class="px-4 py-2">入力内容を確認してください</p>
+</div>
+@endif
 <div  class="p-6 bg-white">
-    <form>
-        <div>
-            <div class="flex flex-row py-3">
-                <div class="w-1/4">
+    <form action="{{ route('business.shop.store') }}" method="post">
+        @csrf
+        <div class="divide-gray-200">
+            <div class="flex flex-row py-3 border-b-2">
+                <div class="px-3 w-1/4">
                     <label>店舗名</label>
                 </div>
                 <div>
-                    <input type="text" value="{{ $shop->name }}">
+                    <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-100 rounded-lg focus:shadow-outline outline-black  @error('shop_name') border-red-400 @enderror"
+                            type="text" name="shop_name" value="{{ old('name', $shop->name) }}">
+                    @if($errors->has('shop_name'))
+                        @foreach($errors->get('shop_name') as $error)
+                        <div>
+                            <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                        </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
-            <div class="flex flex-row py-3">
-                <div class="w-1/4">
+            <div class="flex flex-row py-7 border-b-2">
+                <div class="px-3 w-1/4">
                     <label>営業時間</label>
                 </div>
-                <div>
-                    <vue-timepicker 
-                        format="HH:mm"
-                        minute-interval="15"
-                        name="business_start_time">
-                    </vue-timepicker>
-                    <label>〜</label>
-                    <vue-timepicker
-                        format="HH:mm"
-                        minute-interval="15"
-                        name="business_end_time">
-                    </vue-timepicker>
+                <div class="flex flex-row">
+                    <div>
+                        <vue-timepicker 
+                            format="HH:mm"
+                            minute-interval="15"
+                            name="business_start_time">
+                        </vue-timepicker>
+                        @if($errors->has('business_start_time'))
+                            @foreach($errors->get('business_start_time') as $error)
+                            <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                            @endforeach
+                        @endif
+                    </div>
+                    <div class="px-2 py-2">
+                        <label>〜</label>
+                    </div>
+                    <div>
+                        <vue-timepicker
+                            format="HH:mm"
+                            minute-interval="15"
+                            name="business_end_time">
+                        </vue-timepicker>
+                        @if($errors->has('business_end_time'))
+                            @foreach($errors->get('business_end_time') as $error)
+                            <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-row py-3">
-                <div class="w-1/4">
+            <div class="flex flex-row py-6 border-b-2">
+                <div class="px-3 w-1/4">
                     <label>定休日</label>
                 </div>
                 <div>
-                    <weekly-holiday-select-component holiday="@json($shop->weekly_holiday)">
+                    <weekly-holiday-select-component :holiday="@json($shop->weekly_holiday)">
                     </weekly-holiday-select-component>
+                    @if($errors->has('weekly_holidays'))
+                        @foreach($errors->get('weekly_holidays') as $error)
+                        <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                        @endforeach
+                    @endif
                 </div>
             </div>
-            <div class="flex justify-center">
-                <a class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded" href="{{ route('shop.store') }}">送信</a>
+            <div class="flex justify-center py-4">
+                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded">送信</button>
             </div>
         </div>
     </form>

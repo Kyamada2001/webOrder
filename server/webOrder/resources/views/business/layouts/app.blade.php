@@ -29,14 +29,14 @@
             <div class="flex flex-col sm:flex-row sm:justify-around">
                 <div class="w-72 h-screen">
                     <nav class="mt-10 px-6 ">
-                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('shop.index') }}">
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.index') }}">
                             <span class="mx-4 text-lg font-normal">
                                 店舗一覧
                             </span>
                             <span class="flex-grow text-right">
                             </span>
                         </a>
-                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('shop.create') }}">
+                        <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.create') }}">
                             <span class="mx-4 text-lg font-normal">
                                 店舗登録
                             </span>

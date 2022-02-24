@@ -36,4 +36,20 @@ class ShopController extends Controller
             'shop' => $shop,
         ]);
     }
+
+    public function store(Request $request){
+        $validated = $request->validate([
+            'shop_name' =>'required|max:20',
+            'business_start_time' =>'required',
+            'business_end_time' =>'required',
+            'weekly_holidays' =>'required',
+        ]);
+        $shop = new Shop();
+        $shop->name = $request->shop_name;
+        $shop->business_start_time = $request->business_start_time;
+        $shop->business_end_time = $request->business_end_time;
+        $shop->weekly_holiday = $request->weekly_holidays;
+        $shop->save();
+        return redirect(route('business.shop.index'));
+    }
 }

@@ -1,13 +1,13 @@
 <template>
   <v-select
-    v-model="selected"
+    v-model="holiday"
     :items="weekly_holidays"
     item-text="label"
     item-value="value"
+    name="weekly_holidays"
     attach
     chips
     multiple
-    clearable
     placeholder="選択してください"
     outlined
     dense
@@ -20,7 +20,6 @@
       holiday: Array,
     },
     data: () => ({
-      selectedHoliday: holiday,
       weekly_holidays: [
           { value: 1, label: "月" },
           { value: 2, label: '火' },
