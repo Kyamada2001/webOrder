@@ -35,30 +35,30 @@
                                 @switch($holiday)
                                     @case(App\Models\Shop::STATUS_NO_HOLIDAY)
                                         @break
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">週休なし</div>
+                                        <div class="bg-zinc-500 text-white font-bold py-1 px-2 rounded-full">週休なし</div>
                                     @case(App\Models\Shop::STATUS_MONDAY)
-                                        <div class="bg-red-500 text-white font-bold py-1 px-2 rounded-full">月</div>
+                                        <div class="bg-pink-500 text-white font-bold py-1 px-2 rounded-full">月</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_TUESDAY)
                                         <div class="bg-red-500 text-white font-bold py-1 px-2 rounded-full">火</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_WEDNESDAY)
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">水</div>
+                                        <div class="bg-blue-500 text-white font-bold py-1 px-2 rounded-full">水</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_THURSDAY)
                                         <div class="bg-amber-500 text-white font-bold py-1 px-2 rounded-full">木</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_FRIDAY)
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">金</div>
+                                        <div class="bg-yellow-500 text-white font-bold py-1 px-2 rounded-full">金</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_SATURDAY)
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">土</div>
+                                        <div class="bg-orange-500 text-white font-bold py-1 px-2 rounded-full">土</div>
                                         @break
                                     @case(App\Models\Shop::STATUS_SUNDAY)
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">日</div>
+                                        <div class="bg-violet-500 text-white font-bold py-1 px-2 rounded-full">日</div>
                                         @break
                                     @default
-                                        <div class="bg-red-400 text-white font-bold py-1 px-2 rounded-full">不定期</div>
+                                        <div class="bg-stone-500 text-white font-bold py-1 px-2 rounded-full">不定期</div>
                                 @endswitch
                             @endforeach
                             </div>
