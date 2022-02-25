@@ -19,6 +19,7 @@ Route::get('/business/shops/create', 'Business\ShopController@create')->name('bu
 Route::post('/business/shop/store', 'Business\ShopController@store')->name('business.shop.store');
 
 Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
+Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
 
 
 //お客さん側
