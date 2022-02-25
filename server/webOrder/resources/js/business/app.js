@@ -1,6 +1,5 @@
 //require('./bootstrap');使うようになったらパスを通す
 import Vue from 'vue';
-//import App from './components/ButtonComponent';
 import VueTimepicker from 'vue2-timepicker';
 import 'vue2-timepicker/dist/VueTimepicker.css';
 import Vuetify from 'vuetify';

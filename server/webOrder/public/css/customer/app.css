@@ -540,10 +540,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-center {
   justify-content: center;
 }
-.divide-gray-400 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-opacity: 1;
-  border-color: rgb(156 163 175 / var(--tw-divide-opacity));
-}
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-divide-opacity));
@@ -554,26 +550,23 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-lg {
   border-radius: 0.5rem;
 }
+.rounded-md {
+  border-radius: 0.375rem;
+}
 .rounded {
   border-radius: 0.25rem;
 }
 .rounded-full {
   border-radius: 9999px;
 }
-.rounded-md {
-  border-radius: 0.375rem;
-}
 .border {
   border-width: 1px;
 }
-.border-b {
-  border-bottom-width: 1px;
-}
-.border-b-4 {
-  border-bottom-width: 4px;
-}
 .border-b-2 {
   border-bottom-width: 2px;
+}
+.border-b {
+  border-bottom-width: 1px;
 }
 .border-red-400 {
   --tw-border-opacity: 1;
@@ -641,13 +634,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
 }
 .py-4 {
   padding-top: 1rem;
@@ -656,14 +653,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-}
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-.py-7 {
-  padding-top: 1.75rem;
-  padding-bottom: 1.75rem;
 }
 .text-left {
   text-align: left;
@@ -732,24 +721,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-.placeholder-gray-600::-moz-placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-placeholder-opacity));
-}
-.placeholder-gray-600:-ms-input-placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-placeholder-opacity));
-}
-.placeholder-gray-600::placeholder {
-  --tw-placeholder-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-placeholder-opacity));
-}
-.outline {
-  outline-style: solid;
-}
-.outline-gray-200 {
-  outline-color: #e5e7eb;
 }
 .outline-black {
   outline-color: #000;
