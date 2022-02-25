@@ -34,8 +34,8 @@
                             @foreach(str_split($shop->weekly_holiday) as $holiday)
                                 @switch($holiday)
                                     @case(App\Models\Shop::STATUS_NO_HOLIDAY)
+                                        <div class="bg-zinc-500 text-white font-bold py-1 px-2 rounded-full">無休</div>
                                         @break
-                                        <div class="bg-zinc-500 text-white font-bold py-1 px-2 rounded-full">週休なし</div>
                                     @case(App\Models\Shop::STATUS_MONDAY)
                                         <div class="bg-pink-500 text-white font-bold py-1 px-2 rounded-full">月</div>
                                         @break
