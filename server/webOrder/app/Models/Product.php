@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function shops(){
+    public function shop(){
         return $this->belongsTo('App\Models\Shop');
     }
 }

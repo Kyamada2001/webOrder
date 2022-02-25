@@ -31,11 +31,11 @@ class Shop extends Model
     const STATUS_SATURDAY = 6;
     const STATUS_SUNDAY = 7;
 
-    public function products(){
+    public function product(){
         return $this->hasMany('App\Models\Product');
     }
 
-    public function orders(){
+    public function order(){
         return $this->hasMany('App\Models\Order');
     }
 }
