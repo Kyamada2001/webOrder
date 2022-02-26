@@ -20,6 +20,6 @@ Route::post('/business/shop/store', 'Business\ShopController@store')->name('busi
 
 Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
 Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
-
+Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
 
 //お客さん側
