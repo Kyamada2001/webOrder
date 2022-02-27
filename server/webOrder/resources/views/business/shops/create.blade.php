@@ -74,6 +74,9 @@
                     @endif
                 </div>
             </div>
+            <div>
+                <vuetailwind-holiday-select-component></vuetailwind-holiday-select-component>
+            </div>
             <div class="flex justify-center py-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded">送信</button>
             </div>
