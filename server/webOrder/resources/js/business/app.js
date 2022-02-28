@@ -2,17 +2,20 @@
 import Vue from 'vue';
 import VueTimepicker from 'vue2-timepicker';
 import 'vue2-timepicker/dist/VueTimepicker.css';
-import Vuetify from 'vuetify';
+//import Vuetify from 'vuetify';
+import VueCompositionAPI from '@vue/composition-api';
 
 window.Vue = require('vue').default;
-Vue.use(Vuetify);
+//Vue.use(Vuetify);
 Vue.component('weekly-holiday-select-component', require('./components/weekly-holiday-select.vue').default);
+Vue.use(VueCompositionAPI);
+Vue.component('vueform-multiselect-component', require('./components/vueform-multiselect-holiday.vue').default);
+
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(),
+    //vuetify: new Vuetify(),
     components: {
         'vue-timepicker': VueTimepicker,
-        //'ButtonComponent': App,
     },
 });
