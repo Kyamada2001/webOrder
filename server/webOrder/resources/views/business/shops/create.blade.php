@@ -15,7 +15,7 @@
                     <label>店舗名</label>
                 </div>
                 <div>
-                    <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-100 rounded-lg focus:shadow-outline outline-black  @error('shop_name') border-red-400 @enderror"
+                    <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-400 rounded-lg focus:shadow-outline outline-gray-400  @error('shop_name') border-red-400 @enderror"
                             type="text" name="shop_name" value="{{ old('name', $shop->name) }}">
                     @if($errors->has('shop_name'))
                         @foreach($errors->get('shop_name') as $error)
@@ -64,15 +64,17 @@
                 <div class="px-3 w-1/4">
                     <label>定休日</label>
                 </div>
-                <div>
-                    <weekly-holiday-select-component :holiday="@json($shop->weekly_holiday)">
-                    </weekly-holiday-select-component>
+                <div class="w-1/2">
+                    <vueform-multiselect-component></vueform-multiselect-component>
                     @if($errors->has('weekly_holidays'))
                         @foreach($errors->get('weekly_holidays') as $error)
-                        <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                        <div class="text-red-500 text-xs italic mb-3">{{ $error }}</div>
                         @endforeach
                     @endif
                 </div>
+            </div>
+            <div>
+            
             </div>
             <div class="flex justify-center py-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded">送信</button>
