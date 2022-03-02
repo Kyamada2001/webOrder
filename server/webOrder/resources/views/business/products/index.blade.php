@@ -1,9 +1,9 @@
 @extends('business.layouts.app')
 @section('title', '商品一覧')
 @section('content')
-<div class="p-6 bg-white">
+<div id="app" class="p-6 bg-white">
     <div class="flex justify-center">
-        <a class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded" href="#">
+        <a class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded" href="{{ route('business.product.create') }}">
             新規登録
         </a>
     </div>
@@ -35,4 +35,6 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
 @endsection

@@ -76,20 +76,24 @@
             </div>
         </div>
         <main class="w-full">
-            <div id ="app" class="container mx-auto px-8 bg-stone-100 h-full">
+            <div class="container mx-auto px-8 bg-stone-100 h-full">
                 <div class="flex justify-center flex-col">
                     <div>
-                        <h1  class="text-xl">@yield('title')</h1>
+                        <h1 class="text-xl">@yield('title')</h1>
                     </div> 
                     <div>
+                        @if($errors->any())
+                        <div class="bg-red-200 px-2 py-2 my-4 rounded-md">
+                            <p class="px-4 py-2">入力内容を確認してください</p>
+                        </div>
+                        @endif
                         @yield('content')
                     </div>
-                   
                 </div>
             </div>
         </main>
     </div>
-@yield('script')
 <script src="{{ asset('js/business/app.js') }}"></script>
+@yield('script')
 </body>
 </html>

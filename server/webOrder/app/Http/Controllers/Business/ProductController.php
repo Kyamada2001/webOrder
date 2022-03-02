@@ -17,10 +17,17 @@ class ProductController extends Controller
     }
 
     public function create(){
-        return view('business.products.create');
+        $shops = Shop::get(); //N+1問題考える。いらないカラムは削除するようにした方が良いかも
+        return view('business.products.create',[
+            'shops' => $shops,
+        ]);
     }
 
     public function store(Request $request){
-        
+        $validated = $request->validate([
+            'sale_shop' => 'required',
+            'product_name' =>'required|max:20',
+            'product_price' => 'required',
+        ]);
     }
 }

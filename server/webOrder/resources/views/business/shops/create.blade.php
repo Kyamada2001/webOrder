@@ -1,12 +1,7 @@
 @extends('business.layouts.app')
 @section('title', '店舗登録')
 @section('content')
-@if($errors->any())
-<div class="bg-red-200 px-2 py-2 my-4 rounded-md">
-    <p class="px-4 py-2">入力内容を確認してください</p>
-</div>
-@endif
-<div  class="p-6 bg-white">
+<div  id="app" class="p-6 bg-white">
     <form action="{{ route('business.shop.store') }}" method="post">
         @csrf
         <div class="divide-gray-200">
