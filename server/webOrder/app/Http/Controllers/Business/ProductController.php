@@ -29,5 +29,13 @@ class ProductController extends Controller
             'product_name' =>'required|max:20',
             'product_price' => 'required',
         ]);
+
+        $products = new Product();
+        $products->name = $request->product_name;
+        $products->shop_id = $request->sale_shop;
+        $products->price = $request->product_price;
+        $products->save();
+        
+        return redirect(route('business.product.index'));
     }
 }
