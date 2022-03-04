@@ -12,7 +12,7 @@
                 <div>
                 <select class="block appearance-none w-full bg-white border text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none @error('sale_shop') border-red-400 @enderror"
                         name="sale_shop">
-                    <option selected>選択してください</option>
+                    <option selected value="">選択してください</option>
                     @foreach($shops as $shop)
                     <option value="{{ $shop->id }}">{{ $shop->id }} {{ $shop->name }}</option>
                     @endforeach

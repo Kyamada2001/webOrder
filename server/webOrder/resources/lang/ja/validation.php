@@ -150,7 +150,11 @@ return [
         'shop_name' => '店舗名',
         'business_start_time' => '開店時間',
         'business_end_time' => '閉店時間',
-        'weekly_holidays' => '定休日'
+        'weekly_holidays' => '定休日',
+        'sale_shop' => '販売店舗',
+        'product_name'=> '商品名',
+        'product_price' => '商品金額',
+
     ],
 
 ];

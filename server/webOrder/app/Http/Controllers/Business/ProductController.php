@@ -27,7 +27,7 @@ class ProductController extends Controller
         $validated = $request->validate([
             'sale_shop' => 'required',
             'product_name' =>'required|max:20',
-            'product_price' => 'required',
+            'product_price' => 'required|numeric',
         ]);
 
         $products = new Product();
