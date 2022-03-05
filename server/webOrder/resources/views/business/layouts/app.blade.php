@@ -9,6 +9,7 @@
     <title>web管理</title>
 </head>
 <body>
+<div>
     <div class="h-20 w-full">
         <header class="flex flex-row w-full">
             <div class="text-orange-500">
@@ -24,10 +25,10 @@
             </div>
         </header>
     </div>
-    <div class="flex flex-row">
-        <div class="relative dark:bg-gray-800 h-full w-1/4">
+    <div class="flex flex-row ">
+        <div class="relative dark:bg-gray-800 h-auto w-1/4">
             <div class="flex flex-col sm:flex-row sm:justify-around">
-                <div class="w-72 h-screen">
+                <div class="w-72 h-full">
                     <nav class="mt-10 px-6 ">
                         <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.index') }}">
                             <span class="mx-4 text-lg font-normal">
@@ -93,6 +94,7 @@
             </div>
         </main>
     </div>
+</div>
 <script src="{{ asset('js/business/app.js') }}"></script>
 @yield('script')
 </body>
