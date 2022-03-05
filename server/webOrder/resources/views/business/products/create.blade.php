@@ -46,7 +46,16 @@
                 <div class="px-3 w-1/4">
                     <label>商品金額</label>
                 </div>
-                <product-price-component></product-price-component>
+                <div>
+                    <product-price-component></product-price-component>
+                    @if($errors->has('product_price'))
+                        @foreach($errors->get('product_price') as $error)
+                        <div>
+                            <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                        </div>
+                        @endforeach
+                    @endif
+                </div>
             </div>
             <div class="flex justify-center py-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded">送信</button>
