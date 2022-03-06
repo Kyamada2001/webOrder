@@ -16,6 +16,7 @@ mix.js('resources/js/business/app.js', 'public/js/business')
     .sass('resources/sass/business/app.scss', 'public/css/business')
     .js('resources/js/customer/app.js', 'public/js/customer')
     .sass('resources/sass/customer/app.scss', 'public/css/customer')
+    .version()
     .vue()
     .options({
         processCssUrls: false,

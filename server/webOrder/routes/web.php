@@ -23,9 +23,16 @@ Route::get('/business/products/create', 'Business\ProductController@create')->na
 Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
 
 //お客さん側
-Route::get('/home', function(){
-    return view('customer.welcome');
+
+Route::get('/', function(){
+    return view('customer.home');
 });
 Route::get('/{any}', function(){
-    return view('customer.welcome');
+    return view('customer.home');
 })->where('{any}','*.');
+
+
+//Routingテスト
+Route::get('/welcome', function(){
+    return view('customer.welcome');
+});
