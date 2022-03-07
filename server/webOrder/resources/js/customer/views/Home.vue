@@ -1,12 +1,12 @@
 <template>
     <diV class="h-full">
-        <header class="bg-stone-100 h-1/5">
+        <header class="bg-stone-100 h-1/6 border-t-4 border-orange-400">
             <Navbar/>
         </header>
 
         <main>
             <div class="container">
-                メイン
+                <router-view></router-view>
             </div>
         </main>
 
