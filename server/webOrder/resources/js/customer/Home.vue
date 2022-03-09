@@ -6,13 +6,11 @@
 
         <main>
             <div class="container">
-                メイン以下routerview
                 <router-view/>
             </div>
         </main>
 
         <footer>
-            フッター
         </footer>
     </diV>
 </template>

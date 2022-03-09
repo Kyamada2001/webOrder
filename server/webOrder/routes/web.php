@@ -30,9 +30,3 @@ Route::get('/', function(){
 Route::get('/{any}', function(){
     return view('customer.home');
 })->where('{any}','*.');
-
-
-//Routingテスト
-Route::get('/welcome', function(){
-    return view('customer.welcome');
-});
