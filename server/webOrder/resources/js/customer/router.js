@@ -1,6 +1,7 @@
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './Home.vue'
 import Welcome from './views/Welcome.vue'
+import MemberRegister from './views/MemberRegister.vue'
 
 export default new Router({
   mode: 'history',
@@ -15,5 +16,10 @@ export default new Router({
         name: 'welcome',
         component: Welcome
       },
+      {
+        path: '/member-register',
+        name: 'member-register',
+        component: MemberRegister
+      }
   ]
 });

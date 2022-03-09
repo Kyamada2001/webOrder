@@ -16,7 +16,7 @@
         </div>
         <div class="flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-1/3">
             <div class="px-4">
-                <router-link class="hover:text-orange-300 text-sm" to="#">会員登録</router-link>
+                <router-link class="hover:text-orange-300 text-sm" to="/member-register">会員登録</router-link>
             </div>
             <div class="pl-1 pr-6">
                 <router-link class="hover:text-orange-300 text-sm" to="#">ログイン</router-link>

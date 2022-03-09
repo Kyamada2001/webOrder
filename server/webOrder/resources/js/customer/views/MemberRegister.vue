@@ -1,0 +1,3 @@
+<template>
+	<h1>会員登録画面</h1>
+</template>
