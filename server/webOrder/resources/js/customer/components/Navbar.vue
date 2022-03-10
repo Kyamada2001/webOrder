@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-row justify-around w-full">
         <div class="px-10 pb-3 w-1/5">
-            <h1 class="font-serif text-2xl text-orange-500">webOrder</h1>
+            <router-link class="font-serif text-2xl text-orange-500" to="#">webOrder</router-link>
         </div>
         <div class="w-3/5 space-x-5">
             <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>

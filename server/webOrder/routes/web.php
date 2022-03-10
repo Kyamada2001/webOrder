@@ -27,6 +27,13 @@ Route::post('/business/products/store', 'Business\ProductController@store')->nam
 Route::get('/', function(){
     return view('customer.home');
 });
-Route::get('/{any}', function(){
+
+Route::get('/{any}', function(){ 
     return view('customer.home');
-})->where('{any}','*.');
+})->where('{any}','.+');
+
+Route::get('/{any}/{any2}', function(){ //応急処置的な書き方。2スラッシュ以降URLがある際にどのようなコードがあるのか
+    return view('customer.home');
+})->where('{any}','.+')
+->where('{any2}','.+');
+
