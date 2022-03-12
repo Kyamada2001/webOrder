@@ -17,9 +17,9 @@
         <div class="w-5/12 space-y-2">
             <label for="pass" class="text-sm block">パスワード確認</label>
             <div class="relative">
-                <input :type="showPasswordConfirm ? 'password' : 'text'" class="w-full h-14 py-2 px-4 rounded border border-gray-500 placeholder-gray-500 placeholder-opacity-50">
+                <input :type="showPasswordConfirmation ? 'password' : 'text'" class="w-full h-14 py-2 px-4 rounded border border-gray-500 placeholder-gray-500 placeholder-opacity-50">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
-                    <button @click="showPasswordConfirm = !showPasswordConfirm">👁</button>
+                    <button @click="showPasswordConfirmation = !showPasswordConfirmation">👁</button>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <input type="text" class="w-full h-14 py-2 px-4 rounded border border-gray-500 placeholder-gray-500 placeholder-opacity-50" placeholder="webOrder内のユーザー名">
         </div>
         <div  class="w-5/12 py-5">
-            <router-link to="#" class="flex justify-center rounded bg-red-500 hover:bg-red-700 text-white w-full h-12 pt-2 font-semibold">次へ</router-link>
+            <router-link to="/member/register-completed" class="flex justify-center rounded bg-red-500 hover:bg-red-700 text-white w-full h-12 pt-2 font-semibold">次へ</router-link>
         </div>
 	</div>
 </template>
@@ -37,7 +37,7 @@ export default {
     data() {
         return {
             showPassword: true,
-            showPasswordConfirm: true,
+            showPasswordConfirmation: true,
         }
     }
 }

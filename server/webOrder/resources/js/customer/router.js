@@ -1,7 +1,8 @@
 import Router from 'vue-router'
 import SelectMemberRegister from './views/member/Select-Register.vue'
 import Top from './views/Top.vue'
-import MemberRegister from './views/member/Register.vue'
+import MemberRegisterEmail from './views/member/Register-email.vue'
+import MemberRegisterCompleted from './views/member/Register-completed.vue'
 
 export default new Router({
   mode: 'history',
@@ -17,9 +18,14 @@ export default new Router({
       component: SelectMemberRegister
     },
     {
-      path: '/member/register',
-      name: 'member-register',
-      component: MemberRegister
+      path: '/member/register-email',
+      name: 'member-register-email',
+      component: MemberRegisterEmail
+    },
+    {
+      path: '/member/register-completed',
+      name: 'member-register-completed',
+      component: MemberRegisterCompleted
     },
   ]
 });

@@ -2,7 +2,7 @@
 	<div class="flex flex-col items-center space-y-5">
 		<div class="text-2xl pt-8 font-semibold">会員登録</div>
 		<div class="flex flex-col items-center space-y-4 border-b w-full border-b-gray-400 pb-4">
-				<router-link class="grid justify-items-center rounded bg-red-500 hover:bg-red-700 text-white w-1/2 h-11 pt-2 font-semibold" to="/member/register">メールアドレスで登録する</router-link>
+				<router-link  to="/member/register-email" class="grid justify-items-center rounded bg-red-500 hover:bg-red-700 text-white w-1/2 h-11 pt-2 font-semibold">メールアドレスで登録する</router-link>
 				<router-link class="grid justify-items-center rounded border-solid border border-black bg-white w-1/2 h-11 pt-2 font-semibold" to="#">Googleで登録する</router-link>
 		</div>
 		<div class="flex flex-col items-center w-full space-y-3">
