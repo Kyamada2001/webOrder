@@ -37,3 +37,5 @@ Route::get('/{any}/{any2}', function(){ //応急処置的な書き方。2スラ�
 })->where('{any}','.+')
 ->where('{any2}','.+');
 
+
+Auth::routes();
