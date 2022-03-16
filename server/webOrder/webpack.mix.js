@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
+
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +13,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+ mix.js('resources/js/business/app.js', 'public/js/business')
+    .sass('resources/sass/business/app.scss', 'public/css/business')
+    .js('resources/js/customer/app.js', 'public/js/customer')
+    .sass('resources/sass/customer/app.scss', 'public/css/customer')
+    .version()
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .options({
+        processCssUrls: false,
+        postCss: [ tailwindcss('./tailwind.config.js') ],
+    });

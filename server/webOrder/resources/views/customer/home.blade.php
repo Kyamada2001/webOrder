@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="app" class="h-full">
-        <Home/>
+       <Home/>
     </div>
 <script src="{{ asset('js/customer/app.js') }}"></script>
 </body>
