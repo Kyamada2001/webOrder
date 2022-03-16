@@ -59,7 +59,7 @@ export default {
         register: async function(){
             console.log('登録');
             let postUrl = '/api/register';
-            await axios.post('/api/register' ,{
+            await axios.post(postUrl ,{
                 //register: this.registerForm
                 username: this.registerForm.username,
                 email: this.registerForm.email,
