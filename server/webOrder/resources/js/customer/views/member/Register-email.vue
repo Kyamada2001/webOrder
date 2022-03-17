@@ -57,16 +57,19 @@ export default {
     },
     methods: {
         register: async function(){
-            console.log('登録');
             let postUrl = '/api/register';
             await axios.post(postUrl ,{
-                //register: this.registerForm
+                //register: this.registerForm view側でまとめて送りたい
                 username: this.registerForm.username,
                 email: this.registerForm.email,
                 password: this.registerForm.password,
                 password_confirmation: this.registerForm.password_confirmation,
+            }).then(response =>{
+                this.$router.push('/member/register-complete');
+            }).catch(error => {
+                alert('失敗'); 
+                console.log(error);
             });
-            console.log('登録');
         }
     }
 }
