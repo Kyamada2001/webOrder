@@ -40,7 +40,8 @@ class CustomerSeeder extends Seeder
                 $array = array(
                     [
                     'id' => $i,
-                    'name' => "テスト　ユーザー{$i}",
+                    'username' => "テスト　ユーザー{$i}",
+                    'email' => "test{$i}@example.com",
                     'password' => bcrypt('password'),
                     ]
                 );

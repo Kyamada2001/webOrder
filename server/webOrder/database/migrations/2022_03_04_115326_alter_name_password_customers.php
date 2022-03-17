@@ -14,7 +14,7 @@ class AlterNamePasswordCustomers extends Migration
     public function up()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->renameColumn('user_name','name');
+            $table->renameColumn('user_name','username');
             $table->renameColumn('user_password','password');
         });
     }
@@ -27,7 +27,7 @@ class AlterNamePasswordCustomers extends Migration
     public function down()
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->renameColumn('name','user_name');
+            $table->renameColumn('username','user_name');
             $table->renameColumn('password','user_password');
         });
     }
