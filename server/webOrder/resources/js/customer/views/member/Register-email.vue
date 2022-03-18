@@ -5,7 +5,6 @@
             <div class="w-5/12 space-y-2">
                 <label for="email" class="text-sm block">メールアドレス</label>
                 <input type="email" id="email" v-model="registerForm.email" class="w-full h-14 py-2 px-4 rounded border border-gray-500 placeholder-gray-500 placeholder-opacity-50 focus:border-black" placeholder="例)yamada@example.com">
-                <p v-if="this.notEntryErrors.email">メールアドレスを入力して下さい</p>
             </div>
             <div class="w-5/12 space-y-2">
                 <label for="pass" class="text-sm block">パスワード</label>
