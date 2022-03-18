@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 import router from './router';
 import Home from './Home.vue';
 import axios from 'axios';
-import store from './store'
+import store from './store';
 
 window.Vue = Vue;
 Vue.use(VueRouter);
