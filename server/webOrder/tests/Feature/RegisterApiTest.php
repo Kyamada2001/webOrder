@@ -14,23 +14,26 @@ class RegisterApiTest extends TestCase
      *
      * @return void
      */
-    public function test_register()
+    use RefreshDatabase;
+
+    public function testRegister()
     {
         $data = [
             'username' => 'vuesplash user',
             'email' => 'dummy@email.com',
             'password' => 'test1234',
+            'password_confirmation' => 'test1234',
         ];
 
         $response = $this->json('POST', route('register'), $data);
 
-        $customer = new Customer();
-        $customer = $customer->orderBy('id', 'desc')->first();
-        $this->assertEquals($data['username'], $customer->name);
+        //$customer = new Customer();
+        $customer = Customer::first();
+        $this->assertEquals($data['username'], $customer->username);
         //$this->assertEquals(1,1);
 
         $response
             ->assertStatus(201)
-            ->assertJson(['username' => $customer->name]);
+            ->assertJson(['username' => $customer->username]);
 }
 }

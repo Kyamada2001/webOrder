@@ -57,7 +57,7 @@ export default {
     },
     methods: {
         register: async function(){
-            await this.$store.dispatch('auth/register', this.registerForm);
+            const response = await this.$store.dispatch('auth/register', this.registerForm);
 
             if(this.$store.getters['auth/check']){
                 this.$router.push('/member/register-complete');
