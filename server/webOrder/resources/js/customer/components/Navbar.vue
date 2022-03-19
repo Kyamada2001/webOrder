@@ -19,7 +19,7 @@
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-register">会員登録</router-link>
             </div>
             <div class="pl-1 pr-6">
-                <router-link class="hover:text-orange-300 text-sm" to="#">ログイン</router-link>
+                <router-link class="hover:text-orange-300 text-sm" to="/member/select-login">ログイン</router-link>
             </div>
         </div>
     </div>

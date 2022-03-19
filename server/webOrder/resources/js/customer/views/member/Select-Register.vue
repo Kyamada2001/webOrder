@@ -7,7 +7,7 @@
 		</div>
 		<div class="flex flex-col items-center w-full space-y-3">
 			<h2>アカウントをお持ちの方</h2>
-			<router-link class="grid justify-items-center rounded border-solid border border-red-500 hover:bg-red-50 text-red-500 w-1/2 h-11 pt-2 font-semibold" to="#">ログイン</router-link>
+			<router-link class="grid justify-items-center rounded border-solid border border-red-500 hover:bg-red-50 text-red-500 w-1/2 h-11 pt-2 font-semibold" to="/member/select-login">ログイン</router-link>
 		</div>
 	</div>
 </template>
