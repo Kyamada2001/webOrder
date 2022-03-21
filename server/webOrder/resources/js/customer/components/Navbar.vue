@@ -14,7 +14,7 @@
             <router-link class="hover:text-orange-300 text-lg" to="#">商品一覧</router-link>
             <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>
         </div>
-        <div class="flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-1/3">
+        <div v-if="isLogin" class="flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-1/3">
             <div class="px-4">
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-register">会員登録</router-link>
             </div>
@@ -22,6 +22,27 @@
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-login">ログイン</router-link>
             </div>
         </div>
+        <div v-else class="flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-1/3">
+            <div class="px-4">
+                <router-link to="#" class="hover:text-orange-300 text-sm" >{{ login_customer }}さん</router-link>
+            </div>
+            <div class="pl-1 pr-6">
+                <router-link to="#" class="hover:text-orange-300 text-sm">ログアウト</router-link>
+            </div>
+        </div>
     </div>
 </div>
 </template>
+
+<script>
+export default{
+    computed: {
+        isLogin(){
+            return this.$store.getters['auth/check'];
+        },
+        login_customer(){
+            return this.$store.getters['auth/customername'];
+        }
+    }
+}
+</script>
