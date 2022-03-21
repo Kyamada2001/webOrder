@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit.prevent="login">
         <div class="flex flex-col items-center space-y-5">
             <div class="text-2xl pt-8 font-semibold">ログイン</div>
             <div class="w-5/12 space-y-2">
@@ -26,7 +26,6 @@ export default {
     data() {
         return {
             showPassword: true,
-            showPasswordConfirmation: true,
             loginForm: {
                 email: '',
                 password: '',
@@ -34,7 +33,15 @@ export default {
         }
     },
     methods: {
-        
+        async login() {
+            await this.$store.dispatch('auth/login', this.loginForm);
+
+            if(this.$store.getters['auth/check']){
+                this.$router.push('/');
+            }else{
+                alert('だめです');
+            }
+        }
     }
 }
 </script>

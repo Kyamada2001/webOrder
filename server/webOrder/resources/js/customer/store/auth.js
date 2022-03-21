@@ -15,15 +15,16 @@ const mutations = {
 
 const actions = {
     async register(context, data){
-        const response = await axios.post('/api/register' ,{
-            //register: this.registerForm view側でまとめて送りたい
-            username: data.username,
-            email: data.email,
-            password: data.password,
-            password_confirmation: data.password_confirmation,
-        });
+        const response = await axios.post('/api/register' ,data);
         context.commit('setCustomer', response.data);
-        console.log(response.data);
+    },
+    async login (context, data) {
+        const response = await axios.post('/api/login', data);
+        context.commit('setCustomer', response.data);
+    },
+    async logout (context) {
+    const response = await axios.post('/api/logout')
+    context.commit('setCustomer', null)
     }
 }
 

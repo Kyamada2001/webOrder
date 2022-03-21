@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Customer\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -42,6 +43,16 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return $user;
+    }
+
+    public function authenticate(Request $request)
+    {
+        Auth::guard('customer');
+        $authentication_info = $request->only('email','password');
+
+        if (Auth::guard('customer')->attempt($authentication_info)) {
+            return Auth::guard('customer')->user();
+        }
     }
 
     protected function loggedOut(Request $request)
