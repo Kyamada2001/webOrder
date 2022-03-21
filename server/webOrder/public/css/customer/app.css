@@ -457,6 +457,9 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width: 1536px;
   }
 }
+.fixed {
+  position: fixed;
+}
 .absolute {
   position: absolute;
 }
@@ -476,6 +479,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .right-0 {
   right: 0px;
+}
+.left-0 {
+  left: 0px;
+}
+.z-10 {
+  z-index: 10;
 }
 .mx-auto {
   margin-left: auto;
@@ -504,6 +513,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mb-3 {
   margin-bottom: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
 }
 .block {
   display: block;
@@ -544,6 +559,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-11 {
   height: 2.75rem;
 }
+.max-h-full {
+  max-height: 100%;
+}
 .w-full {
   width: 100%;
 }
@@ -571,8 +589,32 @@ Ensure the default browser behavior of the `hidden` attribute.
 .min-w-full {
   min-width: 100%;
 }
+.max-w-lg {
+  max-width: 32rem;
+}
+.max-w-xl {
+  max-width: 36rem;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-3xl {
+  max-width: 48rem;
+}
+.max-w-full {
+  max-width: 100%;
+}
 .flex-grow {
   flex-grow: 1;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .appearance-none {
   -webkit-appearance: none;
@@ -596,6 +638,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .justify-center {
   justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .justify-around {
   justify-content: space-around;
@@ -631,6 +676,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-divide-opacity));
+}
+.overflow-hidden {
+  overflow: hidden;
 }
 .whitespace-nowrap {
   white-space: nowrap;
@@ -741,6 +789,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-stone-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(120 113 108 / var(--tw-bg-opacity));
+}
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 .p-2 {
   padding: 0.5rem;
@@ -888,6 +944,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-5 {
   line-height: 1.25rem;
 }
+.leading-none {
+  line-height: 1;
+}
 .tracking-wider {
   letter-spacing: 0.05em;
 }
@@ -919,6 +978,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
 .placeholder-gray-500::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(107 114 128 / var(--tw-placeholder-opacity));
@@ -939,6 +1002,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .placeholder-opacity-50::placeholder {
   --tw-placeholder-opacity: 0.5;
+}
+.opacity-50 {
+  opacity: 0.5;
 }
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -997,6 +1063,11 @@ body {
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-red-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
 .hover\:text-orange-300:hover {
   --tw-text-opacity: 1;
   color: rgb(253 186 116 / var(--tw-text-opacity));
@@ -1005,6 +1076,16 @@ body {
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.hover\:text-gray-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
 
 .focus\:border-black:focus {
@@ -1063,5 +1144,12 @@ body {
 
   .sm\:justify-around {
     justify-content: space-around;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .md\:rounded {
+    border-radius: 0.25rem;
   }
 }
