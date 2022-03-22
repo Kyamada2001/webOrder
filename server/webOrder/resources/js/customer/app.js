@@ -11,6 +11,8 @@ window.Vue = Vue;
 Vue.use(VueRouter);
 Vue.prototype.$axios = axios;
 
+const createApp = async() => {
+    await store.dispatch('auth/currentUser');
 const app = new Vue({
     el: '#app',
     router,
@@ -18,3 +20,5 @@ const app = new Vue({
     components: { Home }, //最初のページだけコンポーネントを登録
     template: '<Home/>',
 });
+}
+createApp();
