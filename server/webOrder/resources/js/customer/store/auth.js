@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const state = {
     customer: null
 }
@@ -25,6 +27,11 @@ const actions = {
     async logout (context) {
         const response = await axios.post('/api/logout');
         context.commit('setCustomer', null);
+    },
+    async currentUser(context){
+        const response = await axios.get('/api/user');
+        const user = response.data || null;
+        context.commit('setCustomer', user);
     }
 }
 
