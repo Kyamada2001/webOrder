@@ -60,6 +60,7 @@ export default{
             await this.$store.dispatch('auth/logout');
 
             if(!this.$store.getters['auth/check']){
+                this.showLogoutModal = false;
                 this.$router.push('/');
             }
         }
