@@ -23,6 +23,9 @@
                     </div>
                 </div>
             </div>
+            <div v-if="errorMessage" class="flex flex-col text-red-500 text-md ">
+                <p>⚠ {{ errorMessage }}</p>
+            </div>
             <div  class="w-5/12 py-5">
                 <button class="flex justify-center rounded bg-red-500 hover:bg-red-700 text-white w-full h-12 pt-2 font-semibold">次へ</button>
             </div>
@@ -40,14 +43,20 @@ export default {
             },
         }
     },
+    computed: {
+        apiStatus(){
+            return this.$store.state.auth.apiStatus;
+        },
+        errorMessage(){
+            return this.$store.state.auth.loginErrorMessage;
+        }
+    },
     methods: {
         async login() {
             await this.$store.dispatch('auth/login', this.loginForm);
 
-            if(this.$store.getters['auth/check']){
+            if(this.apiStatus){
                 this.$router.push('/');
-            }else{
-                alert('だめです');
             }
         }
     }
