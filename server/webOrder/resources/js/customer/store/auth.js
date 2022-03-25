@@ -40,12 +40,16 @@ const actions = {
             context.commit('setApiStatus', true);
             return false;
         }
+        //エラーだった場合
         context.commit('setApiStatus' ,false);
+        context.commit('error/setErrorCode', response.status, { root: true });
         if(response.status === UNPROCESSABLE_CONTENT){
             context.commit('setRegisterErrorMessages', response.data.errors);
             return false;
         }
+        context.commit('setRegisterErrorMessages', response.data.errors);
     },
+
     async login(context, data) {
         context.commit('setApiStatus',null);
         const response = await axios.post('/api/login', data).catch(err => err.response || err);
@@ -56,20 +60,23 @@ const actions = {
             context.commit('setLoginErrorMessages', null);
             return false;
         }
-        
-        if(response.status == UNPROCESSABLE_CONTENT){
-            context.commit('setLoginErrorMessages', response.data.errors);
-            context.commit('setApiStatus', false);
-            return false;
-        }
-        context.commit('setLoginErrorMessages', response.data.errors);
+        //エラーだった場合
         context.commit('setApiStatus', false);
         context.commit('error/setCode', response.status ,{ root: true });
+        if(response.status == UNPROCESSABLE_CONTENT){
+            context.commit('setLoginErrorMessages', response.data.errors);
+            return false;
+        }
+        //別のエラーだった場合の保険
+        context.commit('setLoginErrorMessages', response.data.errors);
+        
     },
+
     async logout (context) {
         const response = await axios.post('/api/logout');
             context.commit('setCustomer', null);
     },
+
     async currentUser(context){
         const response = await axios.get('/api/user');
         const user = response.data || null;
