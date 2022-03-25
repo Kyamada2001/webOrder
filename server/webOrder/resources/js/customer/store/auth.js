@@ -1,12 +1,13 @@
 import axios from "axios"
 import { OK } from '../../util'
 import { UNPROCESSABLE_CONTENT } from '../../util'
-
+import { CREATED } from '../../util'
 
 const state = {
     customer: null,
     apiStatus: null,
-    loginErrorMessage: null,
+    loginErrorMessages: null,
+    registerErrorMessages: null,
 }
 
 const getters = {
@@ -21,34 +22,47 @@ const mutations = {
     setApiStatus (state, status) {
         state.apiStatus = status
     },
-    setLoginErrorMessage(state ,loginErrorMessage){
-        state.loginErrorMessage = loginErrorMessage
+    setLoginErrorMessages(state ,errorMessages){
+        state.loginErrorMessages = errorMessages
+    },
+    setRegisterErrorMessages(state ,errorMessages){
+        state.registerErrorMessages = errorMessages
     }
 }
 
 const actions = {
     async register(context, data){
-        const response = await axios.post('/api/register' ,data);
+        context.commit('setApiStatus', null);
+        const response = await axios.post('/api/register' ,data).catch(err => err.response || err);
+        if(response.status === CREATED){
             context.commit('setCustomer', response.data);
+            context.commit('setRegisterErrorMessages', null);
+            context.commit('setApiStatus', true);
+            return false;
+        }
+        context.commit('setApiStatus' ,false);
+        if(response.status === UNPROCESSABLE_CONTENT){
+            context.commit('setRegisterErrorMessages', response.data.errors);
+            return false;
+        }
     },
     async login(context, data) {
         context.commit('setApiStatus',null);
         const response = await axios.post('/api/login', data).catch(err => err.response || err);
         //エラー判定
-        console.log(response.status);
         if(response.status == OK){
             context.commit('setApiStatus',true);
             context.commit('setCustomer', response.data);
-            context.commit('setLoginErrorMessage', null);
+            context.commit('setLoginErrorMessages', null);
             return false;
         }
         
         if(response.status == UNPROCESSABLE_CONTENT){
-            context.commit('setLoginErrorMessage', response.data.errors);
+            context.commit('setLoginErrorMessages', response.data.errors);
             context.commit('setApiStatus', false);
             return false;
         }
-        context.commit('setLoginErrorMessage', response.data.errors);
+        context.commit('setLoginErrorMessages', response.data.errors);
         context.commit('setApiStatus', false);
         context.commit('error/setCode', response.status ,{ root: true });
     },

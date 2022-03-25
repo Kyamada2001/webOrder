@@ -23,8 +23,8 @@
                     </div>
                 </div>
             </div>
-            <div v-if="errorMessage" class="flex flex-col text-red-500 text-md ">
-                <p>⚠ {{ errorMessage }}</p>
+            <div v-if="errorMessages" class="flex flex-col text-red-500 text-md ">
+                <p>⚠ {{ errorMessages }}</p>
             </div>
             <div  class="w-5/12 py-5">
                 <button class="flex justify-center rounded bg-red-500 hover:bg-red-700 text-white w-full h-12 pt-2 font-semibold">次へ</button>
@@ -47,8 +47,8 @@ export default {
         apiStatus(){
             return this.$store.state.auth.apiStatus;
         },
-        errorMessage(){
-            return this.$store.state.auth.loginErrorMessage;
+        errorMessages(){
+            return this.$store.state.auth.loginErrorMessages;
         }
     },
     methods: {

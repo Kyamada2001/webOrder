@@ -154,7 +154,9 @@ return [
         'sale_shop' => '販売店舗',
         'product_name'=> '商品名',
         'product_price' => '商品金額',
-
+        'email' => 'メールアドレス',
+        'password' => 'パスワード',
+        'username' => 'ユーザー名',
     ],
 
 ];
