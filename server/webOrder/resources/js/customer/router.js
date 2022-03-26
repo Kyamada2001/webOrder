@@ -6,6 +6,9 @@ import MemberRegisterCompleted from './views/member/Register-complete.vue'
 import SelectMemberLogin from './views/member/Select-Login.vue'
 import MemberLoginEmail from './views/member/Login-email.vue'
 
+//エラー系
+import SystemError from './views/errors/System.vue'
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -39,5 +42,10 @@ export default new Router({
       name: 'member-login-email',
       component: MemberLoginEmail
     },
+
+    {
+      path: '/500',
+      component: SystemError,
+    }
   ]
 });

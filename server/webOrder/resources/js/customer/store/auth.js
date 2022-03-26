@@ -42,12 +42,12 @@ const actions = {
         }
         //エラーだった場合
         context.commit('setApiStatus' ,false);
-        context.commit('error/setErrorCode', response.status, { root: true });
         if(response.status === UNPROCESSABLE_CONTENT){
             context.commit('setRegisterErrorMessages', response.data.errors);
             return false;
+        }else {
+            context.commit('error/setCode', response.status, { root: true });
         }
-        context.commit('setRegisterErrorMessages', response.data.errors);
     },
 
     async login(context, data) {
@@ -62,14 +62,12 @@ const actions = {
         }
         //エラーだった場合
         context.commit('setApiStatus', false);
-        context.commit('error/setCode', response.status ,{ root: true });
         if(response.status == UNPROCESSABLE_CONTENT){
             context.commit('setLoginErrorMessages', response.data.errors);
             return false;
+        }else{
+            context.commit('error/setCode', response.status ,{ root: true });
         }
-        //別のエラーだった場合の保険
-        context.commit('setLoginErrorMessages', response.data.errors);
-        
     },
 
     async logout (context) {
