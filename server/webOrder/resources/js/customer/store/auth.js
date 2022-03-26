@@ -72,13 +72,25 @@ const actions = {
 
     async logout (context) {
         const response = await axios.post('/api/logout');
+        if(response.status === OK){
             context.commit('setCustomer', null);
+            context.commit('setApiStatus', true);
+            return false;
+        }
+        context.commit('setApiStatus', false);
+        context.commit('error/setCode', response.status, { root: true });
     },
 
     async currentUser(context){
+        context.commit('setApiStatus', null);
         const response = await axios.get('/api/user');
-        const user = response.data || null;
-        context.commit('setCustomer', user);
+        if(response.status === OK){
+            const user = response.data || null;
+            context.commit('setCustomer', user);
+            return false;
+        }
+        context.commit('setApiStatus', false);
+        context.commit('error/setCode', response.status, { root: true });
     }
 }
 
