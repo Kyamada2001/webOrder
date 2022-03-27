@@ -9,6 +9,8 @@ import MemberLoginEmail from './views/member/Login-email.vue'
 //エラー系
 import SystemError from './views/errors/System.vue'
 
+import store from './store'
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -40,7 +42,15 @@ export default new Router({
     {
       path: '/member/login-email',
       name: 'member-login-email',
-      component: MemberLoginEmail
+      component: MemberLoginEmail,
+      beforeEnter(to, from, next){
+        if(store.getters['auth/check']){
+          next('/')
+          //セッションで「ログイン済です。再ログインする場合は一度ログアウトして下さい」みたいなメッセージを出したい
+        }else{
+          next()
+        }
+      }
     },
 
     {
