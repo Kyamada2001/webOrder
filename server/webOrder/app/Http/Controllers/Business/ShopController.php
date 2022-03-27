@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Business;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Shop;
@@ -43,12 +44,20 @@ class ShopController extends Controller
             'business_start_time' =>'required',
             'business_end_time' =>'required',
             'weekly_holidays' =>'required',
+            'shop_image' => 'image|file',
         ]);
+        $imgpath = null;
+        if(isset($request->shop_image)){
+            $fileName = Carbon::now()->format('Ymd')  . '_' . $request->shop_image->getClientOriginalName();
+            $imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+        }
+
         $shop = new Shop();
         $shop->name = $request->shop_name;
         $shop->business_start_time = $request->business_start_time;
         $shop->business_end_time = $request->business_end_time;
         $shop->weekly_holiday = $request->weekly_holidays;
+        $shop->imgpath = $imgpath;
         $shop->save();
         return redirect(route('business.shop.index'));
     }

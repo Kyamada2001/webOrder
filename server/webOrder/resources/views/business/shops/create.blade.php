@@ -2,7 +2,7 @@
 @section('title', '店舗登録')
 @section('content')
 <div  id="app" class="p-6 bg-white">
-    <form action="{{ route('business.shop.store') }}" method="post">
+    <form action="{{ route('business.shop.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="divide-gray-200">
             <div class="flex flex-row py-3 border-b-2">
@@ -69,7 +69,22 @@
                 </div>
             </div>
             <div>
-            
+            <div class="flex flex-row py-3 border-b-2">
+                <div class="px-3 w-1/4">
+                    <label>店舗画像</label>
+                </div>
+                <div>
+                    <input type="file" name="shop_image">
+                    @if($errors->has('shop_image'))
+                        @foreach($errors->get('shop_image') as $error)
+                        <div>
+                            <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+                        </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+
             </div>
             <div class="flex justify-center py-4">
                 <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 border rounded">送信</button>

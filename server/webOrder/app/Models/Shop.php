@@ -13,7 +13,8 @@ class Shop extends Model
         'name',
         'business_start_time',
         'business_end_time',
-        'weekly_holiday'
+        'weekly_holiday',
+        'image',
     ];
     
     /*public function toArray(){
