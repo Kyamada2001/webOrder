@@ -61,4 +61,12 @@ class ShopController extends Controller
         $shop->save();
         return redirect(route('business.shop.index'));
     }
+
+    public function edit(Shop $shop){
+        $shop = Shop::find($shop->id);
+
+        return view('business.shops.edit', [
+            'shop' => $shop,
+        ]);
+    }
 }

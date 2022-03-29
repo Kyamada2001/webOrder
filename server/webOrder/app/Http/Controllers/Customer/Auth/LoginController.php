@@ -47,11 +47,7 @@ class LoginController extends Controller
         if(Auth::guard('customer')->attempt($authentication_info)){
             return Auth::guard('customer')->user();
         }else{
-            //開発エラー表示確認用　ここから
-            return response()->json(['errors' => 'メールアドレスまたはパスワードが違います'] ,500);
-            //ここまで削除
-
-            //return response()->json(['errors' => 'メールアドレスまたはパスワードが違います'] ,422);
+            return response()->json(['errors' => 'メールアドレスまたはパスワードが違います'] ,422);
         }
     }
 

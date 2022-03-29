@@ -20,26 +20,26 @@
                         <td class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">店舗画像</td>
                         <td class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">営業時間(開店時間)</td>
                         <td class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">営業時間(閉店時間)</td>
-                        <td class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">週休</td>
+                        <td class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 w-36">週休</td>
                     </tr>
                 </thead>
                 @foreach($shops as $shop)
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->id }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->name }}</td>
+                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"><a href="{{ route('business.shop.edit', ['shop' => $shop]) }}">{{ $shop->name }}</a></td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @isset($shop->imgpath)
-                                <img src="{{ asset('storage/' . $shop->imgpath) }}">
+                                <img class="h-38 w-48" src="{{ asset('storage/' . $shop->imgpath) }}">
                             @else
-                                <img src="{{ asset('storage/' . 'images/noimage.png') }}">
+                                <img class="h-38 w-48" src="{{ asset('storage/' . 'images/noimage.png') }}">
                             
                             @endisset
                         </td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->business_start_time }}</td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->business_end_time }}</td>
-                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <div class="flex flex-row">
+                        <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white w-36">
+                            <div class="flex flex-wrap">
                             @foreach(str_split($shop->weekly_holiday) as $holiday)
                                 @switch($holiday)
                                     @case(App\Models\Shop::STATUS_NO_HOLIDAY)
