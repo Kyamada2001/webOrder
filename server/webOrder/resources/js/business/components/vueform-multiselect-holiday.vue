@@ -30,6 +30,7 @@ export default {
         return this.value;
       },
       set(newVal){
+        newVal.sort(function(a, b){return a-b;}); //並び替えて月〜日曜日順になるように
         this.dataValue = newVal;
       }
     },

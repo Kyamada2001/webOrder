@@ -10,7 +10,7 @@
                     <label>店舗名</label>
                 </div>
                 <div>
-                    <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-400 rounded-lg focus:shadow-outline outline-gray-400  @error('shop_name') border-red-400 @enderror"
+                    <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-400 rounded focus:shadow-outline outline-gray-400  @error('shop_name') border-red-400 @enderror"
                             type="text" name="shop_name" value="{{ old('shop_name', $shop->name) }}">
                     @if($errors->has('shop_name'))
                         @foreach($errors->get('shop_name') as $error)
@@ -63,7 +63,7 @@
                 <div class="px-3 w-1/4">
                     <label>定休日</label>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/4">
                     <vueform-multiselect-component
                     :name="{{ json_encode($selectName) }}"
                     :value="{{ json_encode($arrayHoliday) }}"></vueform-multiselect-component>
