@@ -30,10 +30,9 @@
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white"><a href="{{ route('business.shop.edit', ['shop' => $shop]) }}">{{ $shop->name }}</a></td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @isset($shop->imgpath)
-                                <img class="h-38 w-48" src="{{ asset('storage/' . $shop->imgpath) }}">
+                                <img class="h-28 w-48" src="{{ asset('storage/' . $shop->imgpath) }}">
                             @else
-                                <img class="h-38 w-48" src="{{ asset('storage/' . 'images/noimage.png') }}">
-                            
+                                <img class="h-28 w-48" src="{{ asset('storage/' . 'images/noimage.png') }}">
                             @endisset
                         </td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->business_start_time }}</td>

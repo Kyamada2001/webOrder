@@ -18,10 +18,13 @@ Route::get('/business/shops', 'Business\ShopController@index')->name('business.s
 Route::get('/business/shops/create', 'Business\ShopController@create')->name('business.shop.create');
 Route::get('/business/shops/{shop}/edit', 'Business\ShopController@edit')->name('business.shop.edit');
 Route::post('/business/shop/store', 'Business\ShopController@store')->name('business.shop.store');
+Route::post('/business/shop/{shop}/update', 'Business\ShopController@update')->name('business.shop.update');
 
 Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
 Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
 Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
+
+
 
 //お客さん側
 

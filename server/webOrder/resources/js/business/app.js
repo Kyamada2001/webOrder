@@ -8,9 +8,10 @@ import VueCompositionAPI from '@vue/composition-api';
 window.Vue = require('vue').default;
 Vue.use(VueCompositionAPI); //vueform-multiselect関係
 //Vue.use(Vuetify);
-Vue.component('weekly-holiday-select-component', require('./components/weekly-holiday-select.vue').default);
+//使っていないVue.component('weekly-holiday-select-component', require('./components/weekly-holiday-select.vue').default);
 Vue.component('vueform-multiselect-component', require('./components/vueform-multiselect-holiday.vue').default);
-Vue.component('vue-timepicker', require('vue2-timepicker').default);
+Vue.component('vue-timepicker-former', require('vue2-timepicker').default);
+Vue.component('vue-timepicker-complete', require('./components/vue-timepicker').default);
 Vue.component('product-price-component', require('./components/product-price.vue').default);
 
 

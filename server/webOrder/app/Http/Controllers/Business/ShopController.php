@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Business;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Shop;
+use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
 {
@@ -20,7 +22,6 @@ class ShopController extends Controller
     public function index(){
 
         $shops = Shop::get();
-        //dd($shops);
         foreach($shops as $shop){ //もっといい処理あるかも
             $shop->weekly_holiday = str_replace(',', '', $shop->weekly_holiday);
             $shop->business_start_time = substr($shop->business_start_time, 0,5);
@@ -38,11 +39,11 @@ class ShopController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request, Shop $shop){
         $validated = $request->validate([
-            'shop_name' =>'required|max:20',
-            'business_start_time' =>'required',
-            'business_end_time' =>'required',
+            'shop_name' =>'required|max:40',
+            'business_start_time' =>'required|regex:/\d{2}:\d{2}$/',
+            'business_end_time' =>'required|regex:/\d{2}:\d{2}$/',
             'weekly_holidays' =>'required',
             'shop_image' => 'image|file',
         ]);
@@ -63,10 +64,45 @@ class ShopController extends Controller
     }
 
     public function edit(Shop $shop){
-        $shop = Shop::find($shop->id);
-
+        $shop->business_start_time = substr($shop->business_start_time, 0,5);
+        $shop->business_end_time = substr($shop->business_end_time, 0,5);
         return view('business.shops.edit', [
             'shop' => $shop,
         ]);
+    }
+
+    public function update(Request $request,Shop $shop){
+        //dd($request);
+        $validated = $request->validate([
+            'shop_name' =>'required|max:40',
+            'business_start_time' =>'required|regex:/\d{2}:\d{2}$/',
+            'business_end_time' =>'required|regex:/\d{2}:\d{2}$/',
+            'weekly_holidays' =>'required',
+            'shop_image' => 'image|file',
+        ]);
+
+        DB::beginTransaction();
+        try{
+            $data = Shop::find($shop->id);
+            $data->name = $request->shop_name;
+            $data->business_start_time = $request->business_start_time;
+            $data->business_end_time = $request->business_end_time;
+            $data->weekly_holiday = $request->weekly_holidays;
+            if(isset($request->shop_image)){
+                $fileName = Carbon::now()->format('Ymd')  . '_' . $request->shop_image->getClientOriginalName();
+                $updateImgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+                $beforeImgpath = $data->imgpath;
+                $data->imgpath = $updateImgpath;
+            }
+            $data->save();
+            DB::commit();
+            if(isset($request->shop_image)) Storage::disk('public')->delete($beforeImgpath);
+        }catch(\Exception $e){
+            //画像削除できなかった場合は新しく登録した画像を削除
+            DB::rollback();
+            if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
+            throw $e;
+        }
+        return redirect(route('business.shop.index'));
     }
 }

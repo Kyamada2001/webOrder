@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     <input class="w-full h-10 px-3 mb-2 text-base text-gray-700 border ring-stone-400 rounded-lg focus:shadow-outline outline-gray-400  @error('shop_name') border-red-400 @enderror"
-                            type="text" name="shop_name" value="{{ old('name', $shop->name) }}">
+                            type="text" name="shop_name" value="{{ old('shop_name', $shop->name) }}">
                     @if($errors->has('shop_name'))
                         @foreach($errors->get('shop_name') as $error)
                         <div>
@@ -27,11 +27,11 @@
                 </div>
                 <div class="flex flex-row">
                     <div>
-                        <vue-timepicker 
-                            format="HH:mm"
-                            minute-interval="15"
-                            name="business_start_time">
-                        </vue-timepicker>
+                        <vue-timepicker-complete
+                        :data="{{ json_encode([
+                            'name' => 'business_start_time',
+                            'time' => old('business_start_time', $shop->business_start_time) ]) }}">
+                        </vue-timepicker-complete>
                         @if($errors->has('business_start_time'))
                             @foreach($errors->get('business_start_time') as $error)
                             <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
@@ -42,11 +42,11 @@
                         <label>〜</label>
                     </div>
                     <div>
-                        <vue-timepicker
-                            format="HH:mm"
-                            minute-interval="15"
-                            name="business_end_time">
-                        </vue-timepicker>
+                        <vue-timepicker-complete
+                        :data="{{ json_encode([
+                            'name' => 'business_end_time',
+                            'time' => old('business_end_time',$shop->business_end_time) ]) }}">
+                        </vue-timepicker-complete>
                         @if($errors->has('business_end_time'))
                             @foreach($errors->get('business_end_time') as $error)
                             <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
@@ -55,12 +55,18 @@
                     </div>
                 </div>
             </div>
+            @php
+                $selectName = 'weekly_holidays';
+                $arrayHoliday = explode(',', old($selectName));
+            @endphp
             <div class="flex flex-row py-6 border-b-2">
                 <div class="px-3 w-1/4">
                     <label>定休日</label>
                 </div>
                 <div class="w-1/2">
-                    <vueform-multiselect-component></vueform-multiselect-component>
+                    <vueform-multiselect-component
+                    :name="{{ json_encode($selectName) }}"
+                    :value="{{ json_encode($arrayHoliday) }}"></vueform-multiselect-component>
                     @if($errors->has('weekly_holidays'))
                         @foreach($errors->get('weekly_holidays') as $error)
                         <div class="text-red-500 text-xs italic mb-3">{{ $error }}</div>
