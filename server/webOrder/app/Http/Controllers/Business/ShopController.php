@@ -48,18 +48,26 @@ class ShopController extends Controller
             'shop_image' => 'image|file',
         ]);
         $imgpath = null;
-        if(isset($request->shop_image)){
-            $fileName = Carbon::now()->format('Ymd')  . '_' . $request->shop_image->getClientOriginalName();
-            $imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+
+        DB::beginTransaction();
+        try{
+            if(isset($request->shop_image)){
+                $fileName = Carbon::now()->format('Ymd')  . '_' . $request->shop_image->getClientOriginalName();
+                $imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+            }
+            $shop = new Shop();
+            $shop->name = $request->shop_name;
+            $shop->business_start_time = $request->business_start_time;
+            $shop->business_end_time = $request->business_end_time;
+            $shop->weekly_holiday = $request->weekly_holidays;
+            $shop->imgpath = $imgpath;
+            $shop->save();
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+            if(Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
         }
 
-        $shop = new Shop();
-        $shop->name = $request->shop_name;
-        $shop->business_start_time = $request->business_start_time;
-        $shop->business_end_time = $request->business_end_time;
-        $shop->weekly_holiday = $request->weekly_holidays;
-        $shop->imgpath = $imgpath;
-        $shop->save();
         return redirect(route('business.shop.index'));
     }
 
@@ -99,7 +107,7 @@ class ShopController extends Controller
             if(isset($request->shop_image)) Storage::disk('public')->delete($beforeImgpath);
         }catch(\Exception $e){
             //画像削除できなかった場合は新しく登録した画像を削除
-            DB::rollback();
+            DB::rollBack();
             if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
             throw $e;
         }
