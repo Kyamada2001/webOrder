@@ -1,4 +1,5 @@
 <template>
+<div class="container mx-auto">
     <form @submit.prevent="register">
         <div class="flex flex-col items-center space-y-5">
             <div class="text-2xl pt-8 font-semibold">会員登録</div>
@@ -80,6 +81,7 @@
             </div>
         </div>
     </form>
+</div>
 </template>
 <script>
 export default {

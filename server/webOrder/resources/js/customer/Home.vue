@@ -5,9 +5,7 @@
         </header>
 
         <main>
-            <div class="container mx-auto">
-                <router-view/>
-            </div>
+            <router-view/>
         </main>
 
         <footer>
