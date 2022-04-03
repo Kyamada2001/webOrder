@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Shop;
+use Image;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -53,7 +54,9 @@ class ShopController extends Controller
         try{
             if(isset($request->shop_image)){
                 $fileName = Carbon::now()->format('Ymd')  . '_' . $request->shop_image->getClientOriginalName();
-                $imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+                //$imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
+                Image::make($request->shop_image)->resize(220,220)->save(storage_path('app/public/images/shops/') . $fileName);
+                $imgpath = 'images/shops/' . $fileName;
             }
             $shop = new Shop();
             $shop->name = $request->shop_name;
@@ -66,6 +69,7 @@ class ShopController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
+            throw $e;   
         }
 
         return redirect(route('business.shop.index'));
