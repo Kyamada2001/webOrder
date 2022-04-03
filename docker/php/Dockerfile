@@ -2,9 +2,10 @@ FROM php:7.4.1-fpm
 COPY php.ini /usr/local/etc/php/
 
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev libzip-dev zip mariadb-client-10.3 libpng-dev libjpeg-dev curl wget \
-  && docker-php-ext-install zip pdo_mysql
-
+  && apt-get install -y zlib1g-dev libzip-dev zip mariadb-client-10.3 libpng-dev libjpeg62-turbo-dev curl wget \
+  && docker-php-ext-configure gd --with-jpeg \
+  && docker-php-ext-install -j$(nproc) gd zip pdo_mysql
+  
 # nodejs install
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
