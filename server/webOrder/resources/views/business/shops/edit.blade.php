@@ -85,9 +85,9 @@
                     </div>
                     <div>
                         @isset($shop->imgpath)
-                            <img class="h-36 w-48 border" src="{{ asset('storage/' . $shop->imgpath) }}">
+                            <img class="h-36 w-auto border" src="{{ asset('storage/' . $shop->imgpath) }}">
                         @else
-                            <img class="h-36 w-48 border" src="{{ asset('storage/' . 'images/noimage.png') }}">
+                            <img class="h-36 w-auto border" src="{{ asset('storage/' . 'images/noimage.png') }}">
                         @endisset
                     </div>
                     <input type="file" name="shop_image">
