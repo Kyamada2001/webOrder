@@ -10,7 +10,7 @@
             <router-link class="font-serif text-2xl text-orange-500" to="/">webOrder</router-link>
         </div>
         <div class="flex justify-center w-full space-x-10">
-            <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>
+            <router-link class="hover:text-orange-300 text-lg" to="/shops">店舗一覧</router-link>
             <router-link class="hover:text-orange-300 text-lg" to="#">商品一覧</router-link>
             <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>
         </div>
