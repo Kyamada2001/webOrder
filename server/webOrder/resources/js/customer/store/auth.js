@@ -91,6 +91,10 @@ const actions = {
         }
         context.commit('setApiStatus', false);
         context.commit('error/setCode', response.status, { root: true });
+    },
+    clearErrorMessages(context){
+        context.commit('setRegisterErrorMessages', null);
+        context.commit('setLoginErrorMessages', null);
     }
 }
 

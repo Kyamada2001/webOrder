@@ -113,6 +113,14 @@ export default {
                 this.$router.push('/member/register-complete');
             }
         },
+    },
+    watch: {
+        $route: {
+        async handler () {
+            this.$store.dispatch('auth/clearErrorMessages');
+        },
+        immediate: true
+        }
     }
 }
 </script>
