@@ -3,13 +3,17 @@
         <div class="w-1/5">
             サイドバー
         </div>
-        <div class="w-4/5">
+        <div class="container pr-10">
             <div>店舗一覧</div>
-            <div>
-                <div v-for="shop in shops" v-bind:key="shop.id">
-                    <label>{{ shop.name }}</label>
-                    <img v-if="shop.imgpath" class="h-28 w-auto" :src="pathheader + shop.imgpath">
-                    <img v-else class="h-28 w-auto" :src="pathheader + noimgpath">
+            <div class="space-y-4">
+                <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">
+                    <div>
+                        <img v-if="shop.imgpath" class="border" :src="pathheader + shop.imgpath">
+                        <img v-else class="border" :src="pathheader + noimgpath">
+                    </div>
+                    <div class="pl-4">
+                        <router-link to="#" class="text-blue-700 text-xl font-bold hover:text-amber-400 hover:underline">{{ shop.name }}</router-link>
+                    </div>
                 </div>
             </div>
         </div>
