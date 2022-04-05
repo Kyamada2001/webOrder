@@ -36,7 +36,7 @@ class ShopSeeder extends Seeder
     protected function getData()
     {
         $shopArray = array();
-            for($i = 1;$i<6; $i++){
+            for($i = 1;$i<9; $i++){
                 $array = array(
                     [
                     'id' => $i,
