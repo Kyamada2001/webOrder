@@ -66,7 +66,17 @@
                 <div class="px-3 w-1/4">
                     <label>商品画像</label>
                 </div>
-                <div>
+                <div class="space-y-2">
+                    <div class="text-sm">
+                        <label>現在登録している画像</label>
+                    </div>
+                    <div>
+                        @isset($product->imgpath)
+                            <img class="h-36 w-auto border" src="{{ asset('storage/' . $product->imgpath) }}">
+                        @else
+                            <img class="h-36 w-auto border" src="{{ asset('storage/' . 'images/noimage.png') }}">
+                        @endisset
+                    </div>
                     <input type="file" name="product_image">
                     @if($errors->has('product_image'))
                         @foreach($errors->get('product_image') as $error)
