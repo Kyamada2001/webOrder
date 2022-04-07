@@ -23,6 +23,8 @@ Route::post('/business/shop/{shop}/update', 'Business\ShopController@update')->n
 Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
 Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
 Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
+Route::get('/business/products/{product}/edit', 'Business\ProductController@edit')->name('business.product.edit');
+Route::post('/business/products/{product}/update', 'Business\ProductController@update')->name('business.product.update');
 
 
 
