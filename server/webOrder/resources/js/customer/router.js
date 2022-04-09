@@ -5,7 +5,8 @@ import MemberRegisterEmail from './views/member/Register-email.vue'
 import MemberRegisterCompleted from './views/member/Register-complete.vue'
 import SelectMemberLogin from './views/member/Select-Login.vue'
 import MemberLoginEmail from './views/member/Login-email.vue'
-import shops from './views/shops.vue'
+import ShopIndex from './views/shop/index.vue'
+import ShopDetail from './views/shop/detail.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -43,7 +44,12 @@ export default new Router({
     {
       path: '/shops',
       name: 'shops',
-      component: shops
+      component: ShopIndex
+    },
+    {
+      path: '/shop/:shopId/detail',
+      name: 'shopDetail',
+      component: ShopDetail
     },
     {
       path: '/member/login-email',

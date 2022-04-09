@@ -43,5 +43,11 @@ Route::get('/{any}/{any2}', function(){ //応急処置的な書き方。2スラ�
 })->where('{any}','.+')
 ->where('{any2}','.+');
 
+Route::get('/{any}/{any2}/{any3}', function(){ //応急処置的な書き方。2スラッシュ以降URLがある際にどのようなコードがあるのか
+    return view('customer.home');
+})->where('{any}','.+')
+->where('{any2}','.+')
+->where('{any3}','.+');
+
 
 Auth::routes();

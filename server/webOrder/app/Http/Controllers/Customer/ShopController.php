@@ -15,4 +15,9 @@ class ShopController extends Controller
         $shops = Shop::get();
         return response()->json(['shops' => $shops] ,200);
     }
+
+    public function getShopDetail(Request $request){
+        $shopDetails = Shop::with('product')->find($request->shopId);
+        return response()->json(['shopDetails' => $shopDetails], 200);
+    }
 }

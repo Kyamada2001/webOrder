@@ -8,11 +8,20 @@
             <div class="space-y-4">
                 <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">
                     <div>
-                        <img v-if="shop.imgpath" class="border" :src="pathheader + shop.imgpath">
-                        <img v-else class="border" :src="pathheader + noimgpath">
+                        <img v-if="shop.imgpath" class="border" :src="pathhead + shop.imgpath">
+                        <img v-else class="border" :src="pathhead + noimgpath">
                     </div>
                     <div class="pl-4">
-                        <router-link to="#" class="text-blue-700 text-xl font-bold hover:text-amber-400 hover:underline">{{ shop.name }}</router-link>
+                        <router-link 
+                        :to="{
+                            name: 'shopDetail',
+                            params: {
+                                shopId: shop.id,
+                            }
+                        }" 
+                        class="text-blue-700 text-xl font-bold hover:text-amber-400 hover:underline">
+                            {{ shop.name }}
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -25,7 +34,7 @@ export default{
     data() {
         return {
             shops: {},
-            pathheader: 'storage/',
+            pathhead: '/storage/',
             noimgpath: 'images/noimage.png',
         }
     },

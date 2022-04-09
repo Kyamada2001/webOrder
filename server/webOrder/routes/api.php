@@ -25,5 +25,6 @@ Route::post('/login', 'Customer\Auth\LoginController@authenticate')->name('login
 Route::post('/logout', 'Customer\Auth\LoginController@logout')->name('logout');
 
 Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
+Route::get('/shop/detail', 'Customer\ShopController@getShopDetail')->name('shop.detail');
 
 Route::get('/user', fn() => Auth::guard('customer')->user())->name('user');
