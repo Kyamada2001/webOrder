@@ -4,15 +4,18 @@
             サイドバー
         </div>
         <div class="container pr-10">
-            <div>店舗詳細</div>
-            <div class="space-y-4">
-                <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="product in shopDetails.product" v-bind:key="product.id">
-                    <div>
-                        <img v-if="product.imgpath" class="border" :src="pathhead + product.imgpath">
-                        <img v-else class="border" :src="pathhead + noimgpath">
-                    </div>
-                    <div class="pl-4">
-                        <router-link to="#" class="text-blue-700 text-xl font-bold hover:text-amber-400 hover:underline">{{ product.id }} {{ product.name }}</router-link>
+            <div>{{ shopDetails.name }}の店舗詳細</div>
+            <div class="flex flex-row flex-wrap">
+                <div v-for="product in shopDetails.product" v-bind:key="product.id" class="mr-4 py-3 w-1/5">
+                    <div class="border rounded">
+                        <div>
+                            <img v-if="product.imgpath" class="border-b-1" :src="pathhead + product.imgpath">
+                            <img v-else class="border-b-1" :src="pathhead + noimgpath">
+                        </div>
+                        <div class="pl-2 py-2">
+                            <label>{{ product.name }}</label>
+                            <br><label>{{ product.price.toLocaleString() }}円</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,7 +29,7 @@ export default{
         return {
             shopDetails: {},
             pathhead: '/storage/',
-            noimgpath: 'images/noimage.png',
+            noimgpath: 'images/product_noimage.png',
         }
     },
     methods: {
@@ -36,8 +39,8 @@ export default{
                     shopId: this.$route.params.shopId
                 }
             });
-                
-            this.shopDetails = response.data.shopDetails;
+        
+        this.shopDetails = response.data.shopDetails;
         }
     },
     watch: {

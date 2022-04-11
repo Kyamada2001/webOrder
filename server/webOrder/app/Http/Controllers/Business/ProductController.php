@@ -40,7 +40,7 @@ class ProductController extends Controller
             $imgpath = null;
             if(isset($request->product_image)){
             $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->product_image->getClientOriginalName();
-            Image::make($request->product_image)->resize(150,150)->save(storage_path('app/public/images/products/') . $fileName);
+            Image::make($request->product_image)->resize(195,150)->save(storage_path('app/public/images/products/') . $fileName);
             $imgpath = 'images/products/' . $fileName;
             }
             $product = new Product();
@@ -88,7 +88,7 @@ class ProductController extends Controller
             $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : '';
             if(isset($request->product_image)){
                 $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->product_image->getClientOriginalName();
-                Image::make($request->product_image)->resize(150,150)->save(storage_path('app/public/images/products/') . $fileName);
+                Image::make($request->product_image)->resize(195,150)->save(storage_path('app/public/images/products/') . $fileName);
                 $imgpath = 'images/products/' . $fileName;
                 $product->imgpath = $imgpath;
             }
