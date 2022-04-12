@@ -1,6 +1,6 @@
 <template>
     <div class="flex form-row">
-        <div class="w-1/5">
+        <div class="w-1/4">
             サイドバー
         </div>
         <div class="container pr-10">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { OK } from '../../../util';
+
 export default{
     data() {
         return {
@@ -40,10 +42,15 @@ export default{
     },
     methods: {
         async fetchShops(){
-        const response = await axios.get('/api/shops');
+        const response = await axios.get('/api/shops').catch(err => err.response || err);
 
+        if(response.status !== OK) {
+            this.$store.commit('error/setCode', response.status);
+            return false;
+        }
 
         this.shops = response.data.shops;
+
         }
     },
     watch: {
