@@ -1,7 +1,7 @@
 <template>
-    <div class="flex form-row">
-        <div class="w-1/4">
-            サイドバー
+    <div class="flex form-row pt-5">
+        <div class="w-96">
+            <SideMenu/>
         </div>
         <div class="container pr-10">
             <div class="text-xl font-semibold">店舗一覧</div>
@@ -31,8 +31,11 @@
 
 <script>
 import { OK } from '../../../util';
-
+import SideMenu from '../../components/SideMenu.vue'
 export default{
+    components: {
+        SideMenu,
+    },
     data() {
         return {
             shops: {},
