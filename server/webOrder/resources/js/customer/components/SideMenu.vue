@@ -7,25 +7,24 @@
             <div>
                 <p v-if="!cartProducts[0]" class="flex justify-center py-3">カートに商品がありません。</p>
                 <div v-else class="space-b-2">
-                    <div v-for="cartProduct in cartProducts" :key="cartProduct.id"  class="border bg-orange-50 rounded my-2 mx-2">
-                        <div>
-                            <div class="border-b border-b-gray-200">
-                                <div class="pl-3 pt-1">{{ cartProduct.name }}</div>
-                                <div class="flex justify-end pb-1 pr-3">{{ cartProduct.price.toLocaleString() }}円</div>
+                    <div v-for="cartProduct in cartProducts" :key="cartProduct.id"  class="border bg-orange-100 rounded my-2 mx-2">
+                        <div class="pl-4 py-1 space-y-1">
+                            <div class="border-b-2 border-b-white py-1">
+                                <div>{{ cartProduct.name }}</div>
                             </div>
-                            <div class="flex flex-row">
-                                <div class="pl-3 py-1">{{ cartProduct.modalInput.quantity }}点</div>
-                                <div class="flex justify-end py-1 pr-3">{{ (cartProduct.price * cartProduct.modalInput.quantity) }}円</div>
+                            <div class="grid grid-cols-3">
+                                <div class="col-span-2">{{ cartProduct.modalInput.quantity }}点</div>
+                                <div class="col-span-1">{{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
                             </div>
                         </div>
-                        <div class="flex flex-row">
-                            <button type="button" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">変更</button>
-                            <button type="button" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">削除</button>
+                        <div class="flex flex-row pb-2 px-3 space-x-3">
+                            <button type="button" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
+                            <button type="button" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
                         </div>
                     </div>
-                    <div class="pl-3">
-                        <div>合計金額</div>
-                        <div></div>
+                    <div class="flex flex-row border-b-2 border-b-black mb-2 mx-4">
+                        <div class="w-24">合計</div>
+                        <div class="flex justify-end w-full">{{ totalPrice.toLocaleString() }}円</div>
                     </div>
                 </div>
             </div>
@@ -37,13 +36,20 @@
 export default{
     data(){
         return {
-            cartProducts: {},
+            cartProducts: { Object },
         }
     },
     computed: {
         computedCartProducts(){
             console.log(this.$store.getters['order/cartProducts']);
             return this.$store.getters['order/cartProducts'];  
+        },
+        totalPrice(){
+            let total = null;
+            Object.keys(this.cartProducts).forEach(key => {
+                total += this.cartProducts[key].price * this.cartProducts[key].modalInput.quantity;
+            });
+            return total;
         },
     },
     watch: {
