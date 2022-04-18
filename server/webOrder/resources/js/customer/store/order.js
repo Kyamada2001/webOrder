@@ -7,11 +7,10 @@ const getters = {
 const mutations = {
     setCartProducts(state, InputProduct){
         let existCart_flg = null;
-        console.log(InputProduct);
         state.cartProducts.forEach((cartProduct,index) => {
             if(cartProduct['id'] == InputProduct.id){
                 state.cartProducts[index]['modalInput'].quantity += InputProduct.modalInput.quantity;
-                exist_flg = true;
+                existCart_flg = true;
                 return false;
             }
         });
