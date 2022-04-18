@@ -5,8 +5,17 @@ const getters = {
     cartProducts: state => state.cartProducts ? state.cartProducts : null
 }
 const mutations = {
-    setCartProducts(state, cartProduct){
-        state.cartProducts.push(cartProduct);
+    setCartProducts(state, InputProduct){
+        let existCart_flg = null;
+        console.log(InputProduct);
+        state.cartProducts.forEach((cartProduct,index) => {
+            if(cartProduct['id'] == InputProduct.id){
+                state.cartProducts[index]['modalInput'].quantity += InputProduct.modalInput.quantity;
+                exist_flg = true;
+                return false;
+            }
+        });
+        if(!existCart_flg) state.cartProducts.push(InputProduct);
     }
 }
 const actions = {
