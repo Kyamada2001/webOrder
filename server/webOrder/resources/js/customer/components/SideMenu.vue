@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="flex flex-row pb-2 px-3 space-x-3">
-                            <button type="button" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
+                            <button type="button" @click="updateCartProduct(cartProduct)" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
                             <button type="button" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
                         </div>
                     </div>
@@ -41,7 +41,6 @@ export default{
     },
     computed: {
         computedCartProducts(){
-            console.log(this.$store.getters['order/cartProducts']);
             return this.$store.getters['order/cartProducts'];  
         },
         totalPrice(){
@@ -51,6 +50,12 @@ export default{
             });
             return total;
         },
+    },
+    methods: {
+        updateCartProduct(cartProduct){
+            let modalStatus = 'update'
+            this.$emit('updateCartProduct', cartProduct, modalStatus);
+        }
     },
     watch: {
         computedCartProducts: {
