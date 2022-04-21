@@ -23,6 +23,13 @@ const mutations = {
                     return false;
                 }
             });
+        }else if(InputProduct.modalStatus == 'delete'){
+            state.cartProducts.forEach((cartProduct,index) => {
+                if(cartProduct['id'] == InputProduct.id) {
+                    state.cartProducts.splice(index, 1);
+                    return false;
+                }
+            });
         }
     }
 }
