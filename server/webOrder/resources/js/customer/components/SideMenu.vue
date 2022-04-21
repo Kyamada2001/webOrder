@@ -18,8 +18,8 @@
                             </div>
                         </div>
                         <div class="flex flex-row pb-2 px-3 space-x-3">
-                            <button type="button" @click="updateCartProduct(cartProduct)" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
-                            <button type="button" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
+                            <button type="button" @click="addUpdateStatus(cartProduct)" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
+                            <button type="button" @click="addDeleteStatus(cartProduct)" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
                         </div>
                     </div>
                     <div class="flex flex-row border-b-2 border-b-black mb-2 mx-4">
@@ -29,14 +29,22 @@
                 </div>
             </div>
         </div>
+        <add-cart-modal v-if="open" @close="closeModal" :product="modalProduct" :modalStatus="modalStatus"/>
     </div>
 </template>
 
 <script>
+import addCartModal from './addCart-modal.vue'
 export default{
+    components: {
+        addCartModal,
+    },
     data(){
         return {
             cartProducts: { Object },
+            modalProduct: { Object },
+            modalStatus: String,
+            open: false,
         }
     },
     computed: {
@@ -52,9 +60,22 @@ export default{
         },
     },
     methods: {
-        updateCartProduct(cartProduct){
-            let modalStatus = 'update'
-            this.$emit('updateCartProduct', cartProduct, modalStatus);
+        addUpdateStatus(product){
+            this.modalStatus = 'update';
+            this.openModal(product);
+        },
+        addDeleteStatus(product){
+            this.modalStatus = 'delete';
+            this.openModal(product);
+        },
+        openModal(product){
+            this.modalProduct = JSON.parse(JSON.stringify(product));
+            this.open = true;
+        },
+        closeModal(){
+            this.modalStatus = null;
+            this.modalProduct = null;
+            this.open = false;
         }
     },
     watch: {
