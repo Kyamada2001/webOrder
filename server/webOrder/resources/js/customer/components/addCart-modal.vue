@@ -66,7 +66,7 @@
         this.$emit('close');
       },
       addCart(){
-        this.$store.commit('order/setCartProducts', this.modalProduct);
+        this.$store.dispatch('order/cartAction', this.modalProduct);
         this.modalProduct = null;
         this.$emit('close');
       },
