@@ -53,9 +53,8 @@ class ShopController extends Controller
         DB::beginTransaction();
         try{
             if(isset($request->shop_image)){
-                $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->shop_image->getClientOriginalName();
-                Image::make($request->shop_image)->resize(220,220)->save(storage_path('app/public/images/shops/') . $fileName);
-                $imgpath = 'images/shops/' . $fileName;
+                $fileName = Carbon::now()->format('Ymdms')  . '_' . $request->shop_image->getClientOriginalName();
+                $imgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
             }
             $shop = new Shop();
             $shop->name = $request->shop_name;
@@ -100,9 +99,8 @@ class ShopController extends Controller
             $data->business_end_time = $request->business_end_time;
             $data->weekly_holiday = $request->weekly_holidays;
             if(isset($request->shop_image)){
-                $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->shop_image->getClientOriginalName();
-                $updateImgpath = 'images/shops/' . $fileName;
-                Image::make($request->shop_image)->resize(220,220)->save(storage_path('app/public/images/shops/') . $fileName);
+                $fileName = Carbon::now()->format('Ymdms')  . '_' . $request->shop_image->getClientOriginalName();
+                $updateImgpath = $request->shop_image->storeAs('images/shops', $fileName, 'public');
                 $beforeImgpath = $data->imgpath;
                 $data->imgpath = $updateImgpath;
             }

@@ -15,8 +15,8 @@
         <div class="max-h-full px-4 py-4">
           <div  v-if="modalStatus =='add' || modalStatus == 'update'" class="flex flex-row">
             <div class="w-1/2">
-                <img v-if="modalProduct.imgpath" class="border-b w-full" :src="pathhead + modalProduct.imgpath">
-                <img v-else class="border w-full" :src="pathhead + noimgpath">
+                <img v-if="modalProduct.imgpath" class="border-b w-64 h-44 object-cover" :src="pathhead + modalProduct.imgpath">
+                <img v-else class="border w-64 h-44 object-cover" :src="pathhead + noimgpath">
                 <div class="text-lg">{{ modalProduct.name }}</div>
                 <div class="flex justify-end text-lg">{{ modalProduct.price }}円</div>
             </div>

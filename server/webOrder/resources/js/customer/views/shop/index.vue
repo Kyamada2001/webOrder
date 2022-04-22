@@ -8,8 +8,8 @@
             <div class="space-y-4">
                 <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">
                     <div>
-                        <img v-if="shop.imgpath" class="border" :src="pathhead + shop.imgpath">
-                        <img v-else class="border" :src="pathhead + noimgpath">
+                        <img v-if="shop.imgpath" class="border w-56 h-56 object-cover" :src="pathhead + shop.imgpath">
+                        <img v-else class="border w-56 h-56 object-cover" :src="pathhead + noimgpath">
                     </div>
                     <div class="pl-4">
                         <router-link 

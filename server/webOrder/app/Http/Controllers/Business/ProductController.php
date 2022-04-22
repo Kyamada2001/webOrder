@@ -39,9 +39,8 @@ class ProductController extends Controller
         try{
             $imgpath = null;
             if(isset($request->product_image)){
-            $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->product_image->getClientOriginalName();
-            Image::make($request->product_image)->resize(195,150)->save(storage_path('app/public/images/products/') . $fileName);
-            $imgpath = 'images/products/' . $fileName;
+                $fileName = Carbon::now()->format('Ymdms')  . '_' . $request->product_image->getClientOriginalName();
+                $imgpath = $request->product_image->storeAs('images/products', $fileName, 'public');
             }
             $product = new Product();
             $product->name = $request->product_name;
@@ -78,26 +77,25 @@ class ProductController extends Controller
         $data = $product;
         DB::beginTransaction();
         try{
-            $imgpath = null;
+            $updateImgpath = null;
             
-            $beforeImgpath = $data->imgpath;
             $product = Product::find($data->id);
             $product->name = $request->product_name;
             $product->shop_id = $request->sale_shop;
             $product->price = $request->product_price;
             $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : '';
             if(isset($request->product_image)){
-                $fileName = Carbon::now()->format('Ymdhms')  . '_' . $request->product_image->getClientOriginalName();
-                Image::make($request->product_image)->resize(195,150)->save(storage_path('app/public/images/products/') . $fileName);
-                $imgpath = 'images/products/' . $fileName;
-                $product->imgpath = $imgpath;
+                $fileName = Carbon::now()->format('Ymdms')  . '_' . $request->product_image->getClientOriginalName();
+                $updateImgpath = $request->product_image->storeAs('images/products', $fileName, 'public');
+                $beforeImgpath = $data->imgpath;
+                $product->imgpath = $updateImgpath;
             }
             $product->save();
             DB::commit();
-            if(!empty($imgpath) && Storage::disk('public')->exists($beforeImgpath)) Storage::disk('public')->delete($beforeImgpath);
+            if(!empty($updateImgpath) && Storage::disk('public')->exists($beforeImgpath)) Storage::disk('public')->delete($beforeImgpath);
         }catch(\Exception $e){
             DB::rollBack();
-            if(!empty($imgpath) && Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
+            if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
             throw $e;
         }
         return redirect(route('business.product.index'));

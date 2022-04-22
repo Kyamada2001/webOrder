@@ -10,8 +10,8 @@
                     <button type="button" @click="modalOpen(product)">
                         <div class="border rounded">
                             <div>
-                                <img v-if="product.imgpath" class="w-full border-b" :src="pathhead + product.imgpath">
-                                <img v-else class="w-full border-b" :src="pathhead + noimgpath">
+                                <img v-if="product.imgpath" class="border-b w-44 h-36 object-cover" :src="pathhead + product.imgpath">
+                                <img v-else class="border-b w-44 h-36 object-cover" :src="pathhead + noimgpath">
                             </div>
                             <div>
                                 <div class="flex justify-start pt-1 pl-1">{{ product.name }}</div>

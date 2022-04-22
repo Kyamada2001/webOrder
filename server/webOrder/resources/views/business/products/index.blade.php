@@ -30,9 +30,9 @@
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-sky-400 hover:underline decoration-solid"><a href="{{ route('business.product.edit', ['product' => $product]) }}">{{ $product->name }}</a></td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             @if(!empty($product->imgpath))
-                            <img class="h-24 w-28" src="{{ asset('storage/' . $product->imgpath) }}">
+                            <img class="h-24 w-28 object-cover" src="{{ asset('storage/' . $product->imgpath) }}">
                             @else
-                            <img class="h-24 w-28" src="{{ asset('storage/images/noimage.png') }}">
+                            <img class="h-24 w-28 object-cover" src="{{ asset('storage/images/noimage.png') }}">
                             @endif
                         </td>
                         <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $product->shop->name }}</td>
