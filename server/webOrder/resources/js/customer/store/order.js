@@ -5,29 +5,35 @@ const getters = {
     cartProducts: state => state.cartProducts ? state.cartProducts : null
 }
 const mutations = {
-    setCartProducts(state, InputProduct){ //actionに移動
-        if(InputProduct.modalStatus == 'add'){
-            let existCart_flg = null;
-            state.cartProducts.forEach((cartProduct,index) => {
-                if(cartProduct['id'] == InputProduct.id){
-                    state.cartProducts[index]['modalInput'].quantity += InputProduct.modalInput.quantity;
-                    existCart_flg = true;
-                    return false;
-                }
-            });
-            if(!existCart_flg) state.cartProducts.push(InputProduct);
-        }else if(InputProduct.modalStatus == 'update'){
-            state.cartProducts.forEach((cartProduct,index) => {
-                if(cartProduct['id'] == InputProduct.id) {
-                    state.cartProducts[index]['modalInput'].quantity = InputProduct.modalInput.quantity;
-                    return false;
-                }
-            });
-        }
+    addCart(state, product){
+        state.cartProducts.push(product);
+    },
+    plusCart(state, data){
+        state.cartProducts[data.index]['modalInput'].quantity += data.InputProduct.modalInput.quantity;
+    },
+    updateCart(state, data){
+        state.cartProducts[data.index]['modalInput'].quantity = data.InputProduct.modalInput.quantity;
+    },
+    deleteCart(state, index){
+        state.cartProducts.splice(index, 1);
     }
 }
 const actions = {
-
+    cartAction(context, InputProduct){
+        let existCart_flg = null;
+        context.state.cartProducts.forEach((cartProduct,index) => {
+            if(cartProduct['id'] == InputProduct.id) {
+                if(InputProduct.modalStatus == 'add'){
+                    context.commit('plusCart', { InputProduct, index });
+                    existCart_flg = true;
+                }
+                else if(InputProduct.modalStatus == 'update') context.commit('updateCart', { InputProduct, index });
+                else if(InputProduct.modalStatus == 'delete') context.commit('deleteCart', index);
+            }
+            return false;
+        });
+        if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
+    }
 }
 
 export default {
