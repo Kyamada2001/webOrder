@@ -7,6 +7,7 @@ import SelectMemberLogin from './views/member/Select-Login.vue'
 import MemberLoginEmail from './views/member/Login-email.vue'
 import ShopIndex from './views/shop/index.vue'
 import ShopDetail from './views/shop/detail.vue'
+import OrderConfimation from './views/order/confirmation.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -62,6 +63,22 @@ export default new Router({
         }else{
           next()
         }
+      }
+    },
+    {
+      path: '/order/confimation',
+      name: 'orderConfimation',
+      component: OrderConfimation
+    },
+
+    //前画面へ戻る
+    {
+      path: '/previous-screen',
+      name: 'previousScreen',
+      beforeEnter(to, from, next){
+        console.log(to);
+        console.log(from);
+        //next(to);
       }
     },
 

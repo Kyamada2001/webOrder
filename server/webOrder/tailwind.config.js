@@ -9,5 +9,8 @@ module.exports = {
   theme: {
     extend: {},
   },
+  variants: {
+    visibility: ['responsive', 'hover', 'focus', 'group-hover']
+  },
   plugins: [],
 }

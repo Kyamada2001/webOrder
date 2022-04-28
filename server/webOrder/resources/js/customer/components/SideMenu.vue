@@ -18,14 +18,18 @@
                             </div>
                         </div>
                         <div class="flex flex-row pb-2 px-3 space-x-3">
-                            <button type="button" @click="addUpdateStatus(cartProduct)" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
-                            <button type="button" @click="addDeleteStatus(cartProduct)" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
+                            <button type="button" @click="openModal(cartProduct, 'update')" class="w-1/2 rounded text-white bg-green-600 focus:outline-none hover:bg-green-500">変更</button>
+                            <button type="button" @click="openModal(cartProduct, 'delete')" class="w-1/2 rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除</button>
                         </div>
                     </div>
                     <div class="flex flex-row border-b-2 border-b-black mb-2 mx-4">
                         <div class="w-24">合計</div>
                         <div class="flex justify-end w-full">{{ totalPrice.toLocaleString() }}円</div>
                     </div>
+                </div>
+                <div class="px-2 py-2">
+                    <router-link to="/order/confimation" v-if="cartProducts[0]" class="w-full h-9 rounded text-center pt-1 text-white bg-red-500 focus:outline-none hover:bg-red-400" type="button">お支払いへ進む</router-link>
+                    <p v-else class="text-center pt-1 w-full h-9 rounded text-white bg-gray-300">お支払いへ進む</p>
                 </div>
             </div>
         </div>
@@ -41,7 +45,7 @@ export default{
     },
     data(){
         return {
-            cartProducts: { Object },
+            cartProducts: {},
             modalProduct: { Object },
             modalStatus: String,
             open: false,
@@ -60,15 +64,8 @@ export default{
         },
     },
     methods: {
-        addUpdateStatus(product){
-            this.modalStatus = 'update';
-            this.openModal(product);
-        },
-        addDeleteStatus(product){
-            this.modalStatus = 'delete';
-            this.openModal(product);
-        },
-        openModal(product){
+        openModal(product, modalStatus){
+            this.modalStatus = modalStatus;
             this.modalProduct = JSON.parse(JSON.stringify(product));
             this.open = true;
         },

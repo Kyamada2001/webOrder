@@ -4,12 +4,9 @@
             <Navbar/>
         </header>
 
-        <main>
+        <main class="h-full">
             <router-view/>
         </main>
-
-        <footer>
-        </footer>
     </diV>
 </template>
 
