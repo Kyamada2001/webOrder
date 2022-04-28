@@ -71,17 +71,6 @@ export default new Router({
       component: OrderConfimation
     },
 
-    //前画面へ戻る
-    {
-      path: '/previous-screen',
-      name: 'previousScreen',
-      beforeEnter(to, from, next){
-        console.log(to);
-        console.log(from);
-        //next(to);
-      }
-    },
-
     {
       path: '/500',
       component: SystemError,
