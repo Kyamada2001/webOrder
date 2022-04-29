@@ -17,7 +17,6 @@ export default{
 	},
 	created: function(){
 		this.login_customer = this.$store.getters['auth/customername'];
-		console.log(this.$store.getters['auth/customername']);
 	}
 }
 </script>

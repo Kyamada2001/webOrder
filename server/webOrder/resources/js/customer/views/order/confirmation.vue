@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-6 py-2">
-                <router-link to="#" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確定</router-link>
+                <router-link to="#" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">次へ</router-link>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@ export default{
           },
         immediate:true,
         deep: true,
-      }
+      },
     },
 
 }

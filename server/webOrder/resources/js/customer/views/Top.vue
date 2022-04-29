@@ -1,5 +1,21 @@
 <template>
-    <div class="flex justify-center text-2xl font-semibold">
-        トップ画面
+    <div class="flex flex-row">
+        <div class="w-96">
+            <SideMenu/>
+        </div>
+        <div class="container pr-10">
+            トップ画面
+        </div>
     </div>
 </template>
+
+<script>
+import SideMenu from '../components/SideMenu.vue'
+
+export default {
+    components: {
+        SideMenu,
+    }
+
+}
+</script>

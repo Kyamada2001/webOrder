@@ -16,7 +16,7 @@ const mutations = {
     },
     deleteCart(state, index){
         state.cartProducts.splice(index, 1);
-    }
+    },
 }
 const actions = {
     cartAction(context, InputProduct){
@@ -33,7 +33,7 @@ const actions = {
             return false;
         });
         if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
-    }
+    },
 }
 
 export default {
