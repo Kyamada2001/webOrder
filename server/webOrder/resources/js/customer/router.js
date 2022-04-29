@@ -68,7 +68,14 @@ export default new Router({
     {
       path: '/order/confimation',
       name: 'orderConfimation',
-      component: OrderConfimation
+      component: OrderConfimation,
+      beforeEnter(to, from, next){
+        if(store.getters['auth/check']){
+          next();
+        }else{
+          next('/member/select-login');
+        }
+      }
     },
 
     {
