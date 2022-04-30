@@ -9,15 +9,22 @@
             <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gyra-400">戻る</div>
         </div>
         <div class="container mx-auto mt-5 space-y-3">
-            <div class="text-center text-2xl font-semibold">注文確認</div>
+            <div class="text-center text-2xl font-semibold">カート</div>
             <div class="flex justify-center w-full rounded bg-gray-200">
                 <div class="bg-orange-50 w-full rounded mx-1 my-1">
-                    <div v-if="!cartProducts[0]" class="pl-2 py-3">カートに商品がありません。</div>
+                    <div v-if="Object.keys(cartProducts).length < 1" class="pl-2 py-3">カートに商品がありません。</div>
                     <div v-else class="grid grid-cols-3 pl-2 py-3">
                         <div class="col-span-1">合計金額( {{ total.quantity }} 点)</div>
                         <div class="col-span-1">：</div>
                         <div class="col-span-1">{{ total.price.toLocaleString() }}円</div>
                     </div>
+                </div>
+            </div>
+            <div class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
+                <div class="bg-white w-full rounded px-2 py-1">
+                    <label class="block text-sm">携帯番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
+                    <input v-model="telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
+                    <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
                 </div>
             </div>
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
@@ -41,8 +48,15 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-6 py-2">
-                <router-link to="#" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">次へ</router-link>
+            <div v-if="Object.keys(cartProducts).length > 0" class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
+                <div class="bg-white rounded py-1 px-2">
+                    <input type="radio" value="0" v-model="prepaid_flg">
+                    <label>代金引換</label>
+                    <input type="radio" value="1" v-model="prepaid_flg">
+                    <label>事前決済(クレジットカード)</label>
+                </div>
+                <button v-if="prepaid_flg == 0" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確認画面へ</button>
+                <button v-if="prepaid_flg == 1" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">お支払い画面へ</button>
             </div>
         </div>
     </div>
@@ -57,8 +71,21 @@ export default{
                 price: 0,
                 quantity: 0,
             },
+            telephoneNumber: '',
+            message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
+            prepaid_flg: 0,
+        }
+    },
+    methods: {
+        checkForm(){
+            if(this.telephoneNumber.toString().length > 11 || this.telephoneNumber.toString().length < 11){
+                this.$set(this.message, 'telephoneNumber', "11桁の電話番号を入力して下さい");
+            }else{
+                if(this.prepaid_flg == 0) this.$router.push('/');
+                else if(this.prepaid_flg == 1) this.$router.push('/');
+            }
         }
     },
     computed: {
@@ -94,6 +121,11 @@ export default{
         immediate:true,
         deep: true,
       },
+      telephoneNumber: {
+        handler($val){
+            this.telephoneNumber = $val.replace(/[^0-9]/g, '');
+        }
+      }
     },
 
 }

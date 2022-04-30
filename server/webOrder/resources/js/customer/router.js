@@ -7,7 +7,7 @@ import SelectMemberLogin from './views/member/Select-Login.vue'
 import MemberLoginEmail from './views/member/Login-email.vue'
 import ShopIndex from './views/shop/index.vue'
 import ShopDetail from './views/shop/detail.vue'
-import OrderConfimation from './views/order/confirmation.vue'
+import CartConfimation from './views/order/cart-confirmation.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -68,7 +68,7 @@ export default new Router({
     {
       path: '/order/confimation',
       name: 'orderConfimation',
-      component: OrderConfimation,
+      component: CartConfimation,
       beforeEnter(to, from, next){
         if(store.getters['auth/check']){
           next();
