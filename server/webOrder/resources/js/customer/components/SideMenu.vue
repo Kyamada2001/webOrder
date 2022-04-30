@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="px-2 py-2">
-                    <router-link to="/order/confimation" v-if="cartProducts[0]" class="w-full h-9 rounded text-center pt-1 text-white bg-red-500 focus:outline-none hover:bg-red-400" type="button">お支払いへ進む</router-link>
+                    <router-link to="/order/cart" v-if="cartProducts[0]" class="w-full h-9 rounded text-center pt-1 text-white bg-red-500 focus:outline-none hover:bg-red-400" type="button">お支払いへ進む</router-link>
                     <p v-else class="text-center pt-1 w-full h-9 rounded text-white bg-gray-300">お支払いへ進む</p>
                 </div>
             </div>

@@ -8,6 +8,7 @@ import MemberLoginEmail from './views/member/Login-email.vue'
 import ShopIndex from './views/shop/index.vue'
 import ShopDetail from './views/shop/detail.vue'
 import CartConfimation from './views/order/cart-confirmation.vue'
+import OrderConfirmation from './views/order/order-confirmation.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -66,8 +67,8 @@ export default new Router({
       }
     },
     {
-      path: '/order/confimation',
-      name: 'orderConfimation',
+      path: '/order/cart',
+      name: 'cartConfimation',
       component: CartConfimation,
       beforeEnter(to, from, next){
         if(store.getters['auth/check']){
@@ -76,6 +77,11 @@ export default new Router({
           next('/member/select-login');
         }
       }
+    },
+    {
+      path: '/order/confirmation',
+      name: 'orderConfirmation',
+      component: OrderConfirmation
     },
 
     {

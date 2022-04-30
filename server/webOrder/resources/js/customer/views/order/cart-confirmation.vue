@@ -83,7 +83,7 @@ export default{
             if(this.telephoneNumber.toString().length > 11 || this.telephoneNumber.toString().length < 11){
                 this.$set(this.message, 'telephoneNumber', "11桁の電話番号を入力して下さい");
             }else{
-                if(this.prepaid_flg == 0) this.$router.push('/');
+                if(this.prepaid_flg == 0) this.$router.push('/order/confirmation');
                 else if(this.prepaid_flg == 1) this.$router.push('/');
             }
         }
