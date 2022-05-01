@@ -1,5 +1,10 @@
 const state = {
     cartProducts: new Array(),
+    orderInfo: {
+        prepaid_flg: 0,
+        telephoneNumber: '',
+        creditNumber: '',
+    }
 }
 const getters = {
     cartProducts: state => state.cartProducts ? state.cartProducts : null
@@ -16,6 +21,9 @@ const mutations = {
     },
     deleteCart(state, index){
         state.cartProducts.splice(index, 1);
+    },
+    setOrderInfo(state, orderInfo){
+        state.orderInfo = orderInfo;
     },
 }
 const actions = {

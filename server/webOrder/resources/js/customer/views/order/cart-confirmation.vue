@@ -20,10 +20,10 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
+            <div v-if="!Object.keys(cartProducts).length < 1" class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
                 <div class="bg-white w-full rounded px-2 py-1">
-                    <label class="block text-sm">携帯番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
-                    <input v-model="telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
+                    <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
+                    <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
                     <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
                 </div>
             </div>
@@ -50,13 +50,13 @@
             </div>
             <div v-if="Object.keys(cartProducts).length > 0" class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
                 <div class="bg-white rounded py-1 px-2">
-                    <input type="radio" value="0" v-model="prepaid_flg">
+                    <input type="radio" value="0" v-model="orderInfo.prepaid_flg">
                     <label>代金引換</label>
-                    <input type="radio" value="1" v-model="prepaid_flg">
+                    <input type="radio" value="1" v-model="orderInfo.prepaid_flg">
                     <label>事前決済(クレジットカード)</label>
                 </div>
-                <button v-if="prepaid_flg == 0" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確認画面へ</button>
-                <button v-if="prepaid_flg == 1" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">お支払い画面へ</button>
+                <button v-if="orderInfo.prepaid_flg == 0" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確認画面へ</button>
+                <button v-if="orderInfo.prepaid_flg == 1" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">お支払い画面へ</button>
             </div>
         </div>
     </div>
@@ -71,27 +71,37 @@ export default{
                 price: 0,
                 quantity: 0,
             },
-            telephoneNumber: '',
+            orderInfo: {
+                telephoneNumber: '',
+                creditNumber: '',
+                prepaid_flg: 0, 
+            },
             message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
-            prepaid_flg: 0,
         }
     },
     methods: {
         checkForm(){
-            if(this.telephoneNumber.toString().length > 11 || this.telephoneNumber.toString().length < 11){
+            if(this.orderInfo.telephoneNumber.toString().length > 11 || this.orderInfo.telephoneNumber.toString().length < 11){
                 this.$set(this.message, 'telephoneNumber', "11桁の電話番号を入力して下さい");
             }else{
-                if(this.prepaid_flg == 0) this.$router.push('/order/confirmation');
-                else if(this.prepaid_flg == 1) this.$router.push('/');
+                this.$store.commit('order/setOrderInfo', this.orderInfo);
+                if(this.orderInfo.prepaid_flg == 0) this.$router.push('/order/confirmation');
+                else if(this.orderInfo.prepaid_flg == 1) this.$router.push('/order/confirmation');
             }
         }
     },
     computed: {
         computedCartProducts(){
             return this.$store.getters['order/cartProducts'];
+        },
+        computedOrderInfo(){
+            return this.$store.state.order.orderInfo;
         }
+    },
+    created: function(){
+        this.orderInfo = this.computedOrderInfo;
     },
     watch: {
       computedCartProducts: {
@@ -121,10 +131,12 @@ export default{
         immediate:true,
         deep: true,
       },
-      telephoneNumber: {
+      orderInfo: {
         handler($val){
-            this.telephoneNumber = $val.replace(/[^0-9]/g, '');
-        }
+            this.orderInfo.telephoneNumber = $val.telephoneNumber.replace(/[^0-9]/g, '');
+        },
+        immediate: true,
+        deep: true,
       }
     },
 
