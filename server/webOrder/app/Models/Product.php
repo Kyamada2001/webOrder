@@ -17,6 +17,10 @@ class Product extends Model
         'recommendation_flg',
     ];
 
+    public function order_detail(){
+        return $this->hasMany('App\Models\Order_detail');
+    }
+
     public function shop(){
         return $this->belongsTo('App\Models\Shop');
     }

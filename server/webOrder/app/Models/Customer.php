@@ -15,4 +15,8 @@ class Customer extends Authenticatable //ログインの判別をするテーブ
         'email',
         'password',
     ];
+
+    public function order(){
+        return $this->hasMany('App\Models\Order');
+    }
 }
