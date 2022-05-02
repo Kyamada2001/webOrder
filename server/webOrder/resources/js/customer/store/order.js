@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const state = {
     cartProducts: new Array(),
     orderInfo: {
@@ -42,6 +44,13 @@ const actions = {
         });
         if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
     },
+    order(context){
+        let response = axios.post('/api/order', {
+            cartProducts: context.state.cartProducts,
+            orderInfo: context.state.orderInfo,
+            customer: context.rootState.auth.customer,
+        }).catch(err => err.response || err);
+    }
 }
 
 export default {
