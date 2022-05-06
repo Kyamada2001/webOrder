@@ -51,12 +51,14 @@
   export default {
     data() {
       return {
+        productAffiliationShop: { Object },
         modalProduct: { Object },
         pathhead: '/storage/',
         noimgpath: 'images/product_noimage.png',
       };
     },
     props: {
+      shop: Object,
       product: Object,
       modalStatus: String,
     },
@@ -66,7 +68,10 @@
         this.$emit('close');
       },
       addCart(){
-        this.$store.dispatch('order/cartAction', this.modalProduct);
+        this.$store.dispatch('order/cartAction', { 
+          productAffiliationShop: this.productAffiliationShop, 
+          InputProduct: this.modalProduct 
+        });
         this.modalProduct = null;
         this.$emit('close');
       },
@@ -78,7 +83,15 @@
           this.$set(this.modalProduct, 'modalStatus', this.modalStatus);
           if(!this.modalProduct.hasOwnProperty('modalInput')) this.$set(this.modalProduct,'modalInput', { quantity: 1 })
         },
-        immediate: true
+        immediate: true,
+        deep: true,
+      },
+      shop: {
+        handler($val){
+          this.productAffiliationShop = JSON.parse(JSON.stringify($val));
+        },
+        immediate: true,
+        deep: true,
       }
     },
     mounted() {
