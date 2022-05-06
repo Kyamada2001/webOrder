@@ -32,8 +32,6 @@ const mutations = {
         state.productAffiliationShops.push(shop);
     },
     deleteProductAffiliationShops(state, shopId){
-        console.log('deleteShop')
-        console.log(state.productAffiliationShops)
         const deleteIndex = state.productAffiliationShops.findIndex((shop) => {
             shop.id == shopId;
         });
@@ -46,8 +44,6 @@ const actions = {
         if(InputProduct.modalStatus == "add" && !context.state.cartProducts.some(
             value => value.shop_id === InputProduct.shop_id
         )){
-            console.log('所属店舗作成前1')
-            console.log(context.state.productAffiliationShops);
             context.commit('setProductAffiliationShops', productAffiliationShop);
         }
         context.state.cartProducts.forEach((cartProduct,index) => {
@@ -60,11 +56,8 @@ const actions = {
                 else if(InputProduct.modalStatus == 'delete'){
                     context.commit('deleteCart', index);
                     if(context.state.cartProducts.some(product => { product.shop_id === InputProduct.shop_id })){
-                        console.log('削除している')
                         context.commit('deleteProductAffiliationShops', InputProduct.shop_id);
                     }
-                    console.log('所属店舗')
-                    console.log(context.state.productAffiliationShops);
                 }
                 return false;
             }
