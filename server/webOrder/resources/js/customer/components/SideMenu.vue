@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="flex flex-row border-b-2 border-b-black mb-2 mx-4">
-                    <div class="w-24">合計</div>
+                    <div class="w-24">合計金額</div>
                     <div class="flex justify-end w-full">{{ totalPrice }}円</div>
                 </div>
             </div>

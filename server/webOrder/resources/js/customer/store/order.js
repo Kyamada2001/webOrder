@@ -32,9 +32,8 @@ const mutations = {
         state.productAffiliationShops.push(shop);
     },
     deleteProductAffiliationShops(state, shopId){
-        const deleteIndex = state.productAffiliationShops.findIndex((shop) => {
-            shop.id == shopId;
-        });
+        const deleteIndex = state.productAffiliationShops.findIndex((shop) => shop.id == shopId);
+        console.log(deleteIndex);
         state.productAffiliationShops.splice(deleteIndex, 1);
     }
 }
@@ -54,8 +53,13 @@ const actions = {
                 }
                 else if(InputProduct.modalStatus == 'update') context.commit('updateCart', { InputProduct, index });
                 else if(InputProduct.modalStatus == 'delete'){
+                    console.log(context.state.cartProducts);
                     context.commit('deleteCart', index);
-                    if(context.state.cartProducts.some(product => { product.shop_id === InputProduct.shop_id })){
+                    console.log(context.state.cartProducts);
+                    console.log(InputProduct)
+                    //console.log(context.state.cartProducts.some(function(product){ return product.shop_id === InputProduct.shop_id }))
+                    if(!context.state.cartProducts.some(function(product){ return product.shop_id === InputProduct.shop_id })){
+                    //if(!context.state.cartProducts.some(product => { a === b })){
                         context.commit('deleteProductAffiliationShops', InputProduct.shop_id);
                     }
                 }
