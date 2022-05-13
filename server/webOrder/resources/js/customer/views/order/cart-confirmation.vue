@@ -22,9 +22,27 @@
             </div>
             <div v-if="!Object.keys(cartProducts).length < 1" class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
                 <div class="bg-white w-full rounded px-2 py-1">
-                    <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
-                    <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
-                    <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
+                    <div>
+                        <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
+                        <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
+                        <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
+                        <div>
+                            <div class="flex flex-row border border-gray-300 w-full">
+                                <div class="align-center border border-gray-300">予約日付</div>
+                                <div class="flex flex-row">
+                                    <div class="divide-x divide-gray-300 w-auto" v-for="date in dates">
+                                        <div class="justify-content-center border-b border-gray-300">{{ date.date }}{{ date.dayOfWeek}}</div>
+                                        <div class="px-1 py-1">
+                                            <button class="bg-green-400 rounded text-sm">予約する</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
@@ -75,10 +93,15 @@ export default{
                 telephoneNumber: '',
                 creditNumber: '',
                 prepaid_flg: 0, 
+                time: {},
             },
             message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
+            orderTime: {
+                hour: '',
+                minute: [0, 15, 30, 45]
+            },
         }
     },
     methods: {
@@ -98,6 +121,45 @@ export default{
         },
         computedOrderInfo(){
             return this.$store.state.order.orderInfo;
+        },
+        productAffiliationShops(){
+            return this.$store.state.order.productAffiliationShops;
+        },
+        dates(){
+            const nowDate = new Date();
+            const endDate = new Date().setDate(new Date().getDate() + 14)
+            let dateList = new Array();
+            
+            for(var d = new Date(); d <= endDate; d.setDate(d.getDate()+1)) {
+                if(JSON.stringify(nowDate) === JSON.stringify(d) || nowDate.getMonth() !== d.getMonth()) var date = (d.getMonth() + 1) + '/' + d.getDate();
+                else var date = d.getDate();
+                switch(d.getDay()){
+                    case 0:
+                        var dayOfWeek = '(日)'
+                        break;
+                    case 1:
+                        var dayOfWeek = '(月)'
+                        break;
+                    case 2:
+                        var dayOfWeek = '(火)'
+                        break;
+                    case 3:
+                        var dayOfWeek = '(水)'
+                        break;
+                    case 4:
+                        var dayOfWeek = '(木)'
+                        break;
+                    case 5:
+                        var dayOfWeek = '(金)'
+                        break;
+                    case 6:
+                        var dayOfWeek = '(土)'
+                        break;
+                }
+                dateList.push({ date: date,dayOfWeek: dayOfWeek });
+            }
+            console.log(dateList);
+            return dateList;
         }
     },
     created: function(){

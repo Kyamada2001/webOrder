@@ -32,12 +32,6 @@
                         <label class="block text-sm">携帯電話番号</label>
                         <span>{{ orderInfo.telephoneNumber }}</span>
                     </div>
-                    <div>
-                        <label>商品受取時間</label>
-                        <select>
-                            <option></option>
-                        </select>
-                    </div>
                 </div>
             </div>
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">

@@ -18,7 +18,7 @@
                 <img v-if="modalProduct.imgpath" class="border-b w-64 h-44 object-cover" :src="pathhead + modalProduct.imgpath">
                 <img v-else class="border w-64 h-44 object-cover" :src="pathhead + noimgpath">
                 <div class="text-lg">{{ modalProduct.name }}</div>
-                <div class="flex justify-end text-lg">{{ modalProduct.price }}円</div>
+                <div class="flex justify-end text-lg">{{ modalProduct.price.toLocaleString() }}円</div>
             </div>
             <div class="w-full px-4">
                 <label>数量</label>
