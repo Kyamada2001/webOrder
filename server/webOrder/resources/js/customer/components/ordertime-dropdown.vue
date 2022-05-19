@@ -20,7 +20,7 @@
                     <template  v-for="time in dateTime.timeList">
                         <template v-if="dateTime.timeList.length > 0">
                             <p @click="setOrderTime(dateTime, time)" class="border border-solid h-auto hover:bg-green-400 px-1 py-1 text-xs">
-                                {{time}}
+                                {{ time }}
                             </p>
                         </template>
                         <template v-else>
@@ -40,10 +40,6 @@
 export default {
     props: {
         dateTime: Object,
-        activeItemKey: {
-            type: [String, Number],
-            required: false,
-        },
     },
     data() {
         return {
@@ -56,16 +52,10 @@ export default {
         },
     },
     methods: {
-        setOrderTime() {
-            this.$store.commit('order/setOrderTime')
+        setOrderTime(dateTime, time) {
+            this.$store.commit('order/setOrderTime', { dateTime: dateTime, time: time })
         }
     },
-    onFocus (){
-        this.isActive = true;
-    },
-    onFocusOut() {
-        this.isActive = false;
-    }
 }
 </script>
 

@@ -34,7 +34,7 @@
                                 <div class="align-center border border-gray-300">予約日付</div>
                                 <div class="flex flex-row">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes">
-                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.date }}{{ dateTime.dayOfWeek }}</div>
+                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.month }}/{{ dateTime.date }}{{ dateTime.dayOfWeek }}</div>
                                         <div class="px-1 py-1">
                                             <order-time-dropdown :dateTime="dateTime" :action="checkForm" class="rounded text-sm cursor-pointer"></order-time-dropdown>
                                         </div>
@@ -132,8 +132,10 @@ export default{
             let dateList = new Array();
             
             for(var d = new Date(); d <= endDate; d.setDate(d.getDate()+1)) {
-                if(JSON.stringify(nowDate) === JSON.stringify(d) || nowDate.getMonth() !== d.getMonth()) var date = (d.getMonth() + 1) + '/' + d.getDate();
-                else var date = d.getDate();
+                //if(JSON.stringify(nowDate) === JSON.stringify(d) || nowDate.getMonth() !== d.getMonth()) var date = (d.getMonth() + 1) + '/' + d.getDate();
+                //else var date = d.getDate();
+                var month = d.getMonth() + 1;
+                var date = d.getDate();
                 switch(d.getDay()){
                     case 0:
                         var dayOfWeek = '(日)'
@@ -157,7 +159,7 @@ export default{
                         var dayOfWeek = '(土)'
                         break;
                 }
-                dateList.push({ date: date, dayOfWeek: dayOfWeek, timeList: this.orderTime});
+                dateList.push({ month: month, date: date, dayOfWeek: dayOfWeek, timeList: this.orderTime});
             }
             return dateList;
         }
