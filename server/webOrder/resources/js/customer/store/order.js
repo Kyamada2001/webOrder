@@ -7,6 +7,10 @@ const state = {
         prepaid_flg: 0,
         telephoneNumber: '',
         creditNumber: '',
+        order_time: {
+            date: '',
+            time: '',
+        }
     }
 }
 const getters = {
@@ -34,6 +38,10 @@ const mutations = {
     deleteProductAffiliationShops(state, shopId){
         const deleteIndex = state.productAffiliationShops.findIndex((shop) => shop.id == shopId);
         state.productAffiliationShops.splice(deleteIndex, 1);
+    },
+    setOrderTime(state, {date, time}){
+        state.orderInfo.date = date;
+        state.orderInfo.time = time;
     }
 }
 const actions = {

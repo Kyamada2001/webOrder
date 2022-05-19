@@ -33,10 +33,10 @@
                             <div class="flex flex-row border border-gray-300 w-full">
                                 <div class="align-center border border-gray-300">予約日付</div>
                                 <div class="flex flex-row">
-                                    <div class="divide-x divide-gray-300 w-auto" v-for="date in dates">
-                                        <div class="justify-content-center border-b border-gray-300">{{ date.date }}{{ date.dayOfWeek}}</div>
+                                    <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes">
+                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.date }}{{ dateTime.dayOfWeek }}</div>
                                         <div class="px-1 py-1">
-                                            <button class="bg-green-400 rounded text-sm">予約する</button>
+                                            <order-time-dropdown :dateTime="dateTime" :action="checkForm" class="rounded text-sm cursor-pointer"></order-time-dropdown>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,11 @@
 </template>
 
 <script>
+import orderTimeDropdown from '../../components/ordertime-dropdown.vue'
 export default{
+    components: {
+        orderTimeDropdown,
+    },
     data() {
         return {
             cartProducts: { Object },
@@ -98,10 +102,7 @@ export default{
             message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
-            orderTime: {
-                hour: '',
-                minute: [0, 15, 30, 45]
-            },
+            orderTime: ['午後15時', '午後16時', '午後17時', '午後18時', '午後19時']
         }
     },
     methods: {
@@ -125,9 +126,9 @@ export default{
         productAffiliationShops(){
             return this.$store.state.order.productAffiliationShops;
         },
-        dates(){
+        dateTimes(){
             const nowDate = new Date();
-            const endDate = new Date().setDate(new Date().getDate() + 14)
+            const endDate = new Date().setDate(new Date().getDate() + 14);//2週間ループする
             let dateList = new Array();
             
             for(var d = new Date(); d <= endDate; d.setDate(d.getDate()+1)) {
@@ -156,9 +157,8 @@ export default{
                         var dayOfWeek = '(土)'
                         break;
                 }
-                dateList.push({ date: date,dayOfWeek: dayOfWeek });
+                dateList.push({ date: date, dayOfWeek: dayOfWeek, timeList: this.orderTime});
             }
-            console.log(dateList);
             return dateList;
         }
     },
