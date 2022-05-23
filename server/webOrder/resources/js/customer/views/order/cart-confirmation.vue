@@ -32,11 +32,11 @@
                         <div>
                             <div class="flex flex-row border border-gray-300 w-full">
                                 <div class="align-center border border-gray-300">予約日付</div>
-                                <div class="flex flex-row">
+                                <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes">
                                         <div class="justify-content-center border-b border-gray-300">{{ dateTime.month }}/{{ dateTime.date }}{{ dateTime.dayOfWeek }}</div>
                                         <div class="px-1 py-1">
-                                            <order-time-dropdown :dateTime="dateTime" :action="checkForm" class="rounded text-sm cursor-pointer"></order-time-dropdown>
+                                            <button @click="openOrderTimeModal(dateTime)" type="button" class="hover:text-orange-300 text-sm">◯</button>
                                         </div>
                                     </div>
                                 </div>
@@ -45,6 +45,27 @@
                     </div>
                 </div>
             </div>
+
+            <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="showOrderTimeModal = false">
+                <div>
+                    <label>予約日付</label>
+                </div>
+                <div>
+                    <label>予約日時</label>
+                    <p  v-if="modalDateTime.timeList.length > 0" @click="setOrderTime(dateTime, time)" class="border border-solid h-auto hover:bg-orange-300 px-1 py-1 text-xs">
+                        {{ time }}
+                    </p>
+                     <p v-else class="w-20 h-36 border border-solid mt-0">
+                        選択肢がありません
+                    </p>
+                </div>
+
+                <div class="text-right mt-4">
+                    <button @click="showOrderTimeModal = false" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
+                    <button  class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">ログアウト</button>
+                </div>
+            </base-modal>
+
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
                 <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
                     <div class="mx-2 my-2 shadow-lg">
@@ -81,10 +102,12 @@
 </template>
 
 <script>
-import orderTimeDropdown from '../../components/ordertime-dropdown.vue'
+import BaseModal from '../../components/BaseModal.vue'
+import OrderTimeDropdown from '../../components/ordertime-dropdown.vue';
 export default{
     components: {
-        orderTimeDropdown,
+        BaseModal,
+        OrderTimeDropdown
     },
     data() {
         return {
@@ -102,7 +125,9 @@ export default{
             message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
-            orderTime: ['午後15時', '午後16時', '午後17時', '午後18時', '午後19時']
+            showOrderTimeModal: false,
+            orderTime: ['午後15時', '午後16時', '午後17時', '午後18時', '午後19時'],//開発用
+            modalDateTime: { Object },
         }
     },
     methods: {
@@ -114,6 +139,10 @@ export default{
                 if(this.orderInfo.prepaid_flg == 0) this.$router.push('/order/confirmation');
                 else if(this.orderInfo.prepaid_flg == 1) this.$router.push('/order/confirmation');
             }
+        },
+        openOrderTimeModal(dateTime){
+            this.modalDateTime = JSON.stringify(dateTime);
+            this.showOrderTimeModal = true;
         }
     },
     computed: {
