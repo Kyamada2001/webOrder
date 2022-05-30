@@ -31,12 +31,12 @@
                         <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
                         <div>
                             <div class="flex flex-row border border-gray-300 w-full">
-                                <div class="align-center border border-gray-300">予約日付</div>
+                                <div class="border border-gray-300">予約日付</div>
                                 <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes">
-                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.month }}/{{ dateTime.date }}{{ dateTime.dayOfWeek }}</div>
-                                        <div class="px-1 py-1">
-                                            <button @click="openOrderTimeModal(dateTime)" type="button" class="hover:text-orange-300 text-sm">◯</button>
+                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.month }}/{{ dateTime.date }}</div>
+                                        <div class="hover:bg-orange-50">
+                                            <button class="px-2 py-2" @click="openOrderTimeModal(dateTime)" type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -145,6 +145,24 @@ export default{
         openOrderTimeModal(dateTime){
             this.modalDateTime = Object.assign({}, dateTime);
             this.showOrderTimeModal = true;
+        },
+        displayDayOfWeek(dayOfWeekFlg){
+            switch(dayOfWeekFlg){
+                case 0:
+                    return '(日)';
+                case 1:
+                    return '(月)';
+                case 2:
+                    return '(火)';
+                case 3:
+                    return '(水)';
+                case 4:
+                    return '(木)';
+                case 5:
+                    return '(金)';
+                case 6:
+                    return '(土)';
+                }
         }
     },
     computed: {
@@ -167,30 +185,8 @@ export default{
                 //else var date = d.getDate();
                 var month = d.getMonth() + 1;
                 var date = d.getDate();
-                switch(d.getDay()){
-                    case 0:
-                        var dayOfWeek = '(日)'
-                        break;
-                    case 1:
-                        var dayOfWeek = '(月)'
-                        break;
-                    case 2:
-                        var dayOfWeek = '(火)'
-                        break;
-                    case 3:
-                        var dayOfWeek = '(水)'
-                        break;
-                    case 4:
-                        var dayOfWeek = '(木)'
-                        break;
-                    case 5:
-                        var dayOfWeek = '(金)'
-                        break;
-                    case 6:
-                        var dayOfWeek = '(土)'
-                        break;
-                }
-                dateList.push({ month: month, date: date, dayOfWeek: dayOfWeek, timeList: this.orderTime});
+                var dayOfWeek = d.getDay();
+                dateList.push({ month: month, date: date, dayOfWeek: dayOfWeek, timeList: this.orderTime});// orderTimeは開発用
             }
             return dateList;
         }
