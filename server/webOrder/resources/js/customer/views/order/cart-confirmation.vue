@@ -47,17 +47,19 @@
             </div>
 
             <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="showOrderTimeModal = false">
-                <div>
+                <div class="border border-gray-300 rounded">
                     <label>予約日付</label>
                 </div>
-                <div>
+                <div class="border border-gray-300 rounded">
                     <label>予約日時</label>
-                    <p  v-if="modalDateTime.timeList.length > 0" @click="setOrderTime(dateTime, time)" class="border border-solid h-auto hover:bg-orange-300 px-1 py-1 text-xs">
-                        {{ time }}
-                    </p>
-                     <p v-else class="w-20 h-36 border border-solid mt-0">
-                        選択肢がありません
-                    </p>
+                    <div class="absolute w-full px-1 py-1">
+                        <p v-if="typeof modalDateTime.timeList === null" @click="setOrderTime(dateTime, time)" class="border border-solid h-auto hover:bg-orange-300 px-1 py-1 text-xs">
+                            {{ time }}
+                        </p>
+                        <p v-else class="w-full border border-solid mt-0 py-1 px-1">
+                            選択肢がありません
+                        </p>
+                    </div>
                 </div>
 
                 <div class="text-right mt-4">
@@ -141,7 +143,7 @@ export default{
             }
         },
         openOrderTimeModal(dateTime){
-            this.modalDateTime = JSON.stringify(dateTime);
+            this.modalDateTime = Object.assign({}, dateTime);
             this.showOrderTimeModal = true;
         }
     },
