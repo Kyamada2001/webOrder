@@ -8,12 +8,13 @@ const state = {
         telephoneNumber: '',
         creditNumber: '',
         order_time: {
-            /*date: {
+            date: {
                 year: '',
                 month: '',
                 date: '',
+                joinDate: '',
             },
-            time: '',*/
+            time: '',
         }
     }
 }
