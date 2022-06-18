@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Order_detail extends Model
 {
     use HasFactory;
+
+    public function order(){
+        return $this->belongsTo('App\Models\Order');
+    }
+
+    public function product(){
+        return $this->belongsTo('App\Models\Product');
+    }
 }

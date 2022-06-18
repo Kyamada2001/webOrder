@@ -28,8 +28,10 @@
             </div>
             <div class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
                 <div class="bg-white w-full rounded px-2 py-1 space-y-3">
-                    <label class="block text-sm">携帯電話番号</label>
-                    <span>{{ orderInfo.telephoneNumber }}</span>
+                    <div>
+                        <label class="block text-sm">携帯電話番号</label>
+                        <span>{{ orderInfo.telephoneNumber }}</span>
+                    </div>
                 </div>
             </div>
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
@@ -52,7 +54,7 @@
                 </div>
             </div>
             <div class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
-                <button type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文を確定する</button>
+                <button @click="order" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文を確定する</button>
             </div>
         </div>
     </div>
@@ -65,6 +67,11 @@ export default {
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
          }
+    },
+    methods: {
+        order: async function(){
+            await this.$store.dispatch('order/order');
+        }
     },
     computed: {
         cartProducts(){

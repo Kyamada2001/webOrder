@@ -18,7 +18,7 @@
                 <img v-if="modalProduct.imgpath" class="border-b w-64 h-44 object-cover" :src="pathhead + modalProduct.imgpath">
                 <img v-else class="border w-64 h-44 object-cover" :src="pathhead + noimgpath">
                 <div class="text-lg">{{ modalProduct.name }}</div>
-                <div class="flex justify-end text-lg">{{ modalProduct.price }}円</div>
+                <div class="flex justify-end text-lg">{{ modalProduct.price.toLocaleString() }}円</div>
             </div>
             <div class="w-full px-4">
                 <label>数量</label>
@@ -51,12 +51,14 @@
   export default {
     data() {
       return {
+        productAffiliationShop: { Object },
         modalProduct: { Object },
         pathhead: '/storage/',
         noimgpath: 'images/product_noimage.png',
       };
     },
     props: {
+      shop: Object,
       product: Object,
       modalStatus: String,
     },
@@ -66,7 +68,10 @@
         this.$emit('close');
       },
       addCart(){
-        this.$store.dispatch('order/cartAction', this.modalProduct);
+        this.$store.dispatch('order/cartAction', { 
+          productAffiliationShop: this.productAffiliationShop, 
+          InputProduct: this.modalProduct 
+        });
         this.modalProduct = null;
         this.$emit('close');
       },
@@ -78,7 +83,15 @@
           this.$set(this.modalProduct, 'modalStatus', this.modalStatus);
           if(!this.modalProduct.hasOwnProperty('modalInput')) this.$set(this.modalProduct,'modalInput', { quantity: 1 })
         },
-        immediate: true
+        immediate: true,
+        deep: true,
+      },
+      shop: {
+        handler($val){
+          this.productAffiliationShop = JSON.parse(JSON.stringify($val));
+        },
+        immediate: true,
+        deep: true,
       }
     },
     mounted() {

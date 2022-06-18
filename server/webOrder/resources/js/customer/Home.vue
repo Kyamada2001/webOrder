@@ -1,10 +1,10 @@
 <template>
-    <diV class="h-full">
+    <diV class="h-fit">
         <header class="bg-stone-100 h-20 border-t-4 border-b-2 border-t-orange-400 border-b-gray-300 shadow-sm sticky top-0">
             <Navbar/>
         </header>
 
-        <main class="h-full">
+        <main class="h-screen">
             <router-view/>
         </main>
     </diV>

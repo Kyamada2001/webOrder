@@ -83,7 +83,6 @@ export default new Router({
       name: 'orderConfirmation',
       component: OrderConfirmation,
       beforeEnter(to, from, next){
-        console.log(store.state.order.cartProducts[0]);
         if(store.getters['auth/check'] && Object.keys(store.state.order.cartProducts).length > 0){
           next();
         }else{

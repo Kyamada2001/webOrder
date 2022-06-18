@@ -22,11 +22,54 @@
             </div>
             <div v-if="!Object.keys(cartProducts).length < 1" class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
                 <div class="bg-white w-full rounded px-2 py-1">
-                    <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
-                    <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
-                    <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
+                    <div>
+                        <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
+                        <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
+                        <p v-if="message.telephoneNumber" class="text-sm text-red-500">{{ message.telephoneNumber }}</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
+                        <div>
+                            <div class="flex flex-row border border-gray-300 w-full">
+                                <div class="border border-gray-300">予約日付</div>
+                                <div class="flex flex-row w-full">
+                                    <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" v-bind="dateTime.id">
+                                        <div class="justify-content-center border-b border-gray-300">{{ dateTime.month }}/{{ dateTime.date }}</div>
+                                        <div class="hover:bg-orange-50">
+                                            <button class="px-2 py-2" @click="openOrderTimeModal(dateTime)" type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="closeOrderTimeModal">
+                <div>
+                    <label>予約日付</label>
+                    <select v-model="modalSelectDateTime.selected.date.date" class="border border-gray-300 rounded py-1 px-1">
+                        <option v-for="dateTime in dateTimes" :value="dateTime.date" :key="dateTime.id">
+                            {{dateTime.joinDate + '('+ displayDayOfWeek(dateTime.dayOfWeek) + ')'}}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <label>予約日時</label>
+                    <select v-model="modalSelectDateTime.selected.time" class="border border-gray-300 rounded py-1 px-1">
+                        <option v-for="timeList in modalSelectDateTime.timeList" :value="timeList">
+                            {{ timeList }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="text-right mt-4">
+                    <button @click="closeOrderTimeModal" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">閉じる</button>
+                    <button @click="reserveOrderTime" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">予約</button>
+                </div>
+            </base-modal>
+
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
                 <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
                     <div class="mx-2 my-2 shadow-lg">
@@ -63,7 +106,13 @@
 </template>
 
 <script>
+import BaseModal from '../../components/BaseModal.vue'
+import OrderTimeDropdown from '../../components/ordertime-dropdown.vue';
 export default{
+    components: {
+        BaseModal,
+        OrderTimeDropdown
+    },
     data() {
         return {
             cartProducts: { Object },
@@ -75,10 +124,26 @@ export default{
                 telephoneNumber: '',
                 creditNumber: '',
                 prepaid_flg: 0, 
+                time: {},
             },
             message: { Object },
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
+            showOrderTimeModal: false,
+            orderTime: [
+                '13:00',
+                '14:00',
+                '15:00',
+            ],//開発用
+            modalSelectDateTime: {
+                year: '',
+                month: '',
+                date: '',
+                dayOfWeek: '',
+                joinDate: '', //年月日をまとめたもの
+                timeList: Array,
+                selected: {},
+            },
         }
     },
     methods: {
@@ -90,6 +155,50 @@ export default{
                 if(this.orderInfo.prepaid_flg == 0) this.$router.push('/order/confirmation');
                 else if(this.orderInfo.prepaid_flg == 1) this.$router.push('/order/confirmation');
             }
+        },
+        openOrderTimeModal(dateTime){
+            console.log(this.$store.state.order.orderInfo.order_time);
+            this.modalSelectDateTime = Object.assign({}, dateTime);
+            if(!Object.keys(this.$store.state.order.orderInfo.order_time).length){//すでに予約しているか判定0
+                this.modalSelectDateTime.selected = {
+                    date:{
+                        year: dateTime.year,
+                        month: dateTime.month,
+                        date: dateTime.date,
+                    },
+                    time: dateTime.timeList[0],
+                };
+            }else{
+                this.modalSelectDateTime.selected = Object.assign({}, this.$store.state.order.orderInfo.order_time);
+            }
+            this.showOrderTimeModal = true;
+
+        },
+        closeOrderTimeModal(){
+            this.modalSelectDateTime = [];
+            this.showOrderTimeModal = false;
+        },
+        reserveOrderTime(){
+            this.$store.commit('order/setOrderTime', { date: this.modalSelectDateTime.selected.date, time: this.modalSelectDateTime.selected.time });
+            this.showOrderTimeModal = false;
+        },
+        displayDayOfWeek(dayOfWeekFlg){
+            switch(dayOfWeekFlg){
+                case 0:
+                    return '日';
+                case 1:
+                    return '月';
+                case 2:
+                    return '火';
+                case 3:
+                    return '水';
+                case 4:
+                    return '木';
+                case 5:
+                    return '金';
+                case 6:
+                    return '土';
+            }
         }
     },
     computed: {
@@ -98,6 +207,26 @@ export default{
         },
         computedOrderInfo(){
             return this.$store.state.order.orderInfo;
+        },
+        productAffiliationShops(){
+            return this.$store.state.order.productAffiliationShops;
+        },
+        dateTimes(){
+            const nowDate = new Date();
+            const endDate = new Date().setDate(new Date().getDate() + 14);//2週間ループする
+            let dateList = new Array();
+            
+            for(var d = new Date(); d <= endDate; d.setDate(d.getDate()+1)) {
+                //if(JSON.stringify(nowDate) === JSON.stringify(d) || nowDate.getMonth() !== d.getMonth()) var date = (d.getMonth() + 1) + '/' + d.getDate();
+                //else var date = d.getDate();
+                var year = d.getFullYear();
+                var month = d.getMonth() + 1;
+                var date = d.getDate();
+                var dayOfWeek = d.getDay();
+                var joinDate = year + '年' + month + '月' + date + '日';
+                dateList.push({ year: year, month: month, date: date, dayOfWeek: dayOfWeek, joinDate: joinDate, timeList: this.orderTime});// orderTimeは開発用
+            }
+            return dateList;
         }
     },
     created: function(){
@@ -137,7 +266,18 @@ export default{
         },
         immediate: true,
         deep: true,
-      }
+      },
+      modalSelectDateTime: {
+          handler: function(next, before){
+              if(next.joinDate === before.joinDate){
+                var selectDateTimeList = this.dateTimes.filter( function(value){
+                    return value.joinDate === next.joinDate;
+                })
+                this.modalSelectDateTime.timeList = selectDateTimeList.timeList;
+              }
+          },
+          deep: true
+        }
     },
 
 }

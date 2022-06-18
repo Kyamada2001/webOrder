@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <add-cart-modal v-if="open" @close="closeModal" :product="modalProduct" :modalStatus="'add'"/>
+        <add-cart-modal v-if="open" @close="closeModal" :product="modalProduct" :modalStatus="'add'" :shop="shopDetails"/>
     </div>
 </template>
 
@@ -57,7 +57,7 @@ export default{
                 this.$store.commit('error/setCode', response.status);
                 return false;
             }
-
+        
             this.shopDetails = response.data.shopDetails;
         },
         modalOpen(product){
@@ -69,13 +69,16 @@ export default{
             this.open = false;
         }
     },
-    watch: {
+    created() {
+        this.getShopDetails();
+    }
+    /*watch: {
         $route: {
             handler () {
                 this.getShopDetails();
             },
             immediate: true
         },
-    },
+    },*/
 }
 </script>

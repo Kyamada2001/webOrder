@@ -20,7 +20,7 @@
             </div>
             <div class="pl-1 pr-6">
                  <button @click="showLogoutModal = true" type="button" class="hover:text-orange-300 text-sm">ログアウト</button>
-                 <logout-modal v-if="showLogoutModal" title="ログアウト" width="1/2" v-on:close="showLogoutModal = false">
+                 <base-modal v-if="showLogoutModal" title="ログアウト" width="1/2" v-on:close="showLogoutModal = false">
                     <p class="text-gray-800">
                         ログアウトしますか？
                     </p>
@@ -29,7 +29,7 @@
                         <button @click="showLogoutModal = false" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
                         <button @click="logout" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">ログアウト</button>
                     </div>
-                </logout-modal>
+                 </base-modal>
             </div>
         </div>
         <div v-else class="flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full">
@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import LogoutModal from '../components/logout-modal.vue';
+import BaseModal from '../components/BaseModal.vue';
 export default{
     components:{
-        LogoutModal,
+        BaseModal,
     },
     data(){
         return {

@@ -56,13 +56,16 @@ export default{
 
         }
     },
-    watch: {
+    created(){
+        this.fetchShops();
+    },
+    /*watch: {
         $route: {
         async handler () {
             await this.fetchShops();
         },
         immediate: true
         }
-    }
+    }*/
 }
 </script>
