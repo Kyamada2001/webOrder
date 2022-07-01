@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div v-if="!Object.keys(cartProducts).length < 1" class="flex justify-center w-full rounded bg-gray-200 px-1 py-1">
-                <div class="bg-white w-full rounded px-2 py-1">
+                <div class="bg-white w-full rounded px-2 py-1 space-y-2">
                     <div>
                         <label class="block text-sm">携帯電話番号(ハイフンなし11桁)<span class="text-sm text-red-500">[必須]</span></label>
                         <input v-model="orderInfo.telephoneNumber" class="border rounded border-gray-300 w-full px-2 space-x-1" type="text"/>
@@ -58,7 +58,7 @@
                 <div>
                     <label>予約日時</label>
                     <select v-model="modalSelectDateTime.selected.time" class="border border-gray-300 rounded py-1 px-1">
-                        <option v-for="timeList in modalSelectDateTime.timeList" :value="timeList">
+                        <option v-for="timeList in modalSelectDateTime.selected.timeList" :value="timeList" :key="timeList.id">
                             {{ timeList }}
                         </option>
                     </select>
@@ -157,8 +157,9 @@ export default{
             }
         },
         openOrderTimeModal(dateTime){
-            this.modalSelectDateTime = Object.assign({}, dateTime);
+            //this.modalSelectDateTime = Object.assign({}, dateTime);
             if(!this.storeOrderTime.date.date){//すでに予約しているか判定0
+                //this.modalSelectDateTime = Object.assign({}, dateTime);
                 this.modalSelectDateTime.selected = {
                     date:{
                         year: dateTime.year,
@@ -167,15 +168,19 @@ export default{
                         joinDate: dateTime.joinDate,
                     },
                     time: dateTime.timeList[0],
+                    timeList: dateTime.timeList,
                 };
             }else{
                 this.modalSelectDateTime.selected = Object.assign({}, this.storeOrderTime);
             }
             this.showOrderTimeModal = true;
-
+            console.log('modalSelectDateTime: ');
+            console.log(this.modalSelectDateTime);
+            console.log('dateTIme');
+            console.log(dateTime);
         },
         closeOrderTimeModal(){
-            this.modalSelectDateTime = [];
+            this.modalSelectDateTime = new Object();
             this.showOrderTimeModal = false;
         },
         reserveOrderTime(){
@@ -270,16 +275,23 @@ export default{
         immediate: true,
         deep: true,
       },
-      modalSelectDateTime: {
+      modalSelectDateTime: { //timeListは最初に定義せず、ここのみで代入するようにする
           handler: function(next, before){
-              if(next.joinDate === before.joinDate){
-                var selectDateTimeList = this.dateTimes.filter( function(value){
-                    return value.joinDate === next.joinDate;
-                })
-                this.modalSelectDateTime.timeList = selectDateTimeList.timeList;
-              }
+              if(next.joinDate !== before.joinDate && Object.keys(next).indexOf('selected') !== -1 ){ //モーダルの日付が変わったか、モーダルクローズ時かを判定
+                    var selectDateInfo = this.dateTimes.filter( function(value){
+                        return value.joinDate === next.joinDate;
+                    });
+                    console.log('next');
+                    console.log(Object.keys(next).indexOf('selected'))
+                    console.log(next);
+                    this.modalSelectDateTime.selected.month = selectDateInfo.month;
+                    this.modalSelectDateTime.selected.year = selectDateInfo.year;
+                    this.modalSelectDateTime.selected.joinDate =selectDateInfo.joinDate;
+                    this.modalSelectDateTime.selected.timeList = selectDateInfo.timeList;
+                }
           },
-          deep: true
+          deep: true,
+          //immediate: true, //modalSelectDateTimeのselected以外を削除するため、初回読み込み時も監視する
        },
     },
 
