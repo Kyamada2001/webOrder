@@ -35,7 +35,7 @@
                                 <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" :key="dateTime.id">
                                         <div class="justify-content-center border-b border-gray-300 px-2 py-1">{{ dateTime.month }}/{{ dateTime.date }}</div>
-                                        <div class="hover:bg-orange-50" v-bind:class="{'bg-orange-300': dateTime.joinDate === storeOrderTime.date.joinDate}">
+                                        <div class="hover:bg-orange-50" v-bind:class="{'bg-orange-300': dateTime.joinDate === storeOrderTime.joinDate}">
                                             <button class="px-2 py-2" @click="openOrderTimeModal(dateTime)" type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</button>
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
             <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="closeOrderTimeModal">
                 <div>
                     <label>予約日付</label>
-                    <select v-model="modalSelectDateTime.selected.date.date" class="border border-gray-300 rounded py-1 px-1">
+                    <select v-model="modalSelectDateTime.date" class="border border-gray-300 rounded py-1 px-1">
                         <option v-for="dateTime in dateTimes" :value="dateTime.date" :key="dateTime.id">
                             {{dateTime.joinDate + '('+ displayDayOfWeek(dateTime.dayOfWeek) + ')'}}
                         </option>
@@ -57,8 +57,8 @@
                 </div>
                 <div>
                     <label>予約日時</label>
-                    <select v-model="modalSelectDateTime.selected.time" class="border border-gray-300 rounded py-1 px-1">
-                        <option v-for="timeList in modalSelectDateTime.selected.timeList" :value="timeList" :key="timeList.id">
+                    <select v-model="modalSelectDateTime.time" class="border border-gray-300 rounded py-1 px-1">
+                        <option v-for="timeList in modalSelectDateTime.timeList" :value="timeList" :key="timeList.id">
                             {{ timeList }}
                         </option>
                     </select>
@@ -141,8 +141,8 @@ export default{
                 date: '',
                 dayOfWeek: '',
                 joinDate: '', //年月日をまとめたもの
+                time: '',
                 timeList: Array,
-                selected: {},
             },
         }
     },
@@ -158,20 +158,19 @@ export default{
         },
         openOrderTimeModal(dateTime){
             //this.modalSelectDateTime = Object.assign({}, dateTime);
-            if(!this.storeOrderTime.date.date){//すでに予約しているか判定0
+            if(!this.storeOrderTime.date){//すでに予約しているか判定0
                 //this.modalSelectDateTime = Object.assign({}, dateTime);
-                this.modalSelectDateTime.selected = {
-                    date:{
-                        year: dateTime.year,
-                        month: dateTime.month,
-                        date: dateTime.date,
-                        joinDate: dateTime.joinDate,
-                    },
+                this.modalSelectDateTime = {
+                    year: dateTime.year,
+                    month: dateTime.month,
+                    date: dateTime.date,
+                    joinDate: dateTime.joinDate,
+                    dayOfWeek: dateTime.dayOfWeek,
                     time: dateTime.timeList[0],
                     timeList: dateTime.timeList,
                 };
             }else{
-                this.modalSelectDateTime.selected = Object.assign({}, this.storeOrderTime);
+                this.modalSelectDateTime = Object.assign({}, this.storeOrderTime);
             }
             this.showOrderTimeModal = true;
             console.log('modalSelectDateTime: ');
@@ -184,7 +183,7 @@ export default{
             this.showOrderTimeModal = false;
         },
         reserveOrderTime(){
-            this.$store.commit('order/setOrderTime', { date: this.modalSelectDateTime.selected.date, time: this.modalSelectDateTime.selected.time });
+            this.$store.commit('order/setOrderTime', this.modalSelectDateTime);
             this.showOrderTimeModal = false;
         },
         displayDayOfWeek(dayOfWeekFlg){
@@ -284,10 +283,11 @@ export default{
                     console.log('next');
                     console.log(Object.keys(next).indexOf('selected'))
                     console.log(next);
-                    this.modalSelectDateTime.selected.month = selectDateInfo.month;
-                    this.modalSelectDateTime.selected.year = selectDateInfo.year;
-                    this.modalSelectDateTime.selected.joinDate =selectDateInfo.joinDate;
-                    this.modalSelectDateTime.selected.timeList = selectDateInfo.timeList;
+                    this.modalSelectDateTime.month = selectDateInfo.month;
+                    this.modalSelectDateTime.year = selectDateInfo.year;
+                    this.modalSelectDateTime.joinDate =selectDateInfo.joinDate;
+                    this.modalSelectDateTime.timeList = selectDateInfo.timeList;
+                    this.modalSelectDateTime.dayOfWeek = selectDateInfo.dayOfWeek;
                 }
           },
           deep: true,

@@ -8,13 +8,12 @@ const state = {
         telephoneNumber: '',
         creditNumber: '',
         order_time: {
-            date: {
-                year: '',
-                month: '',
-                date: '',
-                joinDate: '',
-            },
+            year: '',
+            month: '',
+            date: '',
+            joinDate: '',
             time: '',
+            dayOfWeek: '',
         }
     }
 }
@@ -44,10 +43,8 @@ const mutations = {
         const deleteIndex = state.productAffiliationShops.findIndex((shop) => shop.id == shopId);
         state.productAffiliationShops.splice(deleteIndex, 1);
     },
-    setOrderTime(state, {date, time}){
-        state.orderInfo.order_time.date = date;
-        state.orderInfo.order_time.time = time;// 時間と分をまとめて管理
-        console.log(state.orderInfo);
+    setOrderTime(state, dateTime){
+        state.orderInfo.order_time = dateTime;// 時間と分をまとめて管理
     }
 }
 const actions = {
