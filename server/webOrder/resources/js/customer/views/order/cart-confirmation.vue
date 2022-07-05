@@ -157,26 +157,15 @@ export default{
             }
         },
         openOrderTimeModal(dateTime){
+            console.log('open');
             //this.modalSelectDateTime = Object.assign({}, dateTime);
             if(!this.storeOrderTime.date){//すでに予約しているか判定0
                 //this.modalSelectDateTime = Object.assign({}, dateTime);
-                this.modalSelectDateTime = {
-                    year: dateTime.year,
-                    month: dateTime.month,
-                    date: dateTime.date,
-                    joinDate: dateTime.joinDate,
-                    dayOfWeek: dateTime.dayOfWeek,
-                    time: dateTime.timeList[0],
-                    timeList: dateTime.timeList,
-                };
+                this.$set(this.modalSelectDateTime, 'date', dateTime.date);
             }else{
                 this.modalSelectDateTime = Object.assign({}, this.storeOrderTime);
             }
             this.showOrderTimeModal = true;
-            console.log('modalSelectDateTime: ');
-            console.log(this.modalSelectDateTime);
-            console.log('dateTIme');
-            console.log(dateTime);
         },
         closeOrderTimeModal(){
             this.modalSelectDateTime = new Object();
@@ -274,20 +263,21 @@ export default{
         immediate: true,
         deep: true,
       },
-      modalSelectDateTime: { //timeListは最初に定義せず、ここのみで代入するようにする
+      modalSelectDateTime: { 
           handler: function(next, before){
-              if(next.joinDate !== before.joinDate && Object.keys(next).indexOf('selected') !== -1 ){ //モーダルの日付が変わったか、モーダルクローズ時かを判定
+              console.log('watch呼び出し');
+              console.log(before);
+              console.log(next);
+              if(next.date !== before.date && 'date' in next){ //モーダルの日付が変わったか、モーダルクローズ時かを判定
+                console.log('if');
                     var selectDateInfo = this.dateTimes.filter( function(value){
-                        return value.joinDate === next.joinDate;
+                        return value.date === next.date;
                     });
-                    console.log('next');
-                    console.log(Object.keys(next).indexOf('selected'))
-                    console.log(next);
-                    this.modalSelectDateTime.month = selectDateInfo.month;
-                    this.modalSelectDateTime.year = selectDateInfo.year;
-                    this.modalSelectDateTime.joinDate =selectDateInfo.joinDate;
-                    this.modalSelectDateTime.timeList = selectDateInfo.timeList;
-                    this.modalSelectDateTime.dayOfWeek = selectDateInfo.dayOfWeek;
+                    
+                    this.$set(this, 'modalSelectDateTime', selectDateInfo[0]);
+                    this.$set(this.modalSelectDateTime, 'time', this.modalSelectDateTime.timeList[0]);
+
+                    console.log(this.modalSelectDateTime);
                 }
           },
           deep: true,
