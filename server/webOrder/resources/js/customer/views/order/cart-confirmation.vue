@@ -49,8 +49,8 @@
             <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="closeOrderTimeModal">
                 <div>
                     <label>予約日付</label>
-                    <select v-model="modalSelectDateTime.date" class="border border-gray-300 rounded py-1 px-1">
-                        <option v-for="dateTime in dateTimes" :value="dateTime.date" :key="dateTime.id">
+                    <select v-model="modalSelectDateTime.date" v-on:change="changeSelectDate" class="border border-gray-300 rounded py-1 px-1">
+                        <option v-for="dateTime in dateTimes" :value="dateTime.date">
                             {{dateTime.joinDate + '('+ displayDayOfWeek(dateTime.dayOfWeek) + ')'}}
                         </option>
                     </select>
@@ -160,12 +160,26 @@ export default{
             console.log('open');
             //this.modalSelectDateTime = Object.assign({}, dateTime);
             if(!this.storeOrderTime.date){//すでに予約しているか判定0
-                //this.modalSelectDateTime = Object.assign({}, dateTime);
-                this.$set(this.modalSelectDateTime, 'date', dateTime.date);
+                this.modalSelectDateTime = Vue.util.extend({}, dateTime);
+                console.log(this.modalSelectDateTime);
+                this.modalSelectDateTime.time = JSON.parse(JSON.stringify(dateTime.timeList[0]));
+                //this.$set(this, 'modalSelectDateTime', dateTime);
             }else{
                 this.modalSelectDateTime = Object.assign({}, this.storeOrderTime);
             }
             this.showOrderTimeModal = true;
+        },
+        changeSelectDate(){
+            console.log('modalSelectDateTime');
+            console.log(this.modalSelectDateTime.date);
+            var selectDateInfo = this.dateTimes.filter( v => v.date === this.modalSelectDateTime.date);
+            console.log('selectDateTime');
+            console.log(selectDateInfo);
+            console.log('modalSelectDateTime2');
+            this.modalSelectDateTime = Vue.util.extend({}, selectDateInfo[0]);
+            //this.$set(this, 'modalSelectDateTime', selectDateInfo[0]);
+            console.log(this.modalSelectDateTime);
+            this.modalSelectDateTime.time =  JSON.parse(JSON.stringify(selectDateInfo[0].timeList[0]));
         },
         closeOrderTimeModal(){
             this.modalSelectDateTime = new Object();
@@ -192,7 +206,7 @@ export default{
                 case 6:
                     return '土';
             }
-        }
+        },
     },
     computed: {
         storeOrderTime(){
@@ -263,26 +277,6 @@ export default{
         immediate: true,
         deep: true,
       },
-      modalSelectDateTime: { 
-          handler: function(next, before){
-              console.log('watch呼び出し');
-              console.log(before);
-              console.log(next);
-              if(next.date !== before.date && 'date' in next){ //モーダルの日付が変わったか、モーダルクローズ時かを判定
-                console.log('if');
-                    var selectDateInfo = this.dateTimes.filter( function(value){
-                        return value.date === next.date;
-                    });
-                    
-                    this.$set(this, 'modalSelectDateTime', selectDateInfo[0]);
-                    this.$set(this.modalSelectDateTime, 'time', this.modalSelectDateTime.timeList[0]);
-
-                    console.log(this.modalSelectDateTime);
-                }
-          },
-          deep: true,
-          //immediate: true, //modalSelectDateTimeのselected以外を削除するため、初回読み込み時も監視する
-       },
     },
 
 }
