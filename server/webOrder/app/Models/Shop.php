@@ -23,15 +23,17 @@ class Shop extends Model
         $shops['business_end_time'] = $shops['business_end_time']->format('H:i');
         return $shops;
     }*/
-    const STATUS_NO_HOLIDAY = 0;
+    const STATUS_NO_HOLIDAY = 99;
+    const STATUS_SUNDAY = 0;
     const STATUS_MONDAY = 1;
     const STATUS_TUESDAY = 2;
     const STATUS_WEDNESDAY = 3;
     const STATUS_THURSDAY = 4;
     const STATUS_FRIDAY = 5;
     const STATUS_SATURDAY = 6;
-    const STATUS_SUNDAY = 7;
 
+    const ORDER_POSSIBLE_FLG = 1;
+    const ORDER_IMPOSSIBLE_FLG = 0;
     public function product(){
         return $this->hasMany('App\Models\Product');
     }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::post('/order', 'Customer\OrderController@order')->name('order');
 
 Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
 Route::get('/shop/detail', 'Customer\ShopController@getShopDetail')->name('shop.detail');
+Route::get('/shop/reservable-dateTime', 'Customer\ShopController@getReservableDateTime')->name('shop.reservable-dateTime');
+
 
 Route::get('/user', fn() => Auth::guard('customer')->user())->name('user');

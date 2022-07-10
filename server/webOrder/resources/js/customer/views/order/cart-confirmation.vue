@@ -158,6 +158,7 @@ export default{
         },
         openOrderTimeModal(dateTime){
             console.log('open');
+            this.getReservableDateTime();//開発用
             //this.modalSelectDateTime = Object.assign({}, dateTime);
             if(!this.storeOrderTime.date){//すでに予約しているか判定0
                 this.modalSelectDateTime = Vue.util.extend({}, dateTime);
@@ -207,6 +208,14 @@ export default{
                     return '土';
             }
         },
+        async getReservableDateTime(){
+            const response = await axios.get('/api/shop/reservable-dateTime', {
+                params: {
+                    shop_id: this.$store.state.order.productAffiliationShops[0].id,//データを改竄されないようにサーバー側で店舗情報は取得する
+                },
+            }).catch(err => err.response || err);
+            console.log(response);
+        }
     },
     computed: {
         storeOrderTime(){
