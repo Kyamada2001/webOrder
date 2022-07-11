@@ -57,24 +57,29 @@ class ShopController extends Controller
                 'dayOfWeek' => $dateTime->format('w'),
                 'joinDate' => $dateTime->format('Y年m月d日'),                
             ];
-            //Log::info($orderAbleTime->format('Y-m-d H:i'));
-            if($i === $start){ //今日かどうか判定
-                if($orderAbleTime > $dateTime) $dateTimes[$i] += array('timeList' => $orderReceptionTime, 'orderAbleFlg' => 1);//現在時間が営業開始時間より前の場合
-                elseif($orderAcceptanceEndTime < $dateTime) $dateTimes[$i] += array('timeList' =>[], 'orderAbleFlg' => 0); //現在時間が営業時間終了時間より後の場合
-                else { //営業時間内の場合
-                    $separation = 30;
-                    $roundUpMin = $separation - ((int) $dateTime->format('i') - $separation);
-                    // Log::info($dateTime->format('i'));
-                    // Log::info($roundUpMin);
-                    $dateTime->modify('+'.$roundUpMin.' min');
-                    $todayOrderReceptionTimeList = [];
-                    for($t = clone $dateTime; $t <= $orderAcceptanceEndTime; $t->modify('+30 min')){
-                        array_push($todayOrderReceptionTimeList, $t->format('H:i'));
-                    }
-                    $dateTimes[$i] += array('timeList' => $todayOrderReceptionTimeList, 'orderAbleFlg' => 1);
-                }
+            
+            //週休該当日か判定
+            $shopWeeklyHolidays = explode(',', $shop->weekly_holiday);
+            if(in_array($dateTime->format('w'), $shopWeeklyHolidays)){
+                $dateTimes[$i] += array('timeList' => ['定休日です。'], 'orderAbleFlg' => Shop::ORDER_IMPOSSIBLE_FLG);
             }else{
-                $dateTimes[$i] += array('timeList' => $orderReceptionTime, 'orderAbleFlg' => 1);
+                if($i === $start){ //今日かどうか判定
+                    if($orderAbleTime > $dateTime) $dateTimes[$i] += array('timeList' => $orderReceptionTime, 'orderAbleFlg' => Shop::ORDER_POSSIBLE_FLG);//現在時間が営業開始時間より前の場合
+                    elseif($orderAcceptanceEndTime < $dateTime) $dateTimes[$i] += array('timeList' =>['営業時間が終了しました。'], 'orderAbleFlg' => Shop::ORDER_IMPOSSIBLE_FLG); //現在時間が営業時間終了時間より後の場合
+                    else { //営業時間内の場合
+                        //現在時間より後の注文可能時間を取得
+                        $separation = 30;
+                        $roundUpMin = $separation - ((int) $dateTime->format('i') - $separation);
+                        $dateTime->modify('+'.$roundUpMin.' min');
+                        $todayOrderReceptionTimeList = [];
+                        for($t = clone $dateTime; $t <= $orderAcceptanceEndTime; $t->modify('+30 min')){
+                            array_push($todayOrderReceptionTimeList, $t->format('H:i'));
+                        }
+                        $dateTimes[$i] += array('timeList' => $todayOrderReceptionTimeList, 'orderAbleFlg' => Shop::ORDER_POSSIBLE_FLG);
+                    }
+                }else{
+                    $dateTimes[$i] += array('timeList' => $orderReceptionTime, 'orderAbleFlg' => Shop::ORDER_POSSIBLE_FLG);
+                }
             }
         }
         return response()->json(['dateTimes' => $dateTimes], Response::HTTP_OK);
