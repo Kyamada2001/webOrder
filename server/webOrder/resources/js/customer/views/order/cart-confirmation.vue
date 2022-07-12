@@ -29,8 +29,8 @@
                     </div>
                     <div>
                         <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
-                        <div>
-                            <div class="flex flex-row border border-gray-300 w-full">
+                        <div class="flex overflow-x-auto">
+                            <div class="flex flex-row border border-gray-300 w-full flex-none">
                                 <div class="border border-gray-300 w-20 align-middle">予約日付</div>
                                 <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" :key="dateTime.id">
@@ -50,7 +50,7 @@
                 <div>
                     <label>予約日付</label>
                     <select v-model="modalSelectDateTime.date" v-on:change="changeSelectDate" class="border border-gray-300 rounded py-1 px-1">
-                        <option v-for="dateTime in dateTimes" :value="dateTime.date">
+                        <option v-for="dateTime in dateTimes" :value="dateTime.date" :key="dateTime.id">
                             {{dateTime.joinDate + '('+ displayDayOfWeek(dateTime.dayOfWeek) + ')'}}
                         </option>
                     </select>
@@ -130,11 +130,6 @@ export default{
             pathhead: '/storage/',
             noimgpath: 'images/product_noimage.png',
             showOrderTimeModal: false,
-            orderTime: [
-                '13:00',
-                '14:00',
-                '15:00',
-            ],//開発用
             modalSelectDateTime: {
                 year: '',
                 month: '',
@@ -144,6 +139,7 @@ export default{
                 time: '',
                 timeList: Array,
             },
+            dateTimes: [],
         }
     },
     methods: {
@@ -157,12 +153,10 @@ export default{
             }
         },
         openOrderTimeModal(dateTime){
-            console.log('open');
             this.getReservableDateTime();//開発用
             //this.modalSelectDateTime = Object.assign({}, dateTime);
             if(!this.storeOrderTime.date){//すでに予約しているか判定0
                 this.modalSelectDateTime = Vue.util.extend({}, dateTime);
-                console.log(this.modalSelectDateTime);
                 this.modalSelectDateTime.time = JSON.parse(JSON.stringify(dateTime.timeList[0]));
                 //this.$set(this, 'modalSelectDateTime', dateTime);
             }else{
@@ -171,15 +165,9 @@ export default{
             this.showOrderTimeModal = true;
         },
         changeSelectDate(){
-            console.log('modalSelectDateTime');
-            console.log(this.modalSelectDateTime.date);
             var selectDateInfo = this.dateTimes.filter( v => v.date === this.modalSelectDateTime.date);
-            console.log('selectDateTime');
-            console.log(selectDateInfo);
-            console.log('modalSelectDateTime2');
             this.modalSelectDateTime = Vue.util.extend({}, selectDateInfo[0]);
             //this.$set(this, 'modalSelectDateTime', selectDateInfo[0]);
-            console.log(this.modalSelectDateTime);
             this.modalSelectDateTime.time =  JSON.parse(JSON.stringify(selectDateInfo[0].timeList[0]));
         },
         closeOrderTimeModal(){
@@ -192,19 +180,19 @@ export default{
         },
         displayDayOfWeek(dayOfWeekFlg){
             switch(dayOfWeekFlg){
-                case 0:
+                case "0":
                     return '日';
-                case 1:
+                case "1":
                     return '月';
-                case 2:
+                case "2":
                     return '火';
-                case 3:
+                case "3":
                     return '水';
-                case 4:
+                case "4":
                     return '木';
-                case 5:
+                case "5":
                     return '金';
-                case 6:
+                case "6":
                     return '土';
             }
         },
@@ -214,7 +202,7 @@ export default{
                     shop_id: this.$store.state.order.productAffiliationShops[0].id,//データを改竄されないようにサーバー側で店舗情報は取得する
                 },
             }).catch(err => err.response || err);
-            console.log(response);
+            this.dateTimes = response.data.dateTimes;
         }
     },
     computed: {
@@ -230,26 +218,10 @@ export default{
         productAffiliationShops(){
             return this.$store.state.order.productAffiliationShops;
         },
-        dateTimes(){
-            const nowDate = new Date();
-            const endDate = new Date().setDate(new Date().getDate() + 14);//2週間ループする
-            let dateList = new Array();
-            
-            for(var d = new Date(); d <= endDate; d.setDate(d.getDate()+1)) {
-                //if(JSON.stringify(nowDate) === JSON.stringify(d) || nowDate.getMonth() !== d.getMonth()) var date = (d.getMonth() + 1) + '/' + d.getDate();
-                //else var date = d.getDate();
-                var year = d.getFullYear();
-                var month = d.getMonth() + 1;
-                var date = d.getDate();
-                var dayOfWeek = d.getDay();
-                var joinDate = year + '年' + month + '月' + date + '日';
-                dateList.push({ year: year, month: month, date: date, dayOfWeek: dayOfWeek, joinDate: joinDate, timeList: this.orderTime});// orderTimeは開発用
-            }
-            return dateList;
-        }
     },
     created: function(){
         this.orderInfo = this.computedOrderInfo;
+        this.dateTimes = this.getReservableDateTime();
     },
     watch: {
       computedCartProducts: {
