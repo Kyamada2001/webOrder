@@ -120,6 +120,8 @@
 <script>
 import BaseModal from '../../components/BaseModal.vue'
 import OrderTimeDropdown from '../../components/ordertime-dropdown.vue';
+import { OK } from '../../../util.js';
+
 export default{
     components: {
         BaseModal,
@@ -218,6 +220,12 @@ export default{
                     shop_id: this.$store.state.order.productAffiliationShops[0].id,//データを改竄されないようにサーバー側で店舗情報は取得する
                 },
             }).catch(err => err.response || err);
+            
+            if(response.status !== OK) {
+                this.$store.commit('error/setCode', response.status);
+                return false;
+            }
+
             this.dateTimes = response.data.dateTimes;
         }
     },
