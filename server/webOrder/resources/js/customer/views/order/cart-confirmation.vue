@@ -35,13 +35,25 @@
                                 <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" :key="dateTime.id">
                                         <div class="justify-content-center border-b border-gray-300 px-2 py-1">{{ dateTime.month }}/{{ dateTime.date }}</div>
-                                        <div class="hover:bg-orange-50" v-bind:class="{'bg-orange-300': dateTime.joinDate === storeOrderTime.joinDate}">
-                                            <button class="px-2 py-2" @click="openOrderTimeModal(dateTime)" type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</button>
+
+                                        <div v-if="dateTime.orderAbleFlg === 0" class="cursor-pointer bg-gray-200 justify-center items-center">
+                                            <div>{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
                                         </div>
+                                        <div v-else @click="openOrderTimeModal(dateTime)" class="cursor-pointer bg-orange-100 hover:bg-orange-50 justify-center items-center" v-bind:class="{'bg-yellow-200': dateTime.joinDate === storeOrderTime.joinDate}">
+                                            <div type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <p v-if="message.order_time" class="text-sm text-red-500">{{ message.order_time }}</p>
                     </div>
                 </div>
             </div>
@@ -144,8 +156,12 @@ export default{
     },
     methods: {
         checkForm(){
+            //課題：もっといい処理書きたい。エラー発生後、クリアできていたらエラー文を非表示にしたい
             if(this.orderInfo.telephoneNumber.toString().length > 11 || this.orderInfo.telephoneNumber.toString().length < 11){
                 this.$set(this.message, 'telephoneNumber', "11桁の電話番号を入力して下さい");
+            }if(!this.$store.state.order.orderInfo.order_time.date){
+                this.$set(this.message, 'order_time', "商品受取日付を選択して下さい");
+                //注文受け取り時間が正常な時間かAPI側で判定したいが、とりあえず保留。
             }else{
                 this.$store.commit('order/setOrderInfo', this.orderInfo);
                 if(this.orderInfo.prepaid_flg == 0) this.$router.push('/order/confirmation');
