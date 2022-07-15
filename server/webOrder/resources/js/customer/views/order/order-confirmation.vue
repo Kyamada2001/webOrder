@@ -49,10 +49,10 @@
                         <div class="col-span-2">{{ cartProduct.name }}</div>
                         <div class="col-span-1">
                             <label>数量</label>
-                            <p class="w-full px-2 py-1">{{ cartProduct.quantity }}</p>
+                            <p class="w-full px-2 py-1">{{ cartProduct.modalInput.quantity }}</p>
                         </div>
                         <div class="col-span-1"></div>
-                        <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.quantity).toLocaleString() }}円</div>
+                        <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,8 @@ export default {
             total.quantity = 0;
             total.price = 0;
             Object.keys(this.cartProducts).forEach(key => {
-                total.quantity += this.cartProducts[key].quantity;
-                total.price += this.cartProducts[key].price * this.cartProducts[key].quantity;
+                total.quantity += this.cartProducts[key].modalInput.quantity;
+                total.price += this.cartProducts[key].price * this.cartProducts[key].modalInput.quantity;
             });
             return total;
         },

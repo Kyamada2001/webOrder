@@ -15,8 +15,8 @@
                                     <div class="pl-4">{{ cartProduct.name }}</div>
                                 </div>
                                 <div class="grid grid-cols-3 pl-4">
-                                    <div class="col-span-2">{{ cartProduct.quantity }}点</div>
-                                    <div class="col-span-1">{{ (cartProduct.price * cartProduct.quantity).toLocaleString() }}円</div>
+                                    <div class="col-span-2">{{ cartProduct.modalInput.quantity }}点</div>
+                                    <div class="col-span-1">{{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
                                 </div>
                             </div>
                             <div class="flex flex-row pb-2 px-3 space-x-3">
@@ -61,7 +61,7 @@ export default{
         totalPrice(){
             let total = null;
             Object.keys(this.computedCartProducts).forEach(key => {
-                total += this.computedCartProducts[key].price * this.computedCartProducts[key].quantity;
+                total += this.computedCartProducts[key].price * this.computedCartProducts[key].modalInput.quantity;
             });
             return total;
         },
