@@ -32,6 +32,11 @@
                         <label class="block text-sm">携帯電話番号</label>
                         <span>{{ orderInfo.telephoneNumber }}</span>
                     </div>
+                    <div>
+                        <label class="block text-sm">受取日時</label>
+                        <span>{{ orderInfo.order_time.joinDate }}</span>
+                        <span>{{ orderInfo.order_time.time }}</span>
+                    </div>
                 </div>
             </div>
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
@@ -44,9 +49,7 @@
                         <div class="col-span-2">{{ cartProduct.name }}</div>
                         <div class="col-span-1">
                             <label>数量</label>
-                            <p
-                            class="w-full px-2 py-1">{{ cartProduct.modalInput.quantity }}
-                            </p>
+                            <p class="w-full px-2 py-1">{{ cartProduct.modalInput.quantity }}</p>
                         </div>
                         <div class="col-span-1"></div>
                         <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
