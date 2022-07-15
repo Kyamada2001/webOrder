@@ -25,10 +25,10 @@ const mutations = {
         state.cartProducts.push(product);
     },
     plusCart(state, data){
-        state.cartProducts[data.index]['modalInput'].quantity += data.InputProduct.modalInput.quantity;
+        state.cartProducts[data.index].quantity += data.InputProduct.quantity;
     },
     updateCart(state, data){
-        state.cartProducts[data.index]['modalInput'].quantity = data.InputProduct.modalInput.quantity;
+        state.cartProducts[data.index].quantity = data.InputProduct.quantity;
     },
     deleteCart(state, index){
         state.cartProducts.splice(index, 1);//spliceで削除はダメらしい　https://qiita.com/sirogane/items/b9ee2f829148b5d949f7
@@ -74,11 +74,12 @@ const actions = {
         if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
     },
     order(context){
-        let response = axios.post('/api/order', {
+        let response = axios.post('/api/order/create', {
             cartProducts: context.state.cartProducts,
             orderInfo: context.state.orderInfo,
             customer: context.rootState.auth.customer,
         }).catch(err => err.response || err);
+        console.log(response);
     }
 }
 

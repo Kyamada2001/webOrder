@@ -93,13 +93,13 @@
                         <div class="col-span-1">
                             <label>数量</label>
                             <select
-                            v-model="cartProduct.modalInput.quantity"
+                            v-model="cartProduct.quantity"
                             class="w-full px-2 py-1 rounded-md border border-gray-300 shadow-sm">
                                 <option v-for="n in 99" :value="n">{{ n }}</option>
                             </select>
                         </div>
                         <div class="col-span-1"></div>
-                        <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
+                        <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.quantity).toLocaleString() }}円</div>
                     </div>
                 </div>
             </div>
@@ -261,8 +261,8 @@ export default{
             Object.keys($val).forEach(key => {
                 let str_computedCartProduct = JSON.stringify(this.computedCartProducts[key]);
                 let str_updateCartProduct = JSON.stringify($val[key]);
-                this.total.quantity += $val[key].modalInput.quantity;
-                this.total.price += $val[key].price * $val[key].modalInput.quantity;
+                this.total.quantity += $val[key].quantity;
+                this.total.price += $val[key].price * $val[key].quantity;
                 if(str_computedCartProduct == str_updateCartProduct){
                     let data = {
                         index: key,

@@ -23,7 +23,7 @@
             <div class="w-full px-4">
                 <label>数量</label>
                 <select
-                v-model="modalProduct.modalInput.quantity"
+                v-model="modalProduct.quantity"
                     class="w-full px-2 py-1 rounded-md border border-gray-300 shadow-sm">
                     <option v-for="n in 99" :value="n">{{ n }}</option>
                 </select>
@@ -81,7 +81,7 @@
         handler($val){
           this.modalProduct = JSON.parse(JSON.stringify($val));
           this.$set(this.modalProduct, 'modalStatus', this.modalStatus);
-          if(!this.modalProduct.hasOwnProperty('modalInput')) this.$set(this.modalProduct,'modalInput', { quantity: 1 })
+          if(!this.modalProduct.quantity) this.modalProduct.quantity = 1;
         },
         immediate: true,
         deep: true,
