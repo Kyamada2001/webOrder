@@ -1,6 +1,6 @@
 *
 !.gitignore
-!.htacecess
-!.favicon.ico
+!.htacceess
+!favicon.ico
 !index.php
 !robots.txt
