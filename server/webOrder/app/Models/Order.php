@@ -12,7 +12,13 @@ class Order extends Model
     protected $fillable = [
         'shop_id',
         'customer_id',
-        'total_amount_including_tax',
+        'total_amount',
+        'order_time',
+        'total_quantity',
+        'acceptance_datetime',
+        'prepaid_flg',
+        'status',
+        'tel',
     ];
     public function order_detail(){
         return $this->hasMany('App\Models\Order_detail');

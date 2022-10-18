@@ -30,5 +30,7 @@ Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
 Route::get('/shop/detail', 'Customer\ShopController@getShopDetail')->name('shop.detail');
 Route::get('/shop/reservable-dateTime', 'Customer\ShopController@getReservableDateTime')->name('shop.reservable-dateTime');
 
+Route::post('/order/create', 'Customer\OrderController@create')->name('order.create');
+
 
 Route::get('/user', fn() => Auth::guard('customer')->user())->name('user');

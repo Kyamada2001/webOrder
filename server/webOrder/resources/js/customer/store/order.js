@@ -74,11 +74,13 @@ const actions = {
         if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
     },
     order(context){
+        console.log(context);
         let response = axios.post('/api/order', {
             cartProducts: context.state.cartProducts,
             orderInfo: context.state.orderInfo,
             customer: context.rootState.auth.customer,
         }).catch(err => err.response || err);
+        console.log(response);
     }
 }
 
