@@ -1,2 +1,6 @@
 *
 !.gitignore
+!.htacecess
+!.favicon.ico
+!index.php
+!robots.txt
