@@ -27,6 +27,7 @@ class CustomerSeeder extends Seeder
         DB::table($table)->update([
             'updated_at' => Carbon::now(),
             'created_at' => Carbon::now(),
+            'email_verified_at' => Carbon::now(),
         ]);
 
         Schema::enableForeignKeyConstraints();

@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
                 for($i = 1;$i<10; $i++){
                     $array = array(
                         [
-                        //'id' => $index,
+                        'id' => $index,
                         'shop_id' => "{$i}",
                         'name' => "テスト商品{$i}",
                         'price' => '1000',

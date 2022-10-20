@@ -44,6 +44,7 @@ class ShopSeeder extends Seeder
                     'business_start_time' => "0{$i}:00",
                     'business_end_time' => "1{$i}:00",
                     'weekly_holiday' => "{$i}",
+                    'imgpath' => "null",
                     ]
                 );
                 $shopArray = array_merge($shopArray,$array);
@@ -57,6 +58,7 @@ class ShopSeeder extends Seeder
                     'business_start_time' => "0{$i}:00",
                     'business_end_time' => "1{$i}:00",
                     'weekly_holiday' => "{$j},{$i}",
+                    'imgpath' => "null",
                     ]
                 );
                 $shopArray = array_merge($shopArray,$array);
