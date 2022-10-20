@@ -36,7 +36,7 @@ class ShopSeeder extends Seeder
     protected function getData()
     {
         $shopArray = array();
-            for($i = 1;$i<9; $i++){
+            for($i = 1;$i<4; $i++){
                 $array = array(
                     [
                     'id' => $i,
@@ -49,7 +49,7 @@ class ShopSeeder extends Seeder
                 );
                 $shopArray = array_merge($shopArray,$array);
             }
-            for($i=6;$i<9; $i++){
+            for($i=4;$i<8; $i++){
                 $j = $i-1;
                 $array = array(
                     [
