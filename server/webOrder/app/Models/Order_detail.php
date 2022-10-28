@@ -9,6 +9,7 @@ class Order_detail extends Model
 {
     use HasFactory;
 
+    //updateされると注文商品がわからなくなるため、name,price等も入れる
     protected $fillable = [
         'product_id',
         'product_name',

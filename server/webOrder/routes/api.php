@@ -23,14 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', 'Customer\Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Customer\Auth\LoginController@authenticate')->name('login');
-Route::post('/logout', 'Customer\Auth\LoginController@logout')->name('logout');
-Route::post('/order', 'Customer\OrderController@order')->name('order');
+Route::post('/logout', 'Customer\Auth\LoginController@logot')->name('logout');
+Route::post('/order/store', 'Customer\OrderController@store')->name('order.store');;
 
 Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
 Route::get('/shop/detail', 'Customer\ShopController@getShopDetail')->name('shop.detail');
 Route::get('/shop/reservable-dateTime', 'Customer\ShopController@getReservableDateTime')->name('shop.reservable-dateTime');
 
-Route::post('/order/create', 'Customer\OrderController@create')->name('order.create');
 
 
 Route::get('/user', fn() => Auth::guard('customer')->user())->name('user');

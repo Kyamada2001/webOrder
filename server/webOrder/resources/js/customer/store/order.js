@@ -22,6 +22,7 @@ const getters = {
 }
 const mutations = {
     addCart(state, product){
+        console.log(product);
         state.cartProducts.push(product);
     },
     plusCart(state, data){
@@ -75,10 +76,9 @@ const actions = {
     },
     order(context){
         console.log(context);
-        let response = axios.post('/api/order', {
+        let response = axios.post('/api/order/store', {
             cartProducts: context.state.cartProducts,
             orderInfo: context.state.orderInfo,
-            customer: context.rootState.auth.customer,
         }).catch(err => err.response || err);
         console.log(response);
     }
