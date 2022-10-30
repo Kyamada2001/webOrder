@@ -14,8 +14,8 @@ class AddColumnToOrderDetailsShopIdProductImgpath extends Migration
     public function up()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->integer('shop_id');
-            $table->integer('product_imgpath');
+            $table->string('shop_id');
+            $table->string('product_imgpath')->nullable();
         });
     }
 
@@ -27,8 +27,8 @@ class AddColumnToOrderDetailsShopIdProductImgpath extends Migration
     public function down()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            Schema::dropIfExists('shop_id');
-            Schema::dropIfExists('product_imgpath');
+            $table->dropColumn('shop_id');
+            $table->dropColumn('product_imgpath');
         });
     }
 }

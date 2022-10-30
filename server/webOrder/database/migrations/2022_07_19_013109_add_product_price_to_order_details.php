@@ -26,7 +26,7 @@ class AddProductPriceToOrderDetails extends Migration
     public function down()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            Schema::dropIfExists('product_price');
+            $table->dropColumn('product_price');
         });
     }
 }
