@@ -11,6 +11,8 @@ class Order_detail extends Model
 
     //updateされると注文商品がわからなくなるため、name,price等も入れる
     protected $fillable = [
+        'shop_id',
+        'product_imgpath',
         'product_id',
         'product_name',
         'product_quantity',
