@@ -12,48 +12,43 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Exception;
+use DateTime;
 
 class OrderController extends Controller
 {
     //ユーザーmiddlewareを入れたい
+
+    //protected $customer;
+
+    public function __construct() {
+        $this->customer = Auth::guard('customer')->user();
+    }
+
     public function store(Request $request){
-        $customer = Auth::guard('customer')->user();
         Log::info($request);
 
         try{
             DB::beginTransaction();
 
-            $order = new Order();
-            $order->customer_id = $customer->id;
-            $products = $this->getCartProducts($request->cartProducts);
-            
-            //再計算するべき。
-            //$order->shop_id = //shop_idいらないかも
-
-            //DBのカラム名と合わせたい
-            $orderDetails = array();
-            foreach($request->cartProducts as $index => $cartProduct){
-                Log::info($cartProduct);
-                $orderDetail = [
-                    'product_id' => $cartProduct['id'],
-                    'product_name' => $cartProduct['name'],//product Nameはなくてもいい？
-                    'product_quantity' => $cartProduct['modalInput']['quantity'], //ベストプラクティス的にはmodal_input?
-                    'product_price' => $cartProduct['price'],
-                ];
-                array_push($orderDetails, $orderDetail);
-            }
-            Log::info("orderDetails");
+            $orderDetails = $this->getOrderDetailsProducts($request->cartProducts);
+            $order = $this->getOrderInfo($orderDetails, $request);
+            Log::info('$order');
+            Log::info($order);
+            Log::info('$orderDetails');
             Log::info($orderDetails);
+            $order->save();
+            Log::info("order成功");
             $order->order_detail()->createMany($orderDetails);
+
             DB::commit();
         }catch(Exception $e){
             DB::rollBack();
-            Log::info($e);
+            Log::error($e);
         }
 
-        return response()->json($customer, 200);
+        return response()->json($this->customer, 200);
     }
-    private function getCartProducts($cartProducts){
+    private function getOrderDetailsProducts($cartProducts){
         //product取得
         $productIds = [];
         $acquiredProducts = [];
@@ -74,14 +69,27 @@ class OrderController extends Controller
         //　Ordersの情報もここで計算する。TotalQuantityとか
 
         //ここでOrder Details用の配列にProduct Name等のカラムを追加している
-        foreach($acquiredProducts as $index => $acquiredProduct){
+        foreach($acquiredProducts as $index => &$acquiredProduct){
             $product = array_filter($productList, function($element) use($acquiredProduct){
                 return $element['id'] == $acquiredProduct['product_id'];
             });
+            
+            Log::info('$product');
+            Log::info($product);
             $acquiredProduct['product_name'] = $product[0]['name'];//本当はArray Filterの時点でIndexなしで取得したい
             $acquiredProduct['product_price'] = $product[0]['price'];
+            $acquiredProduct['shop_id'] = $product[0]['shop_id'];
+            $acquiredProduct['product_imgpath'] = $product[0]['imgpath'];
+            Log::info('acquiredProduct');
+            Log::info($acquiredProduct);
         }
+        unset($acquiredProduct);
+
+        Log::info('acquiredProducts');
+        Log::info($acquiredProducts);
+        return $acquiredProducts;
     }
+
     public function productCheck($productInfo){
         try{
             //数量チェック  正常な数値かどうか
@@ -94,5 +102,31 @@ class OrderController extends Controller
             Log::error($e);
         }
         return true;
+    }
+    private function getOrderInfo($orderDetails, $request){
+        $order = new Order();
+
+        $productShopIds = [];
+        //total_amountとtotal_quantityの計算
+        Log::info($orderDetails);
+        foreach($orderDetails as $orderDetailProduct){
+            Log::info("customer");
+            Log::info($this->customer);
+            Log::info(Auth::guard('customer')->user());
+            $order->total_quantity += $orderDetailProduct['product_quantity'];
+            $order->total_amount += $orderDetailProduct['product_quantity'] * $orderDetailProduct['product_price'];
+            array_push($productShopIds, $orderDetailProduct['shop_id']);
+        }
+        $order->shop_id = implode(',', array_unique($productShopIds));
+        //チェックを入れたい
+        $order->prepaid_flg = $request['orderInfo']['prepaid_flg'];
+        $order->tel = $request['orderInfo']['telephoneNumber'];
+        $orderTime = $request['orderInfo']['order_time'];
+        $order->acceptance_datetime = date('Y-m-d H:i' ,strtotime($orderTime['year'] .'-' . $orderTime['month'] . '-' . $orderTime['date'] . $orderTime['time']));
+        $order->customer_id = Auth::guard('customer')->user()->id;//コンストラクトを呼び出せるようにしたい
+        $order->status = Order::NOTYETDELIVERED_STATUS;
+        $order->order_time = new DateTime('now');
+
+        return $order;
     }
 }

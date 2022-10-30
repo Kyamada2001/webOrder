@@ -20,6 +20,8 @@ class Order extends Model
         'status',
         'tel',
     ];
+
+    //Modelのリレーションメソッド名を全体的に複数形にしたい
     public function order_detail(){
         return $this->hasMany('App\Models\Order_detail');
     }
@@ -30,4 +32,8 @@ class Order extends Model
     public function customer(){
         return $this->belongsTo('App\Models\Customer');
     }
+
+    const NOTYETDELIVERED_STATUS = 0;
+    const ACCEPTANCE_STATUS = 1;
+    const CANCELED_STATUS = 2;
 }
