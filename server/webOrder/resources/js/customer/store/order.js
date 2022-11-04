@@ -61,8 +61,8 @@ const mutations = {
                 joinDate: '',
                 time: '',
                 dayOfWeek: '',
-            };
-        }
+            }
+        };
     }
 }
 const actions = {
