@@ -50,7 +50,19 @@ const mutations = {
     cleanOrderInfo(state){
         state.productAffiliationShops = new Array();
         state.cartProducts = new Array();
-        state.orderInfo = new Object();
+        state.orderInfo = {
+            prepaid_flg: 0,
+            telephoneNumber: '',
+            creditNumber: '',
+            order_time: {
+                year: '',
+                month: '',
+                date: '',
+                joinDate: '',
+                time: '',
+                dayOfWeek: '',
+            };
+        }
     }
 }
 const actions = {
