@@ -74,27 +74,22 @@ export default {
     },
     methods: {
         order: async function(){
-            //let response = await this.$store.dispatch('order/order');
             let response = await axios.post('/api/order/store', {
                 cartProducts: this.cartProducts,
                 orderInfo: this.orderInfo,
             }).catch(err => err.response || err);
 
-            console.log("response");
-            console.log(response);
             if(response.status !== OK) {
                 this.$store.commit('error/setCode', response.status);
                 return false;
             }else if(response.status == OK){
-                console.log("response");
-                console.log(response.data.order);
-                console.log(response.data.customer);
                 this.$router.push({
                     name: 'orderComplete',
                     params: {
                         order: response.data.order,
                         customer: response.data.customer,
                     }});
+                this.$store.commit('order/cleanOrderInfo');
             }
         }
     },

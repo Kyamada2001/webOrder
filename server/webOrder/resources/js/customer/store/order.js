@@ -46,6 +46,11 @@ const mutations = {
     },
     setOrderTime(state, dateTime){
         state.orderInfo.order_time = dateTime;// 時間と分をまとめて管理
+    },
+    cleanOrderInfo(state){
+        state.productAffiliationShops = new Array();
+        state.cartProducts = new Array();
+        state.orderInfo = new Object();
     }
 }
 const actions = {
@@ -74,15 +79,6 @@ const actions = {
         });
         if(InputProduct.modalStatus == 'add' && !existCart_flg) context.commit('addCart', InputProduct)
     },
-    order(context){
-        console.log(context);
-        let response = axios.post('/api/order/store', {
-            cartProducts: context.state.cartProducts,
-            orderInfo: context.state.orderInfo,
-        }).catch(err => err.response || err);
-        console.log(response);
-        return response;
-    }
 }
 
 export default {
