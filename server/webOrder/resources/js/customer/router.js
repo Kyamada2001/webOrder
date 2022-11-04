@@ -9,6 +9,7 @@ import ShopIndex from './views/shop/index.vue'
 import ShopDetail from './views/shop/detail.vue'
 import CartConfirmation from './views/order/cart-confirmation.vue'
 import OrderConfirmation from './views/order/order-confirmation.vue'
+import OrderComplete from './views/order/complete.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -89,6 +90,12 @@ export default new Router({
           next('/order/cart');
         }
       }
+    },
+    {
+      path: '/order/complete',
+      name: 'orderComplete',
+      component: OrderComplete,
+      props: true,
     },
 
     {

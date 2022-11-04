@@ -81,6 +81,7 @@ const actions = {
             orderInfo: context.state.orderInfo,
         }).catch(err => err.response || err);
         console.log(response);
+        return response;
     }
 }
 

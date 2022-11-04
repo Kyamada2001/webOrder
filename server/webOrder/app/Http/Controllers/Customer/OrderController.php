@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Order;
+use App\Models\Shop;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -32,12 +33,7 @@ class OrderController extends Controller
 
             $orderDetails = $this->getOrderDetailsProducts($request->cartProducts);
             $order = $this->getOrderInfo($orderDetails, $request);
-            Log::info('$order');
-            Log::info($order);
-            Log::info('$orderDetails');
-            Log::info($orderDetails);
             $order->save();
-            Log::info("order成功");
             $order->order_detail()->createMany($orderDetails);
 
             DB::commit();
@@ -46,7 +42,10 @@ class OrderController extends Controller
             Log::error($e);
         }
 
-        return response()->json($this->customer, 200);
+        return response()->json([
+            'order' => $order, // orderに店舗情報も入れている
+            'customer' =>  Auth::guard('customer')->user(),
+        ], 200);
     }
     private function getOrderDetailsProducts($cartProducts){
         //product取得
@@ -80,13 +79,9 @@ class OrderController extends Controller
             $acquiredProduct['product_price'] = $product[0]['price'];
             $acquiredProduct['shop_id'] = $product[0]['shop_id'];
             $acquiredProduct['product_imgpath'] = $product[0]['imgpath'];
-            Log::info('acquiredProduct');
-            Log::info($acquiredProduct);
         }
         unset($acquiredProduct);
 
-        Log::info('acquiredProducts');
-        Log::info($acquiredProducts);
         return $acquiredProducts;
     }
 
@@ -110,9 +105,9 @@ class OrderController extends Controller
         //total_amountとtotal_quantityの計算
         Log::info($orderDetails);
         foreach($orderDetails as $orderDetailProduct){
-            Log::info("customer");
-            Log::info($this->customer);
-            Log::info(Auth::guard('customer')->user());
+            // Log::info("customer");
+            // Log::info($this->customer);
+            // Log::info(Auth::guard('customer')->user());
             $order->total_quantity += $orderDetailProduct['product_quantity'];
             $order->total_amount += $orderDetailProduct['product_quantity'] * $orderDetailProduct['product_price'];
             array_push($productShopIds, $orderDetailProduct['shop_id']);
@@ -127,6 +122,8 @@ class OrderController extends Controller
         $order->status = Order::NOTYETDELIVERED_STATUS;
         $order->order_time = new DateTime('now');
 
+        //完了画面に表示するため、shop情報を取得。本当はここで取得したくない。設計を要検討
+        $order->shops = Shop::find($productShopIds);
         return $order;
     }
 }
