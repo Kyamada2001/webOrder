@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-row">
-        <div class="w-96">
+        <div class="side-menu">
             <SideMenu/>
         </div>
-        <div class="container pr-10">
+        <div class="side-menu-container">
             トップ画面
         </div>
     </div>

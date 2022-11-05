@@ -1,9 +1,9 @@
 <template>
     <div class="flex form-row pt-5">
-        <div class="w-96">
+        <div class="side-menu">
             <SideMenu/>
         </div>
-        <div class="container pr-10">
+        <div class="side-menu-container">
             <div>{{ shopDetails.name }}の店舗詳細</div>
             <div class="flex flex-wrap">
                 <div v-for="product in shopDetails.product" v-bind:key="product.id" class="mr-5 py-3 w-44">

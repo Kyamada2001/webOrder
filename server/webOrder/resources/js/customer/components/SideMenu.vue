@@ -1,5 +1,5 @@
 <template>
-    <div class="container px-4">
+    <div class="container pl-4">
         <div class="border rounded h-auto">
             <div class="bg-gray-100 h-10">
                 <label class="flex justify-center pt-2 text-lg font-semibold">選択中の商品</label>

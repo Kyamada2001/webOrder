@@ -1,9 +1,9 @@
 <template>
     <div class="flex form-row pt-5">
-        <div class="w-96">
+        <div class="side-menu">
             <SideMenu/>
         </div>
-        <div class="container pr-10">
+        <div class="side-menu-container">
             <div class="text-xl font-semibold">店舗一覧</div>
             <div class="space-y-4">
                 <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">

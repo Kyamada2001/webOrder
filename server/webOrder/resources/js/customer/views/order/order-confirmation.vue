@@ -6,7 +6,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
-            <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gyra-400">戻る</div>
+            <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gray-400">戻る</div>
         </div>
         <div class="container mx-auto mt-5 space-y-3">
             <div class="text-center text-2xl font-semibold">注文確認</div>

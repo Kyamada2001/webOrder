@@ -13,3 +13,11 @@ body {
     height: 100%;
 }
 
+@layer components {
+    .side-menu {
+        @apply md:block w-96 hidden;
+    }
+    .side-menu-container {
+        @apply container pl-4;
+    }
+}
