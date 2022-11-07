@@ -40,7 +40,15 @@
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-login">ログイン</router-link>
             </div>
         </div>
+        <!-- ボトムナビゲーションに変更<div @click="hambergerMenuOpen" class="md:hidden flex flex-row inset-y-0 right-0 px-7 pb-5 justify-end items-end w-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </div> -->
     </div>
+    <!-- <div v-if="humbergerMenuFlg" class="fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        <div @click="hambergerMeneClose" class="absolute w-full h-full bg-gray-900 bg-opacity-50 z-10"></div>
+    </div> -->
 </div>
 </template>
 
@@ -53,6 +61,7 @@ export default{
     data(){
         return {
             showLogoutModal: false,
+            humbergerMenuFlg: false,
         }
     },
     methods: {
@@ -63,7 +72,14 @@ export default{
                 this.showLogoutModal = false;
                 this.$router.push('/');
             }
-        }
+        },
+        //　ボトムナビゲーションに変更。
+        // hambergerMenuOpen(){
+        //     this.humbergerMenuFlg = true;
+        // },
+        // hambergerMeneClose(){
+        //     this.humbergerMenuFlg = false;
+        // }
     },
     computed: {
         isLogin(){

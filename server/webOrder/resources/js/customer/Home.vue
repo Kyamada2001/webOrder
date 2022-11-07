@@ -4,19 +4,26 @@
             <Navbar/>
         </header>
 
-        <main class="h-screen">
+        <main>
             <router-view/>
         </main>
+
+        <!-- 画面縮小時に表示 -->
+        <footer class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm sticky bottom-0">
+            <BottomNavigation/>
+        </footer>
     </diV>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import BottomNavigation from './components/BottomNavigation.vue'
 import { INTERNAL_SERVER_ERROR } from '../util.js'
 
 export default{
     components: {
         Navbar,
+        BottomNavigation,
     },
     computed: {
         errorCode(){
