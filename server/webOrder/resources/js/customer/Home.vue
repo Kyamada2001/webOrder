@@ -4,7 +4,7 @@
             <Navbar/>
         </header>
 
-        <main class="h-full">
+        <main>
             <router-view/>
         </main>
 
