@@ -31,7 +31,6 @@
                         <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
                         <div class="flex overflow-x-auto">
                             <div class="flex flex-row border border-gray-300 w-full flex-none">
-                                <div class="border border-gray-300 w-20 align-middle">予約日付</div>
                                 <div class="flex flex-row w-full">
                                     <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" :key="dateTime.id">
                                         <div class="justify-content-center border-b border-gray-300 px-2 py-1">{{ dateTime.month }}/{{ dateTime.date }}</div>
@@ -58,7 +57,10 @@
                 </div>
             </div>
 
-            <base-modal v-if="showOrderTimeModal" title="商品受取時間予約" width="1/2" @close="closeOrderTimeModal">
+            <base-modal v-if="showOrderTimeModal" title="商品受取日時予約" width="1/2" @close="closeOrderTimeModal">
+                <div v-if="message.orderTimeModalError">
+                    <p class="text-sm text-red-500">{{ message.orderTimeModalError }}</p>
+                </div>
                 <div>
                     <label>予約日付</label>
                     <select v-model="modalSelectDateTime.date" v-on:change="changeSelectDate" class="border border-gray-300 rounded py-1 px-1">
@@ -191,8 +193,15 @@ export default{
         closeOrderTimeModal(){
             this.modalSelectDateTime = new Object();
             this.showOrderTimeModal = false;
+            if(this.message.orderTimeModalError) this.$set(this.message, 'orderTimeModalError', null);
         },
         reserveOrderTime(){
+            if(this.modalSelectDateTime.orderAbleFlg == 0){
+                this.$set(this.message, 'orderTimeModalError', "選択した日時は予約できません。");
+                return false;
+            }else{
+                this.$set(this.message, 'orderTimeModalError', null);
+            }
             this.$store.commit('order/setOrderTime', this.modalSelectDateTime);
             this.showOrderTimeModal = false;
         },
