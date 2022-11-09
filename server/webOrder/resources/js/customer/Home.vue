@@ -4,12 +4,12 @@
             <Navbar/>
         </header>
 
-        <main>
+        <main class="h-full">
             <router-view/>
         </main>
 
         <!-- 画面縮小時に表示 -->
-        <footer class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm sticky bottom-0 mt-2">
+        <footer class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm fixed bottom-0 mt-2 w-full">
             <BottomNavigation/>
         </footer>
     </diV>
