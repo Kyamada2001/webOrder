@@ -1,6 +1,6 @@
 <template>
-<div>
-    <div class="h-1/6">
+<div class="w-full box-sizing">
+    <div class="h-1/3">
         <div>
             <h1 class="px-10 py-1 text-sm font-serif text-gray-500">気軽にwebで注文できるサービス</h1>
         </div>
@@ -14,25 +14,15 @@
             <router-link class="hover:text-orange-300 text-lg" to="#">商品一覧</router-link>
             <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>
         </div>
-        <div v-if="isLogin" class="md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full hidden">
+        <div v-if="isLogin" class="hidden md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full">
             <div class="px-4">
                 <router-link to="#" class="hover:text-orange-300 text-sm" >{{ login_customer }}</router-link>
             </div>
             <div class="pl-1 pr-6">
                  <button @click="showLogoutModal = true" type="button" class="hover:text-orange-300 text-sm">ログアウト</button>
-                 <base-modal v-if="showLogoutModal" title="ログアウト" width="1/2" v-on:close="showLogoutModal = false">
-                    <p class="text-gray-800">
-                        ログアウトしますか？
-                    </p>
-
-                    <div class="text-right mt-4">
-                        <button @click="showLogoutModal = false" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
-                        <button @click="logout" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">ログアウト</button>
-                    </div>
-                 </base-modal>
             </div>
         </div>
-        <div v-else class="md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full hidden">
+        <div v-else class="hidden md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full">
             <div class="px-4">
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-register">会員登録</router-link>
             </div>
@@ -40,6 +30,16 @@
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-login">ログイン</router-link>
             </div>
         </div>
+        <base-modal v-if="showLogoutModal" title="ログアウト" v-on:close="showLogoutModal = false">
+            <p class="text-gray-800">
+                ログアウトしますか？
+            </p>
+
+            <div class="text-right mt-4">
+                <button @click="showLogoutModal = false" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
+                <button @click="logout" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">ログアウト</button>
+            </div>
+        </base-modal>
         <!-- ボトムナビゲーションに変更<div @click="hambergerMenuOpen" class="md:hidden flex flex-row inset-y-0 right-0 px-7 pb-5 justify-end items-end w-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <base-modal v-if="showOrderTimeModal" title="商品受取日時予約" width="1/2" @close="closeOrderTimeModal">
+            <base-modal v-if="showOrderTimeModal" title="商品受取日時予約" @close="closeOrderTimeModal">
                 <div v-if="message.orderTimeModalError">
                     <p class="text-sm text-red-500">{{ message.orderTimeModalError }}</p>
                 </div>
