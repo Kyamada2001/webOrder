@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', 'Customer\Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Customer\Auth\LoginController@authenticate')->name('login');
-Route::post('/logout', 'Customer\Auth\LoginController@logot')->name('logout');
+Route::post('/logout', 'Customer\Auth\LoginController@logout')->name('logout');
 Route::post('/order/store', 'Customer\OrderController@store')->name('order.store');;
 
 Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
