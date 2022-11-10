@@ -65,16 +65,16 @@
                     class="w-full h-14 py-2 px-4 rounded border border-gray-500 placeholder-gray-500 placeholder-opacity-50" 
                     placeholder="webOrder内のユーザー名"
                     v-model="registerForm.username">
-                    <div v-if="registerErrorMessages">
-                        <div v-if="registerErrorMessages.username">
-                            <div 
-                            v-for="message in registerErrorMessages.username" 
-                            :key="message"
-                            class="flex flex-row text-red-500 text-sm">
-                            {{ message }}
-                            </div>
+                <div v-if="registerErrorMessages">
+                    <div v-if="registerErrorMessages.username">
+                        <div 
+                        v-for="message in registerErrorMessages.username" 
+                        :key="message"
+                        class="flex flex-row text-red-500 text-sm">
+                        {{ message }}
                         </div>
                     </div>
+                </div>
             </div>
             <div  class="w-3/4 md:w-5/12 py-5">
                 <button class="flex justify-center rounded bg-red-500 hover:bg-red-700 text-white w-full h-12 pt-2 font-semibold">次へ</button>
