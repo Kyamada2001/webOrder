@@ -33,8 +33,9 @@ const mutations = {
 const actions = {
     async register(context, data){
         context.commit('setApiStatus', null);
-        const response = await axios.post('/api/register' ,data).catch(err => err.response || err);
-        if(response.status === CREATED){
+        const registerInfo = await axios.post('/api/register' ,data).catch(err => err.response || err);
+        const response = await axios.post('/api/login', data).catch(err => err.response || err); //会員登録時にログインできていなかったため、ログイン処理追加
+        if(response.status === OK){
             context.commit('setCustomer', response.data);
             context.commit('setRegisterErrorMessages', null);
             context.commit('setApiStatus', true);

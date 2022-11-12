@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -40,6 +43,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('guest:customer');
     }
 
     /**
@@ -65,11 +69,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Customer::create([
+        $registerInfo = [
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
+        ];
+        try{
+            return Customer::create($registerInfo);
+            // 本当はここにログイン処理を入れたい。もっと言えば、Customer ::createの時点でログインしているようにしたい
+            // Route::post('/api/login', ['email' => $registerInfo['email'], 'password' => $registerInfo['passwrod']]);
+            // return response()->json(['customer' => Auth::guard('customer')->user()]);
+        }catch(Exception $e){
+            return response()->json([], 419);
+        }
+        
     }
 
     protected function registered(Request $request, $user)
