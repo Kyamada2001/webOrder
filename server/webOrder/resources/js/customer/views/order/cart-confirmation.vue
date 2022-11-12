@@ -105,6 +105,9 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <add-cart-modal v-if="open" @close="closeModal" :product="modalProduct" :modalStatus="'delete'" :shop="shopDetails"/> -->
+
             <div v-if="Object.keys(cartProducts).length > 0" class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
                 <div class="bg-white rounded py-1 px-2">
                     <input type="radio" value="0" v-model="orderInfo.prepaid_flg">
@@ -121,13 +124,15 @@
 
 <script>
 import BaseModal from '../../components/BaseModal.vue'
-import OrderTimeDropdown from '../../components/ordertime-dropdown.vue';
+import OrderTimeDropdown from '../../components/ordertime-dropdown.vue'
+import addCartModal from '../../components/addCart-modal.vue'
 import { OK } from '../../../util.js';
 
 export default{
     components: {
         BaseModal,
-        OrderTimeDropdown
+        OrderTimeDropdown,
+        addCartModal,
     },
     data() {
         return {
@@ -160,13 +165,18 @@ export default{
     },
     methods: {
         checkForm(){
+            let errorFlg = false;
             //課題：もっといい処理書きたい。エラー発生後、クリアできていたらエラー文を非表示にしたい
             if(this.orderInfo.telephoneNumber.toString().length > 11 || this.orderInfo.telephoneNumber.toString().length < 11){
+                errorFlg = true;
                 this.$set(this.message, 'telephoneNumber', "11桁の電話番号を入力して下さい");
-            }if(!this.$store.state.order.orderInfo.order_time.date){
+            } else this.$set(this.message, 'telephoneNumber', null);
+            if(!this.$store.state.order.orderInfo.order_time.date){
                 this.$set(this.message, 'order_time', "商品受取日付を選択して下さい");
+                errorFlg = true;
                 //注文受け取り時間が正常な時間かAPI側で判定したいが、とりあえず保留。
-            }else{
+            }  else this.$set(this.message, 'order_time', null);
+            if(!errorFlg) {
                 this.$store.commit('order/setOrderInfo', this.orderInfo);
                 if(this.orderInfo.prepaid_flg == 0) this.$router.push('/order/confirmation');
                 else if(this.orderInfo.prepaid_flg == 1) this.$router.push('/order/confirmation');
