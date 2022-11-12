@@ -20,4 +20,7 @@ body {
     .side-menu-container {
         @apply container pl-4;
     }
+    .b-nav-pb {
+        @apply pb-20 md:pb-0;
+    }
 }

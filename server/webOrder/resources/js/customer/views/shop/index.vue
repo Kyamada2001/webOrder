@@ -1,5 +1,5 @@
 <template>
-    <div class="flex form-row pt-5">
+    <div class="flex form-row pt-5 b-nav-pb">
         <div class="side-menu">
             <SideMenu/>
         </div>
