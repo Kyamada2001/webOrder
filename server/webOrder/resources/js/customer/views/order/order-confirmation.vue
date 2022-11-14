@@ -8,7 +8,7 @@
             </a>
             <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gray-400">戻る</div>
         </div>
-        <div class="container mx-auto mt-5 space-y-3">
+        <div class="mx-3 md:container md:mx-auto mt-5 space-y-3 b-nav-pb">
             <div class="text-center text-2xl font-semibold">注文確認</div>
             <div class="flex justify-center w-full rounded bg-gray-200">
                 <div class="bg-orange-50 w-full rounded mx-1 my-1 pl-2 py-3 space-y-2">
