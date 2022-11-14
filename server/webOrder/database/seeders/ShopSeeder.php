@@ -49,7 +49,7 @@ class ShopSeeder extends Seeder
                 );
                 $shopArray = array_merge($shopArray,$array);
             }
-            for($i=4;$i<8; $i++){
+            for($i=4;$i<10; $i++){
                 $j = $i-1;
                 $array = array(
                     [
