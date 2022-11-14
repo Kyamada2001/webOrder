@@ -1,5 +1,5 @@
 *
 !.gitignore
 !noimage.png
-!shops
-!products
+!shops/
+!products/
