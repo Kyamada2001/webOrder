@@ -1,14 +1,14 @@
 <template>
-    <div class="h-full b-nav-pb">
+    <div class="h-full">
         <div class="cursor-pointer ml-7 relative group w-auto inline-block">
             <a class="pl-3" @click="$router.back()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
             </a>
-            <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gyra-400">戻る</div>
+            <div class="absolute invisible group-hover:visible rounded-md text-center mt-2 px-1 py-1 w-12 border border-gray-400">戻る</div>
         </div>
-        <div class="container mx-auto mt-5 space-y-3">
+        <div class="mx-3 md:container md:mx-auto mt-5 space-y-3  b-nav-pb">
             <div class="text-center text-2xl font-semibold">カート</div>
             <div class="flex justify-center w-full rounded bg-gray-200">
                 <div class="bg-orange-50 w-full rounded mx-1 my-1">
@@ -84,36 +84,43 @@
                 </div>
             </base-modal>
 
-            <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
-                <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
-                    <div class="mx-2 my-2 shadow-lg">
-                        <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="pathhead + cartProduct.imgpath">
-                        <img v-else class="w-44 h-36 object-cover" :src="pathhead + noimgpath">
-                    </div>
-                    <div class="grid grid-cols-2 gap-py-2 pl-4 w-full py-2">
-                        <div class="col-span-2">{{ cartProduct.name }}</div>
-                        <div class="col-span-1">
-                            <label>数量</label>
-                            <select
-                            v-model="cartProduct.modalInput.quantity"
-                            class="w-full px-2 py-1 rounded-md border border-gray-300 shadow-sm">
-                                <option v-for="n in 99" :value="n">{{ n }}</option>
-                            </select>
+            <div v-for="shop in productAffiliationShops" :key="shop.id">
+                <div>{{ shop.name }}</div>
+                <div v-for="cartProduct in viewCartProducts[shop.id]" :key="cartProduct.id" class="border-b border-gray-300">
+                    <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
+                        <div class="mx-2 my-2 shadow-lg">
+                            <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="pathhead + cartProduct.imgpath">
+                            <img v-else class="w-44 h-36 object-cover" :src="pathhead + noimgpath">
                         </div>
-                        <div class="col-span-1"></div>
-                        <div class="col-end-3 col-span-1 underline">小計 {{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
+                        <div class="grid grid-cols-2 gap-py-2 pl-4 w-full py-2">
+                            <div class="col-span-2">{{ cartProduct.name }}</div>
+                            <div class="col-span-1">
+                                <label>数量</label>
+                                <select
+                                v-model="cartProduct.modalInput.quantity"
+                                class="w-full px-2 py-1 rounded-md border border-gray-300 shadow-sm">
+                                    <option v-for="n in 99" :value="n">{{ n }}</option>
+                                </select>
+                                <button type="button" @click="openCancelModal(cartProduct)" class="col-span-1"><p class="text-sm hover:underline">購入をやめる</p></button>
+                            </div>
+                            <div class="col-span-1 underline mt-auto">小計 {{ (cartProduct.price * cartProduct.modalInput.quantity).toLocaleString() }}円</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- <add-cart-modal v-if="open" @close="closeModal" :product="modalProduct" :modalStatus="'delete'" :shop="shopDetails"/> -->
+            <add-cart-modal v-if="cancelModalFlg" @close="closeCancelModal()" :product="cancelModalProduct" :modalStatus="'delete'" :shop="null"/>
 
             <div v-if="Object.keys(cartProducts).length > 0" class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
-                <div class="bg-white rounded py-1 px-2">
-                    <input type="radio" value="0" v-model="orderInfo.prepaid_flg">
-                    <label>代金引換</label>
-                    <input type="radio" value="1" v-model="orderInfo.prepaid_flg">
-                    <label>事前決済(クレジットカード)</label>
+                <div class="bg-white rounded py-1 px-2 md:flex md:flex-row">
+                    <div>
+                        <input type="radio" value="0" v-model="orderInfo.prepaid_flg">
+                        <label>代金引換</label>
+                    </div>
+                    <div>
+                        <input type="radio" value="1" v-model="orderInfo.prepaid_flg">
+                        <label>事前決済(クレジットカード)</label>
+                    </div>
                 </div>
                 <button v-if="orderInfo.prepaid_flg == 0" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確認画面へ</button>
                 <button v-if="orderInfo.prepaid_flg == 1" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">お支払い画面へ</button>
@@ -137,6 +144,7 @@ export default{
     data() {
         return {
             cartProducts: { Object },
+            viewCartProducts: { Object },
             total: {
                 price: 0,
                 quantity: 0,
@@ -161,6 +169,8 @@ export default{
                 timeList: Array,
             },
             dateTimes: [],
+            cancelModalFlg: false,
+            cancelModalProduct: { Object },
         }
     },
     methods: {
@@ -246,6 +256,14 @@ export default{
             }
 
             this.dateTimes = response.data.dateTimes;
+        },
+        openCancelModal(product){
+            this.cancelModalFlg = true;
+            this.cancelModalProduct = product;
+        },
+        closeCancelModal(){
+            this.cancelModalFlg = false;
+            this.cancelModalProduct = null;
         }
     },
     computed: {
@@ -270,6 +288,13 @@ export default{
       computedCartProducts: {
         handler($val){
             this.cartProducts = Object.assign({},$val);
+            // もっといい処理を作りたい。(表示用、処理用と分けているのをまとめたり)
+            this.productAffiliationShops.forEach(function(shop){
+                let shopProduct = $val.filter(product =>{
+                    return shop.id == product.shop_id;
+                });
+                this.$set(this.viewCartProducts, shop.id, shopProduct);
+            }, this);
         },
         immediate: true,
       },
@@ -290,10 +315,10 @@ export default{
                     this.$store.commit('order/updateCart', data);
                 }
             });
-          },
+        },
         immediate:true,
         deep: true,
-      },
+        },
       orderInfo: {
         handler($val){
             this.orderInfo.telephoneNumber = $val.telephoneNumber.replace(/[^0-9]/g, '');
