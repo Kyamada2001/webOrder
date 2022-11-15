@@ -5,8 +5,8 @@
         </div>
         <div class="side-menu-container">
             <div>{{ shopDetails.name }}の店舗詳細</div>
-            <div class="flex flex-wrap justify-evenly">
-                <div v-for="product in shopDetails.product" v-bind:key="product.id" class="mr-5 py-3 w-44">
+            <div class="flex flex-wrap justify-evenly w-full">
+                <div v-for="product in shopDetails.product" v-bind:key="product.id" class="w-1/2 py-3 md:mr-5 sm:w-44">
                     <button type="button" @click="modalOpen(product)">
                         <div class="border rounded">
                             <div>
