@@ -39,7 +39,7 @@ export default{
     data() {
         return {
             shops: {},
-            pathhead: '/storage/',
+            pathhead: '/storage/app/public/',
             noimgpath: 'images/noimage.png',
         }
     },
