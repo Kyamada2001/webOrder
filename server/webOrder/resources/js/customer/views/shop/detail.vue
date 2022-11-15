@@ -40,7 +40,7 @@ export default{
         return {
             shopDetails: {},
             pathhead: '/storage/',
-            noimgpath: 'images/product_noimage.png',
+            noimgpath: 'images/noimage.png',
             modalProduct: { Object }, //モーダル商品
             open: false,
         }

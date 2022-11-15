@@ -157,7 +157,7 @@ export default{
             },
             message: { Object },
             pathhead: '/storage/',
-            noimgpath: 'images/product_noimage.png',
+            noimgpath: 'images/noimage.png',
             showOrderTimeModal: false,
             modalSelectDateTime: {
                 year: '',

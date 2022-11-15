@@ -54,7 +54,7 @@
         productAffiliationShop: { Object },
         modalProduct: { Object },
         pathhead: '/storage/',
-        noimgpath: 'images/product_noimage.png',
+        noimgpath: 'images/noimage.png',
       };
     },
     props: {

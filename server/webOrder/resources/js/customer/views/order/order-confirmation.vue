@@ -69,7 +69,7 @@ export default {
     data(){
          return {
             pathhead: '/storage/',
-            noimgpath: 'images/product_noimage.png',
+            noimgpath: 'images/noimage.png',
          }
     },
     methods: {
