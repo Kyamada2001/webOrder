@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Shop;
 use Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
@@ -67,7 +68,7 @@ class ShopController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
-            throw $e;   
+            Log::info($e);  
         }
 
         return redirect(route('business.shop.index'));
@@ -111,7 +112,7 @@ class ShopController extends Controller
             //画像削除できなかった場合は新しく登録した画像を削除
             DB::rollBack();
             if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
-            throw $e;
+            Log::info($e);
         }
         return redirect(route('business.shop.index'));
     }

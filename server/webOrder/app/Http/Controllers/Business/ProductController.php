@@ -10,6 +10,7 @@ use Image;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -53,7 +54,7 @@ class ProductController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(!empty($imgpath) && Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
-            throw $e;
+            Log::info($e);
         }
         return redirect(route('business.product.index'));
     }
@@ -96,7 +97,7 @@ class ProductController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
-            throw $e;
+            Log::info($e);
         }
         return redirect(route('business.product.index'));
     }

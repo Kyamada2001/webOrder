@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 //管理側
 Route::get('/business/shops', 'Business\ShopController@index')->name('business.shop.index');
 Route::get('/business/shops/create', 'Business\ShopController@create')->name('business.shop.create');
-Route::get('/business/shops/{shop}/edit', 'Business\ShopController@edit')->name('business.shop.edit');
 Route::post('/business/shop/store', 'Business\ShopController@store')->name('business.shop.store');
+Route::get('/business/shops/{shop}/edit', 'Business\ShopController@edit')->name('business.shop.edit');
 Route::post('/business/shop/{shop}/update', 'Business\ShopController@update')->name('business.shop.update');
 
 Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
