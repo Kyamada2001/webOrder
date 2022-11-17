@@ -68,7 +68,7 @@ class ShopController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
-            Log::info($e);  
+            throw $e; 
         }
 
         return redirect(route('business.shop.index'));
@@ -112,7 +112,7 @@ class ShopController extends Controller
             //画像削除できなかった場合は新しく登録した画像を削除
             DB::rollBack();
             if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
-            Log::info($e);
+            throw $e;
         }
         return redirect(route('business.shop.index'));
     }
