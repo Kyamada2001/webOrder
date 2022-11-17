@@ -47,14 +47,14 @@ class ProductController extends Controller
             $product->name = $request->product_name;
             $product->shop_id = $request->sale_shop;
             $product->price = $request->product_price;
-            $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : '';
+            $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : 0;
             $product->imgpath = $imgpath;
             $product->save();
             DB::commit();
         }catch(\Exception $e){
             DB::rollBack();
             if(!empty($imgpath) && Storage::disk('public')->exists($imgpath)) Storage::disk('public')->delete($imgpath);
-            Log::info($e);
+            throw $e;
         }
         return redirect(route('business.product.index'));
     }
@@ -84,7 +84,7 @@ class ProductController extends Controller
             $product->name = $request->product_name;
             $product->shop_id = $request->sale_shop;
             $product->price = $request->product_price;
-            $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : '';
+            $product->recommendation_flg = $request->recommendation_flg ? $request->recommendation_flg : 0;
             if(isset($request->product_image)){
                 $fileName = Carbon::now()->format('Ymdms')  . '_' . $request->product_image->getClientOriginalName();
                 $updateImgpath = $request->product_image->storeAs('images/products', $fileName, 'public');
@@ -97,7 +97,7 @@ class ProductController extends Controller
         }catch(\Exception $e){
             DB::rollBack();
             if(!empty($updateImgpath) && Storage::disk('public')->exists($updateImgpath)) Storage::disk('public')->delete($updateImgpath);
-            Log::info($e);
+            throw $e;
         }
         return redirect(route('business.product.index'));
     }
