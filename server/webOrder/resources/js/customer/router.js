@@ -10,6 +10,7 @@ import ShopDetail from './views/shop/detail.vue'
 import CartConfirmation from './views/order/cart-confirmation.vue'
 import OrderConfirmation from './views/order/order-confirmation.vue'
 import OrderComplete from './views/order/complete.vue'
+import myPageTop from './views/my-page/top.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -96,6 +97,18 @@ export default new Router({
       name: 'orderComplete',
       component: OrderComplete,
       props: true,
+    },
+    {
+      path: '/my-page/top',
+      name: 'myPageTop',
+      component: myPageTop,
+      beforeEnter(to, from, next){
+        if(store.getters['auth/check']){
+          next();
+        }else{
+          next('/member/select-login');
+        }
+      }
     },
 
     {
