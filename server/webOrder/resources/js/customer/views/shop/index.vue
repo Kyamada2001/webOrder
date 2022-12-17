@@ -28,7 +28,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import { OK } from '../../../util';
 import SideMenu from '../../components/SideMenu.vue'
@@ -45,15 +44,14 @@ export default{
     },
     methods: {
         async fetchShops(){
-        const response = await axios.get('/api/shops').catch(err => err.response || err);
+            const response = await axios.get('/api/shops').catch(err => err.response || err);
 
-        if(response.status !== OK) {
-            this.$store.commit('error/setCode', response.status);
-            return false;
-        }
+            if(response.status !== OK) {
+                this.$store.commit('error/setCode', response.status);
+                return false;
+            }
 
-        this.shops = response.data.shops;
-
+            this.shops = response.data.shops;
         }
     },
     created(){

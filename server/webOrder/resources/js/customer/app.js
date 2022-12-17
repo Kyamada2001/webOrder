@@ -13,12 +13,12 @@ Vue.prototype.$axios = axios;
 
 const createApp = async() => {
     await store.dispatch('auth/currentUser');
-const app = new Vue({
-    el: '#app',
-    router,
-    store,
-    components: { Home }, //最初のページだけコンポーネントを登録
-    template: '<Home/>',
-});
+    const app = new Vue({
+        el: '#app',
+        router,
+        store,
+        components: { Home }, //最初のページだけコンポーネントを登録
+        template: '<Home/>',
+    });
 }
 createApp();

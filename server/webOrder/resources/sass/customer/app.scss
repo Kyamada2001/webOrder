@@ -23,4 +23,7 @@ body {
     .b-nav-pb {
         @apply pb-20 md:pb-0;
     }
+    .pagination-item {
+        @apply px-3 py-2 cursor-pointer border border-orange-500 hover:border-orange-500;
+    }
 }
