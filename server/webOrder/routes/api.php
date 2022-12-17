@@ -29,6 +29,7 @@ Route::post('/order/store', 'Customer\OrderController@store')->name('order.store
 Route::get('/shops', 'Customer\ShopController@index')->name('shop.index');
 Route::get('/shop/detail', 'Customer\ShopController@getShopDetail')->name('shop.detail');
 Route::get('/shop/reservable-dateTime', 'Customer\ShopController@getReservableDateTime')->name('shop.reservable-dateTime');
+Route::get('/my-page/order-histories', 'Customer\MyPageController@getOrderHistories')->name('my-page.order-histories');
 
 
 

@@ -19,7 +19,7 @@
                 <router-link to="#" class="hover:text-orange-300 text-sm" >{{ login_customer }}</router-link>
             </div>
             <div class="pl-1 pr-6">
-                 <button @click="showLogoutModal = true" type="button" class="hover:text-orange-300 text-sm">ログアウト</button>
+                 <button @click="logoutModalFlg = true" type="button" class="hover:text-orange-300 text-sm">ログアウト</button>
             </div>
         </div>
         <div v-else class="hidden md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full">
@@ -30,16 +30,7 @@
                 <router-link class="hover:text-orange-300 text-sm" to="/member/select-login">ログイン</router-link>
             </div>
         </div>
-        <base-modal v-if="showLogoutModal" title="ログアウト" v-on:close="showLogoutModal = false">
-            <p class="text-gray-800">
-                ログアウトしますか？
-            </p>
-
-            <div class="text-right mt-4">
-                <button @click="showLogoutModal = false" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
-                <button @click="logout" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">ログアウト</button>
-            </div>
-        </base-modal>
+        <logout-modal v-if="logoutModalFlg" v-on:close="logoutModalFlg = false"/>
         <!-- ボトムナビゲーションに変更<div @click="hambergerMenuOpen" class="md:hidden flex flex-row inset-y-0 right-0 px-7 pb-5 justify-end items-end w-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -53,26 +44,18 @@
 </template>
 
 <script>
-import BaseModal from '../components/BaseModal.vue';
-export default{
+import logoutModal from '../components/logout-modal.vue';
+
+export default {
     components:{
-        BaseModal,
+        logoutModal,
     },
     data(){
         return {
-            showLogoutModal: false,
-            humbergerMenuFlg: false,
+            logoutModalFlg: false,
         }
     },
     methods: {
-        async logout() {
-            await this.$store.dispatch('auth/logout');
-
-            if(!this.$store.getters['auth/check']){
-                this.showLogoutModal = false;
-                this.$router.push('/');
-            }
-        },
         //　ボトムナビゲーションに変更。
         // hambergerMenuOpen(){
         //     this.humbergerMenuFlg = true;

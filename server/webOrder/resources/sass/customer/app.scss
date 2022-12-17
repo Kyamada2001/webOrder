@@ -18,9 +18,12 @@ body {
         @apply md:block w-96 hidden;
     }
     .side-menu-container {
-        @apply container pl-4;
+        @apply container px-4 md:pl-4;
     }
     .b-nav-pb {
         @apply pb-20 md:pb-0;
+    }
+    .pagination-item {
+        @apply px-3 py-2 cursor-pointer border border-orange-500 hover:border-orange-500;
     }
 }

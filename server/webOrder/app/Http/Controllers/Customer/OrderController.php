@@ -37,6 +37,10 @@ class OrderController extends Controller
             $order->order_detail()->createMany($orderDetails);
 
             DB::commit();
+
+
+            $shopIds = explode(',', $order->shop_id);
+            $shops = Shop::find($shopIds)->toArray();
         }catch(Exception $e){
             DB::rollBack();
             Log::error($e);
@@ -45,6 +49,7 @@ class OrderController extends Controller
         return response()->json([
             'order' => $order, // orderに店舗情報も入れている
             'customer' =>  Auth::guard('customer')->user(),
+            'shops' => $shops,
         ], 200);
     }
     private function getOrderDetailsProducts($cartProducts){
@@ -67,20 +72,25 @@ class OrderController extends Controller
         // 本当はForeachではなく、関数で配列に代入したい
         //　Ordersの情報もここで計算する。TotalQuantityとか
 
-        //ここでOrder Details用の配列にProduct Name等のカラムを追加している
+        //ここでOrder Details用の配列にサーバー側で取ってきた値を書き込む
         foreach($acquiredProducts as $index => &$acquiredProduct){
             $product = array_filter($productList, function($element) use($acquiredProduct){
                 return $element['id'] == $acquiredProduct['product_id'];
             });
-            
             Log::info('$product');
             Log::info($product);
-            $acquiredProduct['product_name'] = $product[0]['name'];//本当はArray Filterの時点でIndexなしで取得したい
-            $acquiredProduct['product_price'] = $product[0]['price'];
-            $acquiredProduct['shop_id'] = $product[0]['shop_id'];
-            $acquiredProduct['product_imgpath'] = $product[0]['imgpath'];
+            $product = array_values($product);
+
+            Log::info($product[0]['name']);
+            $acquiredProducts[$index]['product_name'] = $product[0]['name'];//本当はArray Filterの時点でIndexなしで取得したい
+            $acquiredProducts[$index]['product_price'] = $product[0]['price'];
+            $acquiredProducts[$index]['shop_id'] = $product[0]['shop_id'];
+            $acquiredProducts[$index]['product_imgpath'] = $product[0]['imgpath'];
+
+            $product = array();
         }
         unset($acquiredProduct);
+        
 
         return $acquiredProducts;
     }
@@ -103,11 +113,7 @@ class OrderController extends Controller
 
         $productShopIds = [];
         //total_amountとtotal_quantityの計算
-        Log::info($orderDetails);
         foreach($orderDetails as $orderDetailProduct){
-            // Log::info("customer");
-            // Log::info($this->customer);
-            // Log::info(Auth::guard('customer')->user());
             $order->total_quantity += $orderDetailProduct['product_quantity'];
             $order->total_amount += $orderDetailProduct['product_quantity'] * $orderDetailProduct['product_price'];
             array_push($productShopIds, $orderDetailProduct['shop_id']);
@@ -123,7 +129,7 @@ class OrderController extends Controller
         $order->order_time = new DateTime('now');
 
         //完了画面に表示するため、shop情報を取得。本当はここで取得したくない。設計を要検討
-        $order->shops = Shop::find($productShopIds);
+
         return $order;
     }
 }

@@ -89,9 +89,9 @@ class CreateTables extends Migration
                 ->on('products');
         });
 
+
+
         
-
-
     }
 
     /**

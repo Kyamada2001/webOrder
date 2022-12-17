@@ -88,6 +88,7 @@ export default {
                     params: {
                         order: response.data.order,
                         customer: response.data.customer,
+                        shops: response.data.shops,
                     }});
                 this.$store.commit('order/cleanOrderInfo');
             }
