@@ -68,7 +68,8 @@ const mutations = {
 const actions = {
     cartAction(context, { productAffiliationShop, InputProduct }){
         let existCart_flg = null;
-        if(InputProduct.modalStatus == "add" && !context.state.cartProducts.some(
+        if(InputProduct.modalStatus == "add" 
+        && !context.state.cartProducts.some(
             value => value.shop_id === InputProduct.shop_id
         )){
             context.commit('setProductAffiliationShops', productAffiliationShop);

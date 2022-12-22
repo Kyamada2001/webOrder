@@ -11,7 +11,7 @@
         </div>
         <div class="md:flex justify-center w-full space-x-10 hidden">
             <router-link class="hover:text-orange-300 text-lg" to="/shops">店舗一覧</router-link>
-            <router-link class="hover:text-orange-300 text-lg" to="#">商品一覧</router-link>
+            <router-link class="hover:text-orange-300 text-lg" to="/products">商品一覧</router-link>
             <router-link class="hover:text-orange-300 text-lg" to="#">店舗一覧</router-link>
         </div>
         <div v-if="isLogin" class="hidden md:flex flex-row inset-y-0 right-0 px-4 pb-5 justify-end items-end w-full">

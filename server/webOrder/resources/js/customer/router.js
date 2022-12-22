@@ -12,6 +12,7 @@ import OrderConfirmation from './views/order/order-confirmation.vue'
 import OrderComplete from './views/order/complete.vue'
 import myPageTop from './views/my-page/top.vue'
 import orderHistories from './views/my-page/order-histories.vue'
+import productIndex from './views/product/index.vue'
 
 //エラー系
 import SystemError from './views/errors/System.vue'
@@ -55,6 +56,11 @@ export default new Router({
       path: '/shop/:shopId/detail',
       name: 'shopDetail',
       component: ShopDetail
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: productIndex,
     },
     {
       path: '/member/login-email',
