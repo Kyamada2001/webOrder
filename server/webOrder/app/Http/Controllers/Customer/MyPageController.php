@@ -21,7 +21,7 @@ class MyPageController extends Controller
             $perPage = $request->input('per_page');
             $page = $request->input('page');
             $userId = Auth::guard('customer')->user()->id;
-            $orders = Order::with('order_detail')->where('customer_id', $userId)->paginate($perPage, ['*'], 'page', $page);
+            $orders = Order::with('order_detail')->where('customer_id', $userId)->orderBy('id', 'desc')->paginate($perPage, ['*'], 'page', $page);
             Log::info((array)$orders);
             return response()->json([
                 'orders' => $orders->items(),

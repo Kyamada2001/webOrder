@@ -4,7 +4,7 @@
             <SideMenu/>
         </div>
         <div class="side-menu-container">
-            <div class="text-xl font-semibold">店舗一覧</div>
+            <div class="page-title">店舗一覧</div>
             <div class="space-y-4">
                 <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">
                     <div>
@@ -19,7 +19,7 @@
                                 shopId: shop.id,
                             }
                         }" 
-                        class="text-blue-700 text-xl font-semibold hover:text-amber-400 hover:underline">
+                        class="text-blue-700 page-title hover:text-amber-400 hover:underline">
                             {{ shop.name }}
                         </router-link>
                     </div>
