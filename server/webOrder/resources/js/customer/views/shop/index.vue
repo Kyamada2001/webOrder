@@ -8,8 +8,8 @@
             <div class="space-y-4">
                 <div class="flex flex-row border-t border-t-gray-200 pt-4" v-for="shop in shops" v-bind:key="shop.id">
                     <div>
-                        <img v-if="shop.imgpath" class="border w-56 h-56 object-cover" :src="pathhead + shop.imgpath">
-                        <img v-else class="border w-56 h-56 object-cover" :src="pathhead + noimgpath">
+                        <img v-if="shop.imgpath" class="border w-56 h-56 object-cover" :src="IMG_PATH_HEAD + shop.imgpath">
+                        <img v-else class="border w-56 h-56 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                     </div>
                     <div class="pl-4">
                         <router-link 
@@ -30,6 +30,7 @@
 </template>
 <script>
 import { OK } from '../../../util';
+import { mapState } from 'vuex'
 import SideMenu from '../../components/SideMenu.vue'
 export default{
     components: {
@@ -53,6 +54,9 @@ export default{
 
             this.shops = response.data.shops;
         }
+    },
+    computed: {
+        ...mapState(['IMG_PATH_HEAD', 'NO_IMG_PATH']),
     },
     created(){
         this.fetchShops();

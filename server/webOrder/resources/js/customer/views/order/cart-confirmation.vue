@@ -89,8 +89,8 @@
                 <div v-for="cartProduct in viewCartProducts[shop.id]" :key="cartProduct.id" class="border-b border-gray-300">
                     <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
                         <div class="mx-2 my-2 shadow-lg">
-                            <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="pathhead + cartProduct.imgpath">
-                            <img v-else class="w-44 h-36 object-cover" :src="pathhead + noimgpath">
+                            <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="IMG_PATH_HEAD + cartProduct.imgpath">
+                            <img v-else class="w-44 h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                         </div>
                         <div class="grid grid-cols-2 gap-py-2 pl-4 w-full py-2">
                             <div class="col-span-2">{{ cartProduct.name }}</div>
@@ -134,6 +134,7 @@ import BaseModal from '../../components/BaseModal.vue'
 import OrderTimeDropdown from '../../components/ordertime-dropdown.vue'
 import addCartModal from '../../components/addCart-modal.vue'
 import { OK } from '../../../util.js';
+import { mapState } from 'vuex'
 
 export default{
     components: {
@@ -156,8 +157,6 @@ export default{
                 time: {},
             },
             message: { Object },
-            pathhead: '/storage/',
-            noimgpath: 'images/noimage.png',
             showOrderTimeModal: false,
             modalSelectDateTime: {
                 year: '',
@@ -279,6 +278,7 @@ export default{
         productAffiliationShops(){
             return this.$store.state.order.productAffiliationShops;
         },
+        ...mapState(['IMG_PATH_HEAD', 'NO_IMG_PATH']),
     },
     created: function(){
         this.orderInfo = this.computedOrderInfo;

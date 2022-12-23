@@ -13,8 +13,8 @@
                     <button type="button" @click="modalOpen(product)">
                         <div class="border rounded">
                             <div>
-                                <img v-if="product.imgpath" class="border-b w-44 h-36 object-cover" :src="pathhead + product.imgpath">
-                                <img v-else class="border-b w-44 h-36 object-cover" :src="pathhead + noimgpath">
+                                <img v-if="product.imgpath" class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + product.imgpath">
+                                <img v-else class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                             </div>
                             <div>
                                 <div class="flex justify-start pt-1 pl-1">{{ product.name }}</div>
@@ -31,6 +31,7 @@
 
 <script>
 import { OK } from '../../../util'
+import { mapState } from 'vuex'
 import SideMenu from '../../components/SideMenu.vue' //なぜかSideMenuが大文字だとエラーが発生する、、要改善
 import addCartModal from '../../components/addCart-modal.vue'
 
@@ -42,12 +43,13 @@ export default{
     data(){
         return {
             shopDetails: {},
-            pathhead: '/storage/',
-            noimgpath: 'images/noimage.png',
             modalProduct: { Object }, //モーダル商品
             open: false,
             errorMessage: null,
         }
+    },
+    computed: {
+        ...mapState(['IMG_PATH_HEAD', 'NO_IMG_PATH']),
     },
     methods: {
         async getShopDetails(){

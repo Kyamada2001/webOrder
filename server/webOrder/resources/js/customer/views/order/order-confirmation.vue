@@ -42,8 +42,8 @@
             <div v-for="cartProduct in cartProducts" :key="cartProduct.id" class="border-b border-gray-300">
                 <div class="rounded flex flex-row w-full border-b py-2 border-gray-300">
                     <div class="mx-2 my-2 shadow-lg">
-                        <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="pathhead + cartProduct.imgpath">
-                        <img v-else class="w-44 h-36 object-cover" :src="pathhead + noimgpath">
+                        <img v-if="cartProduct.imgpath" class="w-44 h-36 object-cover" :src="IMG_PATH_HEAD + cartProduct.imgpath">
+                        <img v-else class="w-44 h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                     </div>
                     <div class="grid grid-cols-2 gap-py-2 pl-4 w-full py-2">
                         <div class="col-span-2">{{ cartProduct.name }}</div>
@@ -65,13 +65,8 @@
 
 <script>
 import { OK } from '../../../util.js';
+import { mapState } from 'vuex'
 export default {
-    data(){
-         return {
-            pathhead: '/storage/',
-            noimgpath: 'images/noimage.png',
-         }
-    },
     methods: {
         order: async function(){
             let response = await axios.post('/api/order/store', {
@@ -113,7 +108,8 @@ export default {
         },
         orderInfo(){
             return this.$store.state.order.orderInfo;
-        }
+        },
+        ...mapState(['IMG_PATH_HEAD', 'NO_IMG_PATH']),
     },
 }
 </script>
