@@ -6,6 +6,9 @@
         <div class="side-menu-container">
             <div class="page-title">{{ shopDetails.name }}の店舗詳細</div>
             <div class="flex flex-wrap justify-evenly w-full">
+                <div class="bg-orange-50 w-full rounded mx-1 my-1 text-red-500">
+                    <div v-if="errorMessage" class="pl-3 py-5">{{ errorMessage }}</div>
+                </div>
                 <div v-for="product in shopDetails.product" v-bind:key="product.id" class="w-1/2 py-3 md:mr-5 sm:w-44">
                     <button type="button" @click="modalOpen(product)">
                         <div class="border rounded">
@@ -43,6 +46,7 @@ export default{
             noimgpath: 'images/noimage.png',
             modalProduct: { Object }, //モーダル商品
             open: false,
+            errorMessage: null,
         }
     },
     methods: {
@@ -67,10 +71,16 @@ export default{
         closeModal(){
             this.modalProduct = null;
             this.open = false;
+        },
+        async nothingMessage(){
+            let nothingProduct = Object.keys(this.shopDetails.product).length < 1;
+            if (nothingProduct) this.errorMessage = '店舗に注文可能な商品がありません';
+            else                this.errorMessage = null;
         }
     },
-    created() {
-        this.getShopDetails();
+    async created() {
+        await this.getShopDetails();
+        this.nothingMessage();
     }
     /*watch: {
         $route: {

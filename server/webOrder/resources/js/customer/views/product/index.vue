@@ -4,7 +4,7 @@
             <SideMenu/>
         </div>
         <div class="side-menu-container">
-            <div class="page-tile">商品一覧</div>
+            <div class="page-title">商品一覧</div>
             <div class="flex flex-wrap justify-evenly w-full">
                 <div v-for="product in products" v-bind:key="product.id" class="w-1/2 py-3 md:mr-5 sm:w-44">
                     <button type="button" @click="modalOpen(product)">
