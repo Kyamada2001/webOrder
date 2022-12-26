@@ -1,4 +1,4 @@
-//require('./bootstrap');使うようになったらパスを通す
+//require('./bootstrap'); //使うようになったらパスを通す
 import Vue from 'vue';
 import VueTimepicker from 'vue2-timepicker';
 import 'vue2-timepicker/dist/VueTimepicker.css';
@@ -13,7 +13,6 @@ Vue.component('vueform-multiselect-component', require('./components/vueform-mul
 Vue.component('vue-timepicker-former', require('vue2-timepicker').default);
 Vue.component('vue-timepicker-complete', require('./components/vue-timepicker').default);
 Vue.component('product-price-component', require('./components/product-price.vue').default);
-
 
 const app = new Vue({
     el: '#app',
