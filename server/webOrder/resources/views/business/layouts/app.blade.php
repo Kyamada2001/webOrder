@@ -11,9 +11,10 @@
 <body>
 <div class="flex flex-row">
     <div id="sidebar" class="h-full">
-        <div class="md:flex flex-col z-40 animate-slide-in-bck-left" :class="{'hidden': sidebarHidden, 'fixed left-0 top-0 z-50': !sidebarHidden}">
+        <div class="md:flex flex-col animate-slide-in-bck-left" :class="{'hidden': sidebarHidden, 'fixed left-0 top-0 z-50': !sidebarHidden}">
             <div class="text-orange-500 bg-white">
-                <h3 class="px-12 py-6 flex-col">webOrder総合管理</h3>
+                <h3 v-if="!isMd" class="px-12 py-6 flex-col">webOrder総合管理</h3>
+                <div class="h-20"></div>
             </div>
             <div class="dark:bg-gray-800 h-full">
                 <div class="flex flex-col sm:flex-row sm:justify-around">
@@ -68,19 +69,23 @@
         </div>
 
         <div v-if="!sidebarHidden" class="fixed w-full h-full bg-gray-900 bg-opacity-50 z-10" @click="sidebarHidden=true"></div>
-        <div v-if="sidebarMdHidden" @click="sidebarHidden=false" class="absolute left-0 right-0 mx-4 my-4 w-9 h-9 rounded-sm border-gray-700 border-1 z-40">
-            <svg v-if="sidebarHidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+        <div class="fixed left-0 right-0 mx-4 my-4 w-9 h-9 rounded-sm border-gray-700 border-1" style="z-index: 70;">
+            <div v-if="sidebarMdHidden" @click="sidebarHidden = false">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </div>
+            <div v-if="!sidebarMdHidden && isMd" @click="sidebarHidden = true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
         </div>
 
     </div>
     <div>
         <div class="h-20 w-full">
-            <header class="flex flex-row w-full">
+            <header class="relative flex flex-row w-full">
                 <div class="flex flex-row absolute inset-y-0 right-0 px-4 py-6">
                     <div class="px-2">
                         山田さん
@@ -109,7 +114,6 @@
             </div>
         </main>
     </div>
-    <!-- 課題12/25 ハンバーガメニュー展開後、画面拡大。メニューを閉じる。sidebarMdHiddenがfalseのまま-->
 </div>
 <script src="{{ asset('js/business/app.js') }}"></script>
 <script>
