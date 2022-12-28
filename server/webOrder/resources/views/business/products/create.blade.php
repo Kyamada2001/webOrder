@@ -5,8 +5,8 @@
     <form action="{{ route('business.product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="divide-gray-200">
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>販売店舗</label>
                 </div>
                 <div>
@@ -28,8 +28,8 @@
                     @endif
                 </div>
             </div>
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>商品名</label>
                 </div>
                 <div>
@@ -44,8 +44,8 @@
                     @endif
                 </div>
             </div>
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>商品金額</label>
                 </div>
                 <div>
@@ -59,8 +59,8 @@
                     @endif
                 </div>
             </div>
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>商品画像</label>
                 </div>
                 <div>
@@ -74,8 +74,8 @@
                     @endif
                 </div>
             </div>
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>おすすめ設定</label>
                 </div>
                 <div>

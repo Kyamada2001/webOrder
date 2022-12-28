@@ -5,3 +5,23 @@
 @tailwind components;
 
 @tailwind utilities;
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+@layer components {
+
+    // レイアウトが効かなくなるため直接記入するようにした
+    .form-control {
+        @apply flex flex-col md:flex-row py-3 border-b-2;
+    }
+
+    .form-label {
+        @apply md:px-3 w-1/4
+    }
+}

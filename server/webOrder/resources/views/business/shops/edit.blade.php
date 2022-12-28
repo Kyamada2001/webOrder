@@ -4,9 +4,9 @@
 <div id="app" class="p-6 bg-white">
     <form action="{{ route('business.shop.update', ['shop' => $shop]) }}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="divide-gray-200">
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+        <div class="divide-gray-200 space-y-3">
+            <div class="form-control">
+                <div class="form-label">
                     <label>店舗名</label>
                 </div>
                 <div>
@@ -21,8 +21,8 @@
                     @endif
                 </div>
             </div>
-            <div class="flex flex-row py-7 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>営業時間</label>
                 </div>
                 <div class="flex flex-row">
@@ -59,11 +59,11 @@
                 $selectName = 'weekly_holidays';
                 $arrayHoliday = explode(',', old($selectName, $shop->weekly_holiday));
             @endphp
-            <div class="flex flex-row py-6 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>定休日</label>
                 </div>
-                <div class="w-1/2">
+                <div class="w-2/3 md:1/3">
                     <vueform-multiselect-component
                     :value="{{ json_encode($arrayHoliday) }}"
                     :name="{{ json_encode($selectName) }}"></vueform-multiselect-component>
@@ -75,8 +75,8 @@
                 </div>
             </div>
             <div>
-            <div class="flex flex-row py-3 border-b-2">
-                <div class="px-3 w-1/4">
+            <div class="form-control">
+                <div class="form-label">
                     <label>店舗画像</label>
                 </div>
                 <div class="space-y-2">

@@ -14,7 +14,7 @@
         <div class="md:flex flex-col animate-slide-in-bck-left" :class="{'hidden': sidebarHidden, 'fixed left-0 top-0 z-50': !sidebarHidden}">
             <div class="text-orange-500 bg-white">
                 <h3 v-if="!isMd" class="px-12 py-6 flex-col">webOrder総合管理</h3>
-                <div class="h-20"></div>
+                <div v-else class="h-20"></div>
             </div>
             <div class="dark:bg-gray-800 h-full">
                 <div class="flex flex-col sm:flex-row sm:justify-around">
@@ -83,7 +83,7 @@
         </div>
 
     </div>
-    <div>
+    <div class="w-full">
         <div class="h-20 w-full">
             <header class="relative flex flex-row w-full">
                 <div class="flex flex-row absolute inset-y-0 right-0 px-4 py-6">
@@ -134,6 +134,7 @@ new Vue({
         this.isMd = (window.innerWidth <= 768);
         const mediaQueryList = window.matchMedia('(min-width: 640px) and (max-width: 768px)');
             mediaQueryList.addListener((event) => {
+                console.log("check")
                 this.isMd = (window.innerWidth <= 768);
                 // if(isMd) this.sidebarHidden = true;
                 // else     this.sidebarHidden = false;
