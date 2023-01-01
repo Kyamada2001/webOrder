@@ -15,12 +15,12 @@
             <table class="w-full">
                 <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">商品ID</td>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">商品名</td>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">商品画像</td>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">販売店舗</td>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">商品金額</td>
-                        <td class="py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">おすすめ</td>
+                        <td class="thead-item">商品ID</td>
+                        <td class="thead-item">商品名</td>
+                        <td class="thead-item">商品画像</td>
+                        <td class="thead-item">販売店舗</td>
+                        <td class="thead-item">商品金額</td>
+                        <td class="thead-item">おすすめ</td>
                     </tr>
                 </thead>
                 @foreach($products as $product)

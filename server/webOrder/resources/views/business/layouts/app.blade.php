@@ -16,46 +16,46 @@
                 <h3 v-if="!isMd" class="px-12 py-6 flex-col">webOrder総合管理</h3>
                 <div v-else class="h-20"></div>
             </div>
-            <div class="dark:bg-gray-800 h-full">
+            <div class="bg-gray-800 h-full">
                 <div class="flex flex-col sm:flex-row sm:justify-around">
                     <div class="w-72 h-full">
                         <nav class="mt-10 px-6 ">
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.index') }}">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.index') }}">
                                 <span class="mx-4 text-lg font-normal">
                                     店舗一覧
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.create') }}">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.shop.create') }}">
                                 <span class="mx-4 text-lg font-normal">
                                     店舗登録
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.product.index') }}">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.product.index') }}">
                                 <span class="mx-4 text-lg font-normal">
                                     商品一覧
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="{{ route('business.product.create') }}">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.product.create') }}">
                                 <span class="mx-4 text-lg font-normal">
                                     商品登録
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="#">
                                 <span class="mx-4 text-lg font-normal">
                                     アカウント一覧
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-600 dark:text-gray-400 rounded-lg " href="#">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="#">
                                 <span class="mx-4 text-lg font-normal">
                                     管理アカウント一覧
                                 </span>

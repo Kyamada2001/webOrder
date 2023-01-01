@@ -24,4 +24,20 @@ body {
     .form-label {
         @apply md:px-3 w-1/4
     }
+
+    .thead-item {
+        @apply py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400;
+    }
+
+    .thead-item-vertical {
+        @apply py-3 px-1 md:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400;
+        @media (max-width: 768px) {
+            .vertical-text {
+              writing-mode: vertical-rl;
+            }
+          }
+        writing-mode: vertical-rl;
+    }
+
+
 }
