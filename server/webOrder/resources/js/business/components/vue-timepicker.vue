@@ -6,7 +6,8 @@
         hour-label="時"
         placeholder="時:分"
         minute-label="分"
-        v-model="data.time">
+        v-model="data.time"
+        input-width="120px">
     </vue-timepicker-former>
 </template>
 
