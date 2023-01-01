@@ -15,8 +15,8 @@
             <table class="min-w-full">
                 <thead class="bg-gray-50 dark:bg-gray-700">
                     <tr>
-                        <td class="thead-item">店舗ID</td>
-                        <td class="thead-item">店舗名</td>
+                        <td class="thead-item md-vertical-text">店舗ID</td>
+                        <td class="thead-item md-vertical-text">店舗名</td>
                         <td class="thead-item">店舗画像</td>
                         <td class="thead-item">営業時間(開店時間)</td>
                         <td class="thead-item">営業時間(閉店時間)</td>
@@ -27,8 +27,8 @@
                 <tbody>
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="py-3 px-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $shop->id }}</td>
-                        <td class="py-3 px-1 text-sm font-medium text-sky-400 whitespace-nowrap dark:text-sky-400 hover:underline decoration-solid"><a href="{{ route('business.shop.edit', ['shop' => $shop]) }}">{{ $shop->name }}</a></td>
-                        <td class="py-3 px-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td class="py-3 px-1 text-sm font-medium text-sky-400 whitespace-nowrap dark:text-sky-400 hover:underline decoration-solid md-vertical-text"><a href="{{ route('business.shop.edit', ['shop' => $shop]) }}">{{ $shop->name }}</a></td>
+                        <td class="py-3 px-1 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white h-24 w-28">
                             @isset($shop->imgpath)
                                 <img class="h-24 w-28 object-cover" src="{{ asset('storage/' . $shop->imgpath) }}">
                             @else
