@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'user',
+        'passwords' => 'user',
     ],
 
     /*
@@ -36,13 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'user',
         ],
         'customer' => [
             'driver' => 'session',
-            'provider' => 'customers',
+            'provider' => 'customer',
         ]
     ],
 
@@ -64,11 +64,11 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'user' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'customers' => [
+        'customer' => [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class,
         ],
@@ -95,14 +95,14 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'user' => [
+            'provider' => 'user',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
-        'customers' => [
-            'provider' => 'customers',
+        'customer' => [
+            'provider' => 'customer',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

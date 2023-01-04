@@ -14,17 +14,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 //管理側
-Route::get('/business/shops', 'Business\ShopController@index')->name('business.shop.index');
-Route::get('/business/shops/create', 'Business\ShopController@create')->name('business.shop.create');
-Route::post('/business/shop/store', 'Business\ShopController@store')->name('business.shop.store');
-Route::get('/business/shops/{shop}/edit', 'Business\ShopController@edit')->name('business.shop.edit');
-Route::post('/business/shop/{shop}/update', 'Business\ShopController@update')->name('business.shop.update');
+Route::middleware('auth:user')->group(function() {
+    Route::get('/business/shops', 'Business\ShopController@index')->name('business.shop.index');
+    Route::get('/business/shops/create', 'Business\ShopController@create')->name('business.shop.create');
+    Route::post('/business/shop/store', 'Business\ShopController@store')->name('business.shop.store');
+    Route::get('/business/shops/{shop}/edit', 'Business\ShopController@edit')->name('business.shop.edit');
+    Route::post('/business/shop/{shop}/update', 'Business\ShopController@update')->name('business.shop.update');
 
-Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
-Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
-Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
-Route::get('/business/products/{product}/edit', 'Business\ProductController@edit')->name('business.product.edit');
-Route::post('/business/products/{product}/update', 'Business\ProductController@update')->name('business.product.update');
+    Route::get('/business/products', 'Business\ProductController@index')->name('business.product.index');
+    Route::get('/business/products/create', 'Business\ProductController@create')->name('business.product.create');
+    Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
+    Route::get('/business/products/{product}/edit', 'Business\ProductController@edit')->name('business.product.edit');
+    Route::post('/business/products/{product}/update', 'Business\ProductController@update')->name('business.product.update');
+});
+
+//管理側ログイン
+Route::get('/business/login', 'Business\Auth\LoginController@index')->name('business.login.index');
+Route::post('/business/logout', 'Business\Auth\LoginController@logout')->name('business.logout');
+Route::post('/business/authenticate', 'Business\Auth\LoginController@authenticate')->name('business.login.authenticate');
+
 
 
 

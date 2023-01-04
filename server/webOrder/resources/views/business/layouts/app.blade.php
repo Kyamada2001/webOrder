@@ -90,9 +90,10 @@
                     <div class="px-2">
                         山田さん
                     </div>
-                    <div>
-                        ログアウト
-                    </div>
+                    <form action="{{ route('business.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">ログアウト</button>
+                    </form>
                 </div>
             </header>
         </div>

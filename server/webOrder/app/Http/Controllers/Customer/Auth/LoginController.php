@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::CUSTOMER_HOME;
 
     /**
      * Create a new controller instance.
@@ -39,7 +39,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:customer')->except('logout');
     }
 
     public function authenticate(Request $request)
@@ -52,8 +52,9 @@ class LoginController extends Controller
         }
     }
 
-    protected function loggedOut(Request $request)
+    public function logout(Request $request)
     {
+        Auth::guard('customer')->logout();
         // セッションを再生成する
         $request->session()->regenerate();
 
