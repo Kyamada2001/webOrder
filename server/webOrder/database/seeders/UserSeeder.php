@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
         return  array(
             [
             'id' => 1,
-            'name' =>"admin",
+            'username' =>"admin",
             'email' => "admin1@example.com",
             'password' => bcrypt('password'),
             ]
