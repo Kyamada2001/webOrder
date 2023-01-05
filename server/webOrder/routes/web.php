@@ -26,6 +26,12 @@ Route::middleware('auth:user')->group(function() {
     Route::post('/business/products/store', 'Business\ProductController@store')->name('business.product.store');
     Route::get('/business/products/{product}/edit', 'Business\ProductController@edit')->name('business.product.edit');
     Route::post('/business/products/{product}/update', 'Business\ProductController@update')->name('business.product.update');
+
+    Route::get('business/users', 'Business\UserController@index')->name('business.user.index');
+    Route::get('business/users/create', 'Business\UserController@create')->name('business.user.create');
+    Route::get('business/users/{user}/edit', 'Business\UserController@edit')->name('business.user.edit');
+    Route::post('business/users/store', 'Business\UserController@store')->name('business.user.store');
+    Route::post('business/users/{user}/update', 'Business\UserController@update')->name('business.user.update');
 });
 
 //管理側ログイン

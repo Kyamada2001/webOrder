@@ -17,7 +17,7 @@
             <div class="px-2 py-3 space-y-3">
                 <div class="space-y-3">
                     <div>
-                        <input type="text" placeholder="ログインID" name="name" class="px-2 py-2 w-full text-gray-700 border ring-stone-100 rounded-sm focus:shadow-outline outline-black  @error('name') border-red-400 @enderror">
+                        <input type="text" placeholder="アカウント名" name="username" class="px-2 py-2 w-full text-gray-700 border ring-stone-100 rounded-sm focus:shadow-outline outline-black  @error('username') border-red-400 @enderror">
                     </div>
                     <div>
                         <input type="password" placeholder="パスワード" name="password" class="px-2 py-2 w-full text-gray-700 border ring-stone-100 rounded-sm focus:shadow-outline outline-black  @error('password') border-red-400 @enderror">
@@ -28,6 +28,13 @@
                 </div>
             </div>
         </form>
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+            <div class="flex justify-center">
+                <p class="text-red-500 text-xs italic mb-3">{{ $error }}</p>
+            </div>
+            @endforeach
+        @endif
     </div>
 </div>
 <script src="{{ asset('js/business/app.js') }}"></script>

@@ -55,9 +55,16 @@
                                 <span class="flex-grow text-right">
                                 </span>
                             </a>
-                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="#">
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.user.index') }}">
                                 <span class="mx-4 text-lg font-normal">
                                     管理アカウント一覧
+                                </span>
+                                <span class="flex-grow text-right">
+                                </span>
+                            </a>
+                            <a class="hover:text-gray-800 hover:bg-gray-100 flex items-center p-2 my-6 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200  text-gray-300 dark:text-gray-400 rounded-lg " href="{{ route('business.user.create') }}">
+                                <span class="mx-4 text-lg font-normal">
+                                    管理アカウント登録
                                 </span>
                                 <span class="flex-grow text-right">
                                 </span>
@@ -88,11 +95,11 @@
             <header class="relative flex flex-row w-full">
                 <div class="flex flex-row absolute inset-y-0 right-0 px-4 py-6">
                     <div class="px-2">
-                        山田さん
+                        {{ Auth::guard('user')->user()->username }}さん
                     </div>
                     <form action="{{ route('business.logout') }}" method="POST">
                         @csrf
-                        <button type="submit">ログアウト</button>
+                        <button type="submit" class="text-gray-800 hover:text-blue-500 hover:underline">ログアウト</button>
                     </form>
                 </div>
             </header>

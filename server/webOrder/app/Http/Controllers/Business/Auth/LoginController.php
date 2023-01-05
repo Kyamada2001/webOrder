@@ -49,9 +49,9 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $this->validator($request->toArray());;
-        $authenticationInfo = $request->only('name','password');
+        $authenticationInfo = $request->only('username','password');
         if(Auth::guard('user')->attempt($authenticationInfo)){
-            return redirect(route('business.shop.index'));
+            return redirect()->route('business.shop.index');
         }else{
             return back()->withErrors([
                 'auth' => ['ユーザー名かパスワードが違います']
@@ -61,27 +61,16 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        // $request->session()->regenerate();
         Auth::guard('user')->logout();
         $request->session()->regenerate();
 
         return redirect()->route('business.login.index');
     }
 
-    // public function adminLogout(Request $request) {
-    //     // Auth::guard('user')->logout();
-    //     \Log::info('logout');
-    //     \Log::info(Auth::guard('user')->user());
-    //     \Log::info(Auth::guard('customer')->user());
-    //     Auth::guard('user')->logout();
-
-    //     return redirect()->route('business.login.index');
-    // }
-
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
