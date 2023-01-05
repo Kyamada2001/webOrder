@@ -14,18 +14,18 @@ class AlterChangeOrdersShopsIdForegin extends Migration
     public function up()
     {
 
-        Schema::disableForeignKeyConstraints(); //外部キー制約を一時的に無くしている
+        // Schema::disableForeignKeyConstraints(); //外部キー制約を一時的に無くしている
 
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('shop_id')
-                ->references('id')
-                ->on('shops')
-                ->cascadeOnDelete() //消さないほうがいい？
-                ->cascadeOnUpdate()
-                ->change();
-        });
+        // Schema::table('orders', function (Blueprint $table) {
+        //     $table->foreign('shop_id')
+        //         ->references('id')
+        //         ->on('shops')
+        //         ->cascadeOnDelete() //消さないほうがいい？
+        //         ->cascadeOnUpdate()
+        //         ->change();
+        // });
 
-        Schema::enableForeignKeyConstraints();
+        // Schema::enableForeignKeyConstraints();
     }
 
     /**
