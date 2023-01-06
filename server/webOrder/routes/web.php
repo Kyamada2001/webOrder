@@ -34,6 +34,8 @@ Route::middleware('auth:user')->group(function() {
     Route::post('business/users/{user}/update', 'Business\UserController@update')->name('business.user.update');
 
     Route::get('business/orders', 'Business\OrderController@index')->name('business.order.index');
+
+    Route::get('business/customers', 'Business\CustomerController@index')->name('business.customer.index');
 });
 
 //管理側ログイン
