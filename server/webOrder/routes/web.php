@@ -32,6 +32,8 @@ Route::middleware('auth:user')->group(function() {
     Route::get('business/users/{user}/edit', 'Business\UserController@edit')->name('business.user.edit');
     Route::post('business/users/store', 'Business\UserController@store')->name('business.user.store');
     Route::post('business/users/{user}/update', 'Business\UserController@update')->name('business.user.update');
+
+    Route::get('business/orders', 'Business\OrderController@index')->name('business.order.index');
 });
 
 //管理側ログイン
