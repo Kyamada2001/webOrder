@@ -14,7 +14,7 @@
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "@popperjs/core": "^2.11.6",
-    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-babel": "^4.5.19",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-unit-jest": "^5.0.8",
     "@vue/cli-service-global": "^4.5.19",
