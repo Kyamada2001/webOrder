@@ -1,0 +1,10 @@
++ vue@2.7.14
++ jest@24.9.0
++ eslint@8.31.0
+updated 3 packages and audited 3141 packages in 36.228s
+
+176 packages are looking for funding
+  run `npm fund` for details
+
+found 39 vulnerabilities (2 low, 9 moderate, 14 high, 14 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
