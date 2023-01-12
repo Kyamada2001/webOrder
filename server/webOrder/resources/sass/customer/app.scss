@@ -13,6 +13,19 @@ body {
     height: 100%;
 }
 
+$breakpoints: (
+    "sm": "screen and (min-width: 400px)",
+    "md": "screen and (min-width: 768px)",
+    "lg": "screen and (min-width: 1000px)",
+    "xl": "screen and (min-width: 1200px)",
+) !default;
+
+@mixin mq($breakpoint) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
 @layer components {
     .side-menu {
         @apply md:block w-96 hidden;
@@ -28,5 +41,17 @@ body {
     }
     .page-title {
         @apply text-xl font-semibold;
+    }
+    .product-items {
+        width: 47%;
+        @include mq(sm){
+            width: 47%;
+        }
+        @include mq(md){
+            width: 30%;
+        }
+        @include mq(xl){
+            width: 23%;
+        }
     }
 }
