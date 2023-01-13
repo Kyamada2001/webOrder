@@ -5,23 +5,23 @@
         </div>
         <div class="side-menu-container">
             <div class="page-title">{{ shopDetails.name }}の店舗詳細</div>
-            <div class="flex flex-wrap justify-evenly w-full">
-                <div class="bg-orange-50 w-full rounded mx-1 my-1 text-red-500">
-                    <div v-if="errorMessage" class="pl-3 py-5">{{ errorMessage }}</div>
+            <div class="flex flex-wrap w-full gap-2 mt-5">
+                <div v-if="errorMessage" class="bg-orange-50 w-full rounded mx-1 my-1 text-red-500">
+                    <div class="pl-3 py-5">{{ errorMessage }}</div>
                 </div>
-                <div v-for="product in shopDetails.product" v-bind:key="product.id" class="w-1/2 py-3 md:mr-5 sm:w-44">
-                    <button type="button" @click="modalOpen(product)">
+                <div v-for="product in shopDetails.product" v-bind:key="product.id" class="product-items">
+                    <div  @click="modalOpen(product)">
                         <div class="border rounded">
                             <div>
-                                <img v-if="product.imgpath" class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + product.imgpath">
-                                <img v-else class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
+                                <img v-if="product.imgpath" class="border-b w-full h-36 object-cover" :src="IMG_PATH_HEAD + product.imgpath">
+                                <img v-else class="border-b w-full h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                             </div>
                             <div>
                                 <div class="flex justify-start pt-1 pl-1">{{ product.name }}</div>
                                 <div class="flex justify-end pb-1 pr-2">{{ product.price.toLocaleString() }}円</div>
                             </div>
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
