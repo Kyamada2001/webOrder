@@ -1,45 +1,5 @@
 ## ディレクトリ構成
-.
-├── docker　　　　　　　　　　　　    docker環境構築ファイル格納ディレクトリ
-│   ├── db
-│   │   ├── data
-│   │   ├── my.conf
-│   │   └── sql
-│   ├── nginx
-│   └── php
-└── server
-    └── webOrder 　　　　　　　　    Laravelプロジェクトディレクトリ
-        ├── app                   サーバー側ファイル格納ディレクトリ
-        │   ├── Console
-        │   ├── Exceptions
-        │   ├── Http
-        │   │   ├──Controllers    Controllerファイル格納ディレクトリ
-        │   │   └──Middleware     Middlewareファイル格納ディレクトリ
-        │   ├── Models
-        │   └── Providers
-        ├── bootstrap
-        │   └── cache
-        ├── config                設定ファイル格納ディレクトリ
-        ├── database
-        │   ├── factories
-        │   ├── migrations        migrationファイル格納ディレクトリ
-        │   └── seeders           seederファイル格納ディレクトリ
-        ├── resources             フロント側ファイル格納ディレクトリ
-        │   ├── css               CSSファイル格納ディレクトリ 
-        │   │   ├──business         管理画面CSSファイル格納ディレクトリ
-        │   │   └──customer         ユーザー画面CSSファイル格納ディレクトリ
-        │   ├── js                JSファイル格納ディレクトリ(Vueファイルも含む)
-        │   │   ├──business         管理画面JSファイル格納ディレクトリ
-        │   │   └──customer         ユーザー画面JSファイル格納ディレクトリ(SPA用のファイル格納)
-        │   ├── lang
-        │   ├── sass              SCSSファイル格納ディレクトリ
-        │   │   ├──business         管理画面SCSSファイル格納ディレクトリ
-        │   │   └──customer         ユーザー画面SCSSファイル格納ディレクトリ
-        │   └── views             bladeファイル格納ディレクトリ
-        │   │   ├──business         管理画面bladeファイル格納ディレクトリ
-        │   │   └──customer         ユーザー画面bladeファイル格納ディレクトリ
-        └── routes                ルーティングファイル格納ディレクトリ
-
+<img width="653" alt="スクリーンショット 2023-01-15 2 47 18" src="https://user-images.githubusercontent.com/93695486/212487697-766ca2fc-8be8-45bc-9df3-e45631b1c864.png">
 
 ## WEBアプリケーション概要
 当アプリケーションは飲食店へWEBから注文する、という想定で制作しております。
@@ -66,20 +26,25 @@
 ・商品一覧
 <img width="1402" alt="スクリーンショット 2023-01-15 2 17 30" src="https://user-images.githubusercontent.com/93695486/212486422-0bd51f2d-8dd1-41ae-a8a0-622835c930c1.png">
 
-・カート追加モーダル(商品一覧の商品を押下)
+・カート追加モーダル
+(商品一覧の商品を押下)
 <img width="1403" alt="スクリーンショット 2023-01-15 2 19 36" src="https://user-images.githubusercontent.com/93695486/212486475-fb60cb24-15c3-490c-a6ca-cc14a0fc8139.png">
 
-・店舗商品一覧(カート追加後)
+・店舗商品一覧
+(カート追加後)
 <img width="1400" alt="スクリーンショット 2023-01-15 2 21 43" src="https://user-images.githubusercontent.com/93695486/212486561-b44cf741-5f9a-4b9d-9856-78da6a05bbfa.png">
 
 ### 3.商品カート追加後、カート画面へ遷移し、必須情報を入力する
-・カート画面(お支払いへ進むボタンを押下して遷移する)
+・カート画面
+(お支払いへ進むボタンを押下して遷移する)
 <img width="1401" alt="スクリーンショット 2023-01-15 2 24 15" src="https://user-images.githubusercontent.com/93695486/212486736-4b282aec-c93a-45fe-87b6-c8bd3a92cd5e.png">
 
-・商品受取日時予約モーダル(任意の商品受取日時を押下。※管理画面で設定した定休日、営業時間外の場合は選択できない)
+・商品受取日時予約モーダル
+(任意の商品受取日時を押下。※管理画面で設定した定休日、営業時間外の場合は選択できない)
 <img width="1402" alt="スクリーンショット 2023-01-15 2 28 01" src="https://user-images.githubusercontent.com/93695486/212486852-d49f4f3b-b01d-46c9-80ef-70803c8b1394.png">
 
-・カート画面(商品受取日時選択後)
+・カート画面
+(商品受取日時選択後)
 <img width="1404" alt="スクリーンショット 2023-01-15 2 28 08" src="https://user-images.githubusercontent.com/93695486/212486885-9ae54227-50a2-404b-8d96-1466ee997abf.png">
 
 
