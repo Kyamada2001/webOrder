@@ -6,9 +6,9 @@
 			<router-link  to="/member/login-email" class="grid justify-items-center rounded bg-red-500 hover:bg-red-700 text-white w-3/4 md:w-1/2 h-11 pt-2 font-semibold">
 				メールアドレスでログインする
 			</router-link>
-			<router-link to="#" class="grid justify-items-center rounded border-solid border border-black bg-white w-3/4 md:w-1/2 h-11 pt-2 font-semibold">
+			<!-- <router-link to="#" class="grid justify-items-center rounded border-solid border border-black bg-white w-3/4 md:w-1/2 h-11 pt-2 font-semibold">
 				Googleでログインする
-			</router-link>
+			</router-link> -->
 		</div>
 		<div class="flex flex-col items-center w-full space-y-3">
 			<h2>アカウントをお持ちでない方</h2>
