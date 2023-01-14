@@ -5,13 +5,13 @@
         </div>
         <div class="side-menu-container">
             <div class="page-title">商品一覧</div>
-            <div class="flex flex-wrap justify-evenly w-full">
-                <div v-for="product in products" v-bind:key="product.id" class="w-1/2 py-3 md:mr-5 sm:w-44">
-                    <button type="button" @click="modalOpen(product)">
+            <div class="flex flex-wrap w-full mt-5 gap-2">
+                <div v-for="product in products" v-bind:key="product.id" class="product-items">
+                    <div @click="modalOpen(product)">
                         <div class="border rounded">
                             <div>
-                                <img v-if="product.imgpath" class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + product.imgpath">
-                                <img v-else class="border-b w-44 h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
+                                <img v-if="product.imgpath" class="border-b w-full h-36 object-cover" :src="IMG_PATH_HEAD + product.imgpath">
+                                <img v-else class="border-b w-full h-36 object-cover" :src="IMG_PATH_HEAD + NO_IMG_PATH">
                             </div>
                             <div>
                                 <div class="flex justify-start pt-1 pl-1 tex-sm text-gray-500">{{ displayShop(product).name }}</div>
@@ -19,7 +19,7 @@
                                 <div class="flex justify-end pb-1 pr-2">{{ product.price.toLocaleString() }}円</div>
                             </div>
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
