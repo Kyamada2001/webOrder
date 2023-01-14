@@ -60,7 +60,7 @@ $breakpoints: (
         }
     }
     .order-date-lists {
-        @apply divide-x divide-gray-300;
+        @apply border border-gray-300 divide-x divide-gray-300;
         width: 23vw;
         // @include mq(sm){
         //     width: 20%;
