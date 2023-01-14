@@ -114,7 +114,8 @@
             <add-cart-modal v-if="cancelModalFlg" @close="closeCancelModal()" :product="cancelModalProduct" :modalStatus="'delete'" :shop="null"/>
 
             <div v-if="Object.keys(cartProducts).length > 0" class="flex justify-end sticky bottom-0 bg-gray-200 bg-opacity-75 w-auto rounded px-2 py-2 space-x-3">
-                <div class="bg-white rounded py-1 px-2 md:flex md:flex-row">
+                <!-- <div class="bg-white rounded py-1 px-2 md:flex md:flex-row">
+                    開発用に作成。後々に実装する予定のため一旦hiddenに
                     <div>
                         <input type="radio" value="0" v-model="orderInfo.prepaid_flg">
                         <label>代金引換</label>
@@ -123,7 +124,7 @@
                         <input type="radio" value="1" v-model="orderInfo.prepaid_flg">
                         <label>事前決済(クレジットカード)</label>
                     </div>
-                </div>
+                </div> -->
                 <button v-if="orderInfo.prepaid_flg == 0" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">注文確認画面へ</button>
                 <button v-if="orderInfo.prepaid_flg == 1" @click="checkForm" type="button" class="text-white bg-red-500 hover:bg-red-400 rounded py-1 px-2">お支払い画面へ</button>
             </div>
