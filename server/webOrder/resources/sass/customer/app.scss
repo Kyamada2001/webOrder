@@ -10,6 +10,7 @@ html {
 }
 
 body {
+    min-width: 270px;
     height: 100%;
 }
 
@@ -18,6 +19,7 @@ $breakpoints: (
     "md": "screen and (min-width: 768px)",
     "lg": "screen and (min-width: 1000px)",
     "xl": "screen and (min-width: 1200px)",
+    "xxl": "screen and (min-width: 1500px)",
 ) !default;
 
 @mixin mq($breakpoint) {
@@ -50,8 +52,21 @@ $breakpoints: (
         @include mq(md){
             width: 30%;
         }
-        @include mq(xl){
+        @include mq(lg){
             width: 23%;
         }
+        @include mq(xxl){
+            width: 18%;
+        }
+    }
+    .order-date-lists {
+        @apply divide-x divide-gray-300;
+        width: 23vw;
+        // @include mq(sm){
+        //     width: 20%;
+        // }
+        // @include mq(md){
+        //     width: 7%;
+        // }
     }
 }

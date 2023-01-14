@@ -30,24 +30,26 @@
                     <div>
                         <label class="block text-sm">商品受取日時<span class="text-sm text-red-500">[必須]</span></label>
                         <div class="flex overflow-x-auto">
-                            <div class="flex flex-row border border-gray-300 w-full flex-none">
+                            <div class="flex flex-row w-full flex-none">
                                 <div class="flex flex-row w-full">
-                                    <div class="divide-x divide-gray-300 w-auto" v-for="dateTime in dateTimes" :key="dateTime.id">
+                                    <div class="border border-gray-300 order-date-lists" v-for="dateTime in dateTimes" :key="dateTime.id">
                                         <div class="justify-content-center border-b border-gray-300 px-2 py-1">{{ dateTime.month }}/{{ dateTime.date }}</div>
 
-                                        <div v-if="dateTime.orderAbleFlg === 0" class="cursor-pointer bg-gray-200 justify-center items-center">
-                                            <div>{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        <div v-if="dateTime.orderAbleFlg === 0" class="bg-gray-200 flex flex-col h-12">
+                                            <div class="mx-auto">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                                             </svg>
                                         </div>
-                                        <div v-else @click="openOrderTimeModal(dateTime)" class="cursor-pointer bg-orange-100 hover:bg-orange-50 justify-center items-center" v-bind:class="{'bg-yellow-200': dateTime.joinDate === storeOrderTime.joinDate}">
-                                            <div type="button">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                            </svg>
+                                        <div v-else @click="openOrderTimeModal(dateTime)" class="cursor-pointer bg-orange-100 hover:bg-orange-50 h-12 flex flex-col">
+                                            <div class="mx-auto">{{ displayDayOfWeek(dateTime.dayOfWeek) }}</div>
+                                            <div class="mx-auto">
+                                                <div v-if="storeOrderTime.joinDate && storeOrderTime.date == dateTime.date" class="text-sm bg-green-300 reounded align-bottom inline-block w-full mx-0">{{ storeOrderTime.time }}</div>
+                                                <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 block">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
+                                                </svg>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
