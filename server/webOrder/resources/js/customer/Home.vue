@@ -8,10 +8,9 @@
             <router-view/>
         </main>
 
-        <footer class="flex h-40 md:h-20 bg-gray-100 text-sm items-center pb-20 md:pb-0"><p class="italic">@{{ new Date().getFullYear() }} webOrder</p></footer>
 
         <!-- 画面縮小時に表示 -->
-        <div class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm fixed bottom-0 mt-2 w-full">
+        <div class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm bottom-0 mt-2 w-full fixed">
             <BottomNavigation/>
         </div>
     </diV>

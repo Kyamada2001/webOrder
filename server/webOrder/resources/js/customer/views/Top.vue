@@ -14,6 +14,7 @@
                     </div>
                 </div>
             </div>
+            <footer class="flex h-40 md:h-20 w-full bg-gray-100 text-sm items-center pb-20 md:pb-0"><p class="italic">@{{ new Date().getFullYear() }} webOrder</p></footer>
         </div>
 </template>
 
