@@ -1,5 +1,5 @@
 <template>
-    <diV class="h-full">
+    <diV class="h-screen">
         <header class="bg-stone-100 h-20 border-t-4 border-b-2 border-t-orange-400 border-b-gray-300 shadow-sm sticky top-0">
             <Navbar/>
         </header>
@@ -8,10 +8,12 @@
             <router-view/>
         </main>
 
+        <footer class="flex h-40 md:h-20 bg-gray-100 text-sm items-center pb-20 md:pb-0"><p class="italic">@{{ new Date().getFullYear() }} webOrder</p></footer>
+
         <!-- 画面縮小時に表示 -->
-        <footer class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm fixed bottom-0 mt-2 w-full">
+        <div class="md:hidden bg-stone-100 h-20 border border-b-gray-300 shadow-sm fixed bottom-0 mt-2 w-full">
             <BottomNavigation/>
-        </footer>
+        </div>
     </diV>
 </template>
 
