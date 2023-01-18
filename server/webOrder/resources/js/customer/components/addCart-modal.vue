@@ -23,7 +23,7 @@
             <div class="w-full px-4">
                 <label>数量</label>
                 <select
-                v-model="modalProduct.modalInput.quantity"
+                    v-model="modalProduct.modalInput.quantity"
                     class="w-full px-2 py-1 rounded-md border border-gray-300 shadow-sm">
                     <option v-for="n in 99" :value="n">{{ n }}</option>
                 </select>
