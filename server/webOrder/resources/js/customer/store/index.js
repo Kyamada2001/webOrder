@@ -11,6 +11,11 @@ const store = new Vuex.Store({
   state: {
     IMG_PATH_HEAD: '/storage/',
     NO_IMG_PATH: 'images/noimage.png',
+    MODAL_STATUS: {
+      STATUS_ADD: 'add',
+      STATUS_UPDATE: 'update',
+      STATUS_DELETE: 'delete',
+    }
   },
   modules: {
     auth,

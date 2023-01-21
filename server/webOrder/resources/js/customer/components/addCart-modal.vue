@@ -1,6 +1,6 @@
 <template>
   <div class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-10">
-    <div class="absolute w-full h-full bg-gray-900 opacity-50" @click="close"></div>
+    <div class="bg-action-close absolute w-full h-full bg-gray-900 opacity-50" @click="close"></div>
 
     <div class="absolute w-full px-3 md:w-2/3">
       <div class="container bg-white overflow-hidden md:rounded">
@@ -12,7 +12,7 @@
           </div>
         </div>
 
-        <div class="max-h-full px-4 py-4">
+        <div v-if="modalProduct" class="max-h-full px-4 py-4">
           <div  v-if="modalStatus =='add' || modalStatus == 'update'" class="flex flex-row">
             <div class="w-1/2">
                 <img v-if="modalProduct.imgpath" class="border-b w-64 h-44 object-cover" :src="pathhead + modalProduct.imgpath">
@@ -35,11 +35,14 @@
             </div>
           </div>
           <div class="text-right mt-4">
-              <button @click="close" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline">キャンセル</button>
-              <button v-if="modalStatus=='add'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">カートに追加</button>
-              <button v-if="modalStatus == 'update'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">変更する</button>
-              <button v-if="modalStatus == 'delete'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400">削除する</button>
+              <button @click="close" class="px-4 py-2 text-sm text-gray-600 focus:outline-none hover:underline btn-close">キャンセル</button>
+              <button v-if="modalStatus=='add'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400 btn-action">カートに追加</button>
+              <button v-if="modalStatus == 'update'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400 btn-action">変更する</button>
+              <button v-if="modalStatus == 'delete'" @click="addCart" class="mr-2 px-4 py-2 text-sm rounded text-white bg-red-500 focus:outline-none hover:bg-red-400 btn-action">削除する</button>
           </div>
+        </div>
+        <div v-else class="max-h-full px-4 py-4">
+          <div class="text-red-400 font-serif font-semibold"><p>商品を選択できませんでした。再度お試しください。</p></div>
         </div>
         
       </div>
@@ -52,7 +55,7 @@
     data() {
       return {
         productAffiliationShop: { Object },
-        modalProduct: { Object },
+        modalProduct: null,
         pathhead: '/storage/',
         noimgpath: 'images/noimage.png',
       };
@@ -65,15 +68,15 @@
     methods: {
       close() {
         this.modalProduct = null;
+        this.productAffiliationShop = null;
         this.$emit('close');
       },
       addCart(){
         this.$store.dispatch('order/cartAction', { 
           productAffiliationShop: this.productAffiliationShop, 
-          InputProduct: this.modalProduct 
+          InputProduct: this.modalProduct
         });
-        this.modalProduct = null;
-        this.$emit('close');
+        this.close();
       },
     },
     watch: {
