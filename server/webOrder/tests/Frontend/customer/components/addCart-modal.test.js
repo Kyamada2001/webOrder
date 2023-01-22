@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import config from '../../../../resources/js/customer/const.js'
+import { config } from '../../../../resources/js/customer/const.js'
 import addCartModal from '../../../../resources/js/customer/components/addCart-modal.vue';
 import { wrap } from 'lodash';
 import Vuex from 'vuex'
