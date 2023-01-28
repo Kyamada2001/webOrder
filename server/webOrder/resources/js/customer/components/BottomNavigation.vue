@@ -53,9 +53,12 @@ export default{
         quantity(){
             let products = this.$store.getters['order/cartProducts'];
             let quantity = 0;
-            products.forEach(element => {
-                quantity += element.modalInput.quantity;
-            });
+            // storeのstateの初期値をnew Array()ではなくnullにすべきかもしれない
+            if(products.length > 0){
+                products.forEach(element => {
+                    quantity += element.modalInput.quantity;
+                });
+            };
             return quantity;
         },
     },
